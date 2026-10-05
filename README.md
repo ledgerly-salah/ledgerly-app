@@ -1,1 +1,3 @@
-# ledgerly-app
+# Ledgerly
+
+Standalone GitHub Pages repository for Ledgerly · Private Debt Ledger.
