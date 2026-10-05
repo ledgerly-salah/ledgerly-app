@@ -9,7 +9,7 @@ import {
 const PATCH_BUILD='20261005-r3';
 const APP_VERSION='3.1.0';
 
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const uid=(prefix='id')=>`${prefix}_${Date.now().toString(36)}_${(crypto.randomUUID?.()||Math.random().toString(36).slice(2)).replace(/-/g,'').slice(0,12)}`;
 function b64url(bytes){return bytesToBase64(bytes).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 function newRecoveryKey(){return `LDG-${b64url(randomBytes(24)).match(/.{1,6}/g).join('-')}`;}
