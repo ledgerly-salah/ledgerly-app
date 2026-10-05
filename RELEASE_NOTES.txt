@@ -1,0 +1,29 @@
+LEDGERLY 3.1.0 — PROTECTION + EVIDENCE + PDF RELEASE
+Build: 2026-10-05-r1
+Baseline: Ledgerly 3.0.0 Approved Baseline
+
+MANDATORY CHANGES
+- Master password is now mandatory before Ledgerly can be opened.
+- Existing unprotected ledgers are encrypted in-place after the user creates a password.
+- Recovery key is offered during mandatory protection setup.
+- Debt correction/void and payment correction/void require the master password.
+- Protected actions no longer bypass authorization when encryption is off.
+- Global Add Payment is available from desktop, hero and mobile navigation.
+- Global Add Payment includes a creditor dropdown and live remaining/allocation fields.
+- Every NEW debt requires a supporting attachment before save.
+- Every NEW payment requires a supporting attachment before save.
+- Required evidence supports images and PDF, max 10 MB. Images are re-encoded to strip common EXIF metadata.
+- Required evidence is encrypted with the ledger.
+- PDF Report now exports a real .pdf file offline, plus a redacted PDF option.
+
+MOBILE / UI FIXES
+- Expanded creditor cards no longer repeat Original/Paid/Remaining twice.
+- Bottom navigation gets extra content clearance so it does not cover the last record/actions.
+- Transaction cards keep Correct + Attachments visible on mobile; Void/Reverse/Move are under More.
+- Saudi Energy migrated debt now displays 'Effective date not set' until the user confirms/corrects the true date. Recorded-at timestamp is preserved separately.
+
+DATA SAFETY
+- Current 3.0.0 data model remains schema v4; this is a compatible app upgrade.
+- Current balances are not reset or reseeded.
+- Restoring an unencrypted backup into a protected ledger keeps the restored data encrypted.
+- Template-generated debts now open the normal Add Debt flow so required evidence cannot be bypassed.

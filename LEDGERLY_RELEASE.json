@@ -1,0 +1,133 @@
+{
+  "product": "Ledgerly",
+  "version": "3.1.0",
+  "schemaVersion": 4,
+  "buildDate": "2026-10-05",
+  "buildId": "20261005-r1",
+  "baseline": "Ledgerly 3.0.0 Approved Baseline",
+  "entry": "index.html",
+  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261005-r1",
+  "security": "mandatory",
+  "requiredEvidence": [
+    "debt",
+    "payment"
+  ],
+  "pdfReport": true,
+  "files": [
+    {
+      "name": ".nojekyll",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "app.3.1.0.js",
+      "bytes": 135907,
+      "sha256": "a956245de3fd6e14003c933087e015cc2aa607935a6fceac2adbb423fa85e018"
+    },
+    {
+      "name": "BASELINE.txt",
+      "bytes": 173,
+      "sha256": "17cb9df76b36681444edc9002b2b44ee0dd9f288fc3ae220883d068893c7131c"
+    },
+    {
+      "name": "crypto.3.1.0.js",
+      "bytes": 7125,
+      "sha256": "dd649225c89573b961e89779656ef48677ac669cfdbdc4fb04418582e464c4a8"
+    },
+    {
+      "name": "i18n.3.1.0.js",
+      "bytes": 9963,
+      "sha256": "9f15903aaae8d340cda567b937bed9c3e8563d30e932cc62f2b239c5cedca7cb"
+    },
+    {
+      "name": "icon-192.png",
+      "bytes": 1119,
+      "sha256": "6d911b11fe22f762da940c057262eaa9e372200f05b0ec2cc96e5dbf9c38e46a"
+    },
+    {
+      "name": "icon-512.png",
+      "bytes": 3240,
+      "sha256": "f0f6980e4d341f2ce75eb470429de91c10bfb04c42973bd3580705e3b770f643"
+    },
+    {
+      "name": "icon-maskable-512.png",
+      "bytes": 3246,
+      "sha256": "86c8f6458b4924d9eb563047ea3e460bf44a5d8455a24f565eb7f67fff3c8cb4"
+    },
+    {
+      "name": "index.html",
+      "bytes": 12389,
+      "sha256": "7120e49d3bf4958dd939ad988aad4a6489284070d54c244c7d1c27242baf9aad"
+    },
+    {
+      "name": "ledger-core.3.1.0.js",
+      "bytes": 18923,
+      "sha256": "013d878758d576fc899d18f2885351e95c2c031aa1cfe8df997fd78c2e03df72"
+    },
+    {
+      "name": "ledgerly_update.html",
+      "bytes": 601,
+      "sha256": "e545ce2ee663fe1396eb255c9bbdbdae06051c2ab50ba293887af33978607fc7"
+    },
+    {
+      "name": "logo.svg",
+      "bytes": 449,
+      "sha256": "7f5e2925cefbffec011ee6ed953c9a9d8212d9dac1f929a1a90d6f24d6c45ec3"
+    },
+    {
+      "name": "manifest.webmanifest",
+      "bytes": 873,
+      "sha256": "e43165eb144eca34d230982491f1cca69081b27f3fc3abcacbc9b3a06231d2a8"
+    },
+    {
+      "name": "migrations.3.1.0.js",
+      "bytes": 7368,
+      "sha256": "59cef05cd22b55d7270bba3504fb285c0bece18da1f26f673b8ea943203465ff"
+    },
+    {
+      "name": "pdf.3.1.0.js",
+      "bytes": 4427,
+      "sha256": "8255b3e2c083ded267d7f1af553e125a49dd0afd628509b3c4fad520a3b0131f"
+    },
+    {
+      "name": "Personal_Debt_Dashboard.html",
+      "bytes": 259,
+      "sha256": "7bb6e7650bedf00d35c2f3c16af5ffc84fd9aec449c160b08507b582dcb5ad46"
+    },
+    {
+      "name": "RELEASE_NOTES.txt",
+      "bytes": 1824,
+      "sha256": "dc6965a75d076a1a2c8e5b7f62f066cfd8f3302bbf86817dbfe2dc1eade63888"
+    },
+    {
+      "name": "service-worker.js",
+      "bytes": 1490,
+      "sha256": "a13117d568db1c52d4557e2f45b32f17246500a3714088de147d9bbbcc79109c"
+    },
+    {
+      "name": "storage.3.1.0.js",
+      "bytes": 10091,
+      "sha256": "e74938f3275a174aabce438bd98cc36f9c499e146cf69714dc40c2ef4f456515"
+    },
+    {
+      "name": "styles.3.1.0.css",
+      "bytes": 26193,
+      "sha256": "819551a33d14fdd1dfa3cf9958ffd12134139f983784a40b0b968fe29b420a40"
+    },
+    {
+      "name": "TEST_CHECKLIST.txt",
+      "bytes": 940,
+      "sha256": "16eb1dfe190632e71f80301a3674722fa595ca55076c0792e71e579a87abe108"
+    },
+    {
+      "name": "UPLOAD_INSTRUCTIONS.txt",
+      "bytes": 1187,
+      "sha256": "58d017e6a8dd602d2cd98704324f7dbe84b14bba8f7c07076d39a5d358540dfa"
+    },
+    {
+      "name": "version.json",
+      "bytes": 367,
+      "sha256": "b1c2218d79c76fdc7f265a9f1e148eb593de469cfcce7b6fabb056d9863ae0b9"
+    }
+  ]
+}

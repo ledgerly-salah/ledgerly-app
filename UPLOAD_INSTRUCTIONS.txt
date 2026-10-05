@@ -1,0 +1,17 @@
+LEDGERLY 3.1.0 UPLOAD
+
+1. Export a backup from the currently working Ledgerly 3.0.0 first.
+2. Extract this ZIP.
+3. Upload ALL files from this package into the repository folder: ledgerly
+4. Allow matching files (index.html, service-worker.js, version.json, manifest.webmanifest, etc.) to be replaced.
+5. Commit the upload.
+6. Open the normal Ledgerly GitHub Pages URL.
+7. If an update banner appears, press Reload once.
+8. Because protection is now mandatory, an unprotected existing ledger will show Protect Ledgerly before continuing. Create and confirm a master password and save the recovery key.
+9. Verify Saudi Energy Company remains Original 2,620.66 / Paid 1,010.00 / Remaining 1,610.66.
+10. Test Add Payment from the global button: choose a creditor from the dropdown; saving must be blocked until an attachment is selected.
+11. Test Add Debt: saving must be blocked until an attachment is selected.
+12. Test correcting/voiding a debt and a payment: each must request the master password.
+13. Settings > Report > PDF report must download a .pdf file.
+
+Old 3.0.0 versioned JS/CSS files may remain temporarily; 3.1.0 does not reference them. They can be cleaned after acceptance.
