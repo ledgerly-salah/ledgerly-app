@@ -2,11 +2,11 @@
   "app": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "build": "2026-10-05-r1",
+  "build": "2026-10-05-r2",
   "baseline": "Ledgerly 3.0.0 Approved Baseline",
   "currency": "SAR",
   "storage": "IndexedDB",
-  "security": "mandatory AES-GCM master password",
+  "security": "mandatory AES-GCM master password + recovery key rotation",
   "newRecordEvidence": "required for debts and payments",
   "pdfReport": true,
   "sync": "disabled-on-static-github-pages"
