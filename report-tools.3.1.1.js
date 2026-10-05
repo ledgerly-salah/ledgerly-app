@@ -18,8 +18,30 @@ function dl(bytes,name,type='application/pdf'){
   const blob=bytes instanceof Blob?bytes:new Blob([bytes],{type});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1200);
 }
 function closeOverlay(){document.getElementById('ledgerlyReportOverlay')?.remove();document.body.style.overflow='';}
+function ensureReportStyles(){
+  if(document.getElementById('ledgerlyReportV2Styles'))return;
+  const style=document.createElement('style');style.id='ledgerlyReportV2Styles';style.textContent=`
+    #ledgerlyReportOverlay .settings-row select,
+    #ledgerlyReportOverlay .settings-row input[type="date"]{
+      min-height:40px;border:1px solid var(--line);border-radius:10px;
+      background:var(--surface2);color:var(--ink);padding:8px 10px;
+    }
+    #ledgerlyReportOverlay .settings-row select{max-width:58%;}
+    #ledgerlyReportOverlay .settings-row input[type="date"]{max-width:58%;}
+    body.dark #ledgerlyReportOverlay .settings-row select,
+    body.dark #ledgerlyReportOverlay .settings-row input[type="date"]{color-scheme:dark;}
+    body:not(.dark) #ledgerlyReportOverlay .settings-row select,
+    body:not(.dark) #ledgerlyReportOverlay .settings-row input[type="date"]{color-scheme:light;}
+    #ledgerlyReportOverlay .settings-row select option{background:var(--surface);color:var(--ink);}
+    @media(max-width:620px){
+      #ledgerlyReportOverlay .settings-row{align-items:center;}
+      #ledgerlyReportOverlay .settings-row select,
+      #ledgerlyReportOverlay .settings-row input[type="date"]{max-width:56%;min-width:160px;}
+    }
+  `;document.head.appendChild(style);
+}
 function overlay(html,wide=true){
-  closeOverlay();const wrap=document.createElement('div');wrap.id='ledgerlyReportOverlay';wrap.className='modal-backdrop';wrap.innerHTML=`<div class="modal${wide?' wide':''}"><div class="modal-body">${html}</div></div>`;document.body.appendChild(wrap);document.body.style.overflow='hidden';return wrap;
+  ensureReportStyles();closeOverlay();const wrap=document.createElement('div');wrap.id='ledgerlyReportOverlay';wrap.className='modal-backdrop';wrap.innerHTML=`<div class="modal${wide?' wide':''}"><div class="modal-body">${html}</div></div>`;document.body.appendChild(wrap);document.body.style.overflow='hidden';return wrap;
 }
 function header(title,subtitle=''){return `<div class="modal-head"><div><h2>${esc(title)}</h2>${subtitle?`<p>${esc(subtitle)}</p>`:''}</div><button id="reportClose" class="modal-close" type="button" aria-label="Close">×</button></div>`;}
 function bindClose(wrap){wrap.querySelector('#reportClose')?.addEventListener('click',closeOverlay);}
@@ -27,7 +49,7 @@ function patchBuildLabel(){const el=document.getElementById('versionLabel');if(e
 
 function openReportCenter(){
   const html=`${header('Report center','Ledgerly Report v2 · audit-ready exports')}
-  <div class="notice"><strong>Report v2</strong> validates reconciliation and the audit chain before it creates a PDF. Plans and forecasts never reduce actual balances.</div>
+  <div class="notice"><strong>Report v2</strong> validates reconciliation and the current cryptographic audit chain before it creates a PDF. Older imported audit history is preserved and identified separately.</div>
   <form id="reportV2Form">
     <div class="settings-sections">
       <div class="settings-card"><h3>Report type</h3>
@@ -42,7 +64,7 @@ function openReportCenter(){
         <div class="settings-row"><span>Transaction order</span><select name="order"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div>
         <label class="settings-row"><span>Include notes</span><input name="includeNotes" type="checkbox" checked></label>
       </div>
-      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Report ID, build and revision, timezone, reconciliation equation, data-quality exceptions, audit-chain status, total row, short transaction IDs, payment allocation, evidence status, PDF metadata, and multi-page footers.</p></div>
+      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Report ID, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status, total row, short transaction IDs, payment allocation, evidence status, PDF metadata, and multi-page footers.</p></div>
     </div>
     <div class="form-actions"><button class="btn btn-soft" type="button" id="reportCancel">Cancel</button><button class="btn btn-primary" type="submit">Continue to authorization</button></div>
   </form>`;
@@ -57,20 +79,36 @@ function openAuthorization(options){
   bindClose(wrap);wrap.querySelector('#reportBack').addEventListener('click',openReportCenter);
   wrap.querySelector('#reportAuthForm').addEventListener('submit',async e=>{
     e.preventDefault();const btn=wrap.querySelector('#reportGenerate');const err=wrap.querySelector('#reportAuthError');btn.disabled=true;btn.textContent='Validating…';err.textContent='';
-    try{await generateReport(options,new FormData(e.currentTarget).get('password'));closeOverlay();toast('Report exported','Report v2 passed reconciliation and audit checks before export.');}
+    try{await generateReport(options,new FormData(e.currentTarget).get('password'));closeOverlay();toast('Report exported','Report v2 passed reconciliation and current audit-chain checks before export.');}
     catch(ex){console.error(ex);err.textContent=ex?.message||'Report generation failed.';btn.disabled=false;btn.textContent='Generate report';}
   });
   setTimeout(()=>wrap.querySelector('input[name="password"]')?.focus(),50);
 }
 
+function isCurrentAuditEntry(entry){
+  const id=String(entry?.id||'');
+  const app=String(entry?.appVersion||'');
+  return app===APP_VERSION && /^audit_[a-z0-9]{8,}_[a-z0-9]{8,}$/i.test(id) && typeof entry?.hash==='string' && entry.hash.length>=40;
+}
 async function verifyAuditChain(state){
   const items=[...(state.audit||[]),...(state.auditArchive||[])];
-  if(!items.length)return {ok:true,count:0};
+  if(!items.length)return {ok:true,count:0,verified:0,legacy:0,label:'EMPTY'};
+  let verified=0,legacy=0,boundary=false;
   for(let i=0;i<items.length;i++){
-    const entry=items[i];const expected=await sha256Text(JSON.stringify({...entry,hash:null}));if(expected!==entry.hash)return {ok:false,count:items.length,reason:`Audit hash mismatch at ${entry.id||i}`};
-    if(i<items.length-1 && String(entry.prevHash||'')!==String(items[i+1].hash||''))return {ok:false,count:items.length,reason:`Audit link mismatch at ${entry.id||i}`};
+    const entry=items[i];
+    if(boundary||!isCurrentAuditEntry(entry)){boundary=true;legacy++;continue;}
+    const expected=await sha256Text(JSON.stringify({...entry,hash:null}));
+    if(expected!==entry.hash)return {ok:false,count:items.length,verified,legacy,reason:`Current audit hash mismatch at ${entry.id||i}`};
+    const next=items[i+1];
+    if(next){
+      const prev=String(entry.prevHash||'');const nextHash=String(next.hash||'');const nextCurrent=isCurrentAuditEntry(next);
+      if(nextCurrent && prev!==nextHash)return {ok:false,count:items.length,verified,legacy,reason:`Current audit link mismatch at ${entry.id||i}`};
+      if(!nextCurrent && prev && (!nextHash||prev!==nextHash))return {ok:false,count:items.length,verified,legacy,reason:`Audit boundary link mismatch at ${entry.id||i}`};
+    }
+    verified++;
   }
-  return {ok:true,count:items.length};
+  const label=legacy?(verified?`CURRENT VALID (${verified}) / LEGACY ${legacy}`:`LEGACY PRESERVED (${legacy})`):`VALID (${verified} events)`;
+  return {ok:true,count:items.length,verified,legacy,label};
 }
 function tzLabel(){
   const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';const mins=-new Date().getTimezoneOffset();const sign=mins>=0?'+':'-';const h=Math.floor(Math.abs(mins)/60);const m=Math.abs(mins)%60;return `${zone} (UTC${sign}${h}${m?':'+String(m).padStart(2,'0'):''})`;
@@ -90,6 +128,10 @@ function attachmentTypeSummary(items){
   return [pdf?`${pdf} PDF`:'',img?`${img} image${img===1?'':'s'}`:'',other?`${other} file${other===1?'':'s'}`:''].filter(Boolean).join(' + ');
 }
 function qualityForSummary(summary){const q=new Set(summary.transactions.filter(x=>!x.voidedAt).map(x=>x.quality||'Confirmed'));return q.has('Disputed')?'Disputed':q.has('Estimated')?'Estimated':'Confirmed';}
+function isLegacyTransaction(tx){
+  const v=String(tx?.createdByVersion||'').toLowerCase();
+  return !v||v==='legacy'||v.includes('migration')||v.startsWith('3.0');
+}
 
 async function generateReport(options,password){
   const record=await getStateRecord();if(!record)throw new Error('Ledger record was not found on this device.');
@@ -112,7 +154,10 @@ async function generateReport(options,password){
   const estimated=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&tx.quality==='Estimated').length;
   const disputed=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&tx.quality==='Disputed').length;
   let legacyNoEvidence=0,missingEvidence=0;
-  for(const tx of state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&['debt','payment'].includes(tx.type))){const has=(byTx.get(tx.id)||[]).length>0||(tx.attachmentIds||[]).length>0;if(has)continue;const legacy=String(tx.createdByVersion||'').toLowerCase().includes('migration')||String(state.meta?.migratedFrom||'').length>0;if(legacy)legacyNoEvidence++;else missingEvidence++;}
+  for(const tx of state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&['debt','payment'].includes(tx.type))){
+    const has=(byTx.get(tx.id)||[]).length>0||(tx.attachmentIds||[]).length>0;if(has)continue;
+    if(isLegacyTransaction(tx))legacyNoEvidence++;else missingEvidence++;
+  }
 
   const checksum=await checksumObject(state);const reportId=`LGR-${String(checksum).replace(/[^A-Za-z0-9]/g,'').slice(0,10).toUpperCase()}`;
   const redacted=options.reportType==='redacted';const creditorNames=new Map();summaries.forEach((s,i)=>creditorNames.set(s.creditor.id,redacted?`Creditor ${String(i+1).padStart(2,'0')}`:s.creditor.name));
@@ -121,7 +166,7 @@ async function generateReport(options,password){
   }));
 
   const txRows=[];for(const tx of txs){
-    const h=await sha256Text(tx.id);const att=byTx.get(tx.id)||[];const legacy=String(tx.createdByVersion||'').toLowerCase().includes('migration')||String(state.meta?.migratedFrom||'').length>0;
+    const h=await sha256Text(tx.id);const att=byTx.get(tx.id)||[];const legacy=isLegacyTransaction(tx);
     let evidence=attachmentTypeSummary(att);if(!evidence){if(['debt','payment'].includes(tx.type))evidence=legacy?'Legacy - no evidence':'Missing';else evidence='N/A';}
     let allocation='';if(['payment','waiver'].includes(tx.type)){const n=(tx.allocations||[]).length;allocation=n?`${n} debt record${n===1?'':'s'} | ${tx.allocationMode||'allocated'}`:'Unallocated';}
     let verification='';if(!redacted){const parts=[];if(tx.verificationSource)parts.push(tx.verificationSource);if(tx.verifiedAt)parts.push(shortDate(tx.verifiedAt));if(tx.verified)parts.push('Verified');verification=parts.join(' | ');}
@@ -133,7 +178,7 @@ async function generateReport(options,password){
   const generatedIso=new Date().toISOString();const generated=shortDateTime(generatedIso);const rangeFrom=options.from?shortDate(options.from):'start';const rangeTo=options.to?shortDate(options.to):'current';const scopeText=`${options.scope==='outstanding'?'Outstanding creditors only':'All creditors'}; balances as of ${options.to?shortDate(options.to):'current snapshot'}; transactions ${rangeFrom} through ${rangeTo}`;
   const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`);
   const equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
-  const model={reportType:options.reportType==='redacted'?'detailed':options.reportType,redacted,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:`VALID (${audit.count} events)`,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
+  const model={reportType:options.reportType==='redacted'?'detailed':options.reportType,redacted,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
 
   const bytes=buildLedgerReportPdf(model);const d=new Date();const p=n=>String(n).padStart(2,'0');const stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_R${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`;const kind=redacted?'Redacted':options.reportType==='summary'?'Summary':'Detailed';dl(bytes,`Ledgerly_${kind}_${stamp}.pdf`);
 }
@@ -141,4 +186,4 @@ async function generateReport(options,password){
 document.addEventListener('click',e=>{
   const target=e.target.closest?.('[data-action="report-menu"]');if(!target)return;e.preventDefault();e.stopImmediatePropagation();openReportCenter();
 },true);
-window.addEventListener('load',patchBuildLabel);
+window.addEventListener('load',()=>{ensureReportStyles();patchBuildLabel();});
