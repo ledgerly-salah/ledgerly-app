@@ -1,4 +1,4 @@
-import { getStateRecord, saveStateRecord } from './storage.3.1.0.js';
+import { getStateRecord, saveStateRecord, clearSnapshots } from './storage.3.1.0.js';
 import {
   unlockSecurity, decryptJson, encryptJson, deriveKek, randomBytes,
   bytesToBase64, sha256Text, RECOVERY_ITERATIONS
@@ -6,7 +6,6 @@ import {
 
 const PATCH_BUILD='20261005-r2';
 const APP_VERSION='3.1.0';
-const enc=new TextEncoder();
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const uid=(prefix='id')=>`${prefix}_${Date.now().toString(36)}_${(crypto.randomUUID?.()||Math.random().toString(36).slice(2)).replace(/-/g,'').slice(0,12)}`;
@@ -117,7 +116,8 @@ async function rotateRecoveryKey(password){
   audit.hash=await sha256Text(JSON.stringify({...audit,hash:null}));
   next.audit=[audit,...(next.audit||[])];
   const envelope=await encryptJson(next,dek);
-  await saveStateRecord({id:'current',encrypted:true,revision:expected+1,envelope,security:nextSecurity},{expectedRevision:expected,snapshotReason:'Before recovery key rotation'});
+  await saveStateRecord({id:'current',encrypted:true,revision:expected+1,envelope,security:nextSecurity},{expectedRevision:expected,snapshotReason:null});
+  await clearSnapshots();
   return recoveryKey;
 }
 
@@ -126,10 +126,10 @@ function showNewRecoveryKey(key){
     <div class="modal-head"><div><h2>New recovery key</h2><p>The previous recovery key is now invalid for the current ledger.</p></div></div>
     <div class="danger-box"><strong>Save this key now.</strong> Do not send it in chat, screenshots, email, or messages. Store it somewhere only you can access.</div>
     <div class="recovery-code" id="rkCode">${esc(key).replace(/-/g,'-<wbr>')}</div>
-    <div id="rkCopyStatus" class="notice">Your master password has not changed.</div>
+    <div id="rkCopyStatus" class="notice">Your master password has not changed. Previous rollback snapshots were cleared so the exposed recovery key cannot be reintroduced from an old local snapshot.</div>
     <div class="form-actions"><button id="rkCopy" class="btn btn-soft" type="button">Copy key</button><button id="rkDone" class="btn btn-primary" type="button">I saved it — reload Ledgerly</button></div>`);
   overlay.querySelector('#rkCopy').addEventListener('click',async()=>{
-    try{await navigator.clipboard.writeText(key);overlay.querySelector('#rkCopyStatus').textContent='Recovery key copied. Save it somewhere private.';}catch{overlay.querySelector('#rkCopyStatus').textContent='Copy was blocked by the browser. Select the key manually and save it privately.';}
+    try{await navigator.clipboard.writeText(key);overlay.querySelector('#rkCopyStatus').textContent='Recovery key copied. Save it somewhere private. Your master password has not changed.';}catch{overlay.querySelector('#rkCopyStatus').textContent='Copy was blocked by the browser. Select the key manually and save it privately.';}
   });
   overlay.querySelector('#rkDone').addEventListener('click',()=>location.reload());
 }
