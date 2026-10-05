@@ -61,7 +61,7 @@ function summaryBlock(b,model){
   b.add(txt(307,704,7,'WAIVED / ADJ.','F1'));b.add(txt(307,685,10,model.summary.waivedAdjusted,'F2'));
   b.add(txt(430,704,7,'REMAINING','F1'));b.add(txt(430,685,14,model.summary.remaining,'F2'));
   b.add(txt(54,656,7.5,`Reconciliation: ${model.summary.equation}`,'F2'));
-  b.add(txt(54,640,7.2,`${model.counts.creditors} creditors | ${model.counts.transactions} transactions | ${model.counts.active} active | ${model.counts.completed} paid`,'F1'));
+  b.add(txt(54,640,7.2,`${model.counts.creditors} creditors | ${model.counts.transactions} transactions | ${model.counts.active} open creditors | ${model.counts.completed} fully paid`,'F1'));
   b.y=607;
 }
 
@@ -69,8 +69,8 @@ function healthBlock(b,model){
   b.write('Integrity & data quality',{size:11,font:'F2',gap:18});
   const h=`Reconciliation: ${model.health.reconciliation} | Audit chain: ${model.health.audit} | Diagnostics: ${model.health.diagnostics}`;
   b.write(h,{size:7.5,max:100});
-  const q=`Estimated: ${model.quality.estimated} | Disputed: ${model.quality.disputed} | Legacy without evidence: ${model.quality.legacyNoEvidence} | Missing evidence: ${model.quality.missingEvidence}`;
-  b.write(q,{size:7.5,max:105});
+  const q=`Estimated: ${model.quality.estimated} | Disputed: ${model.quality.disputed} | Legacy records without attachments: ${model.quality.legacyNoEvidence} | Missing evidence: ${model.quality.missingEvidence}`;
+  b.write(q,{size:7.5,max:110});
   if(model.scopeText)b.write(`Scope: ${model.scopeText}`,{size:7.2,max:105});
   b.spacer(3);b.rule();
 }
@@ -86,14 +86,41 @@ function creditorTable(b,model){
   b.spacer(8);
 }
 
+function debtCategoryMap(model){
+  const map=new Map();
+  for(const tx of model.transactions||[]){
+    if(!String(tx.type||'').startsWith('Debt'))continue;
+    const category=String(tx.category||'').trim();if(!category||category==='Personal')continue;
+    if(!map.has(tx.creditor))map.set(tx.creditor,new Set());map.get(tx.creditor).add(category);
+  }
+  return map;
+}
+function displayCategory(tx,categoryMap){
+  const current=String(tx.category||'Personal');
+  if((String(tx.type||'').startsWith('Payment')||String(tx.type||'').startsWith('Waiver'))&&current==='Personal'){
+    const categories=categoryMap.get(tx.creditor);if(categories?.size===1)return [...categories][0];
+  }
+  return current;
+}
+function displayEffectiveDate(tx){
+  const legacy=String(tx.evidence||'').startsWith('Legacy');
+  const sameRecordedDate=String(tx.recordedAt||'').startsWith(String(tx.effectiveDate||''));
+  if(String(tx.type||'').startsWith('Debt')&&legacy&&sameRecordedDate)return 'Opening balance (date not set)';
+  return tx.effectiveDate;
+}
+function displayEvidence(tx){
+  return String(tx.evidence||'').startsWith('Legacy - no evidence')?'Legacy - no attachment':tx.evidence;
+}
+
 function detailTransactions(b,model){
   b.write('Transaction detail',{size:11,font:'F2',gap:18});
   b.write(`Sorted: ${model.orderLabel} | Transaction range: ${model.transactionRange}`,{size:7.3,max:105});
   b.spacer(2);b.rule();
+  const categoryMap=debtCategoryMap(model);
   for(const tx of model.transactions){
     b.ensure(tx.note?64:50);
-    b.write(`${tx.effectiveDate} | Recorded ${tx.recordedAt} | ${tx.shortId} | ${tx.type} | ${tx.amount}`,{size:7.5,font:'F2',gap:13,max:105});
-    b.write(`${tx.creditor} | ${tx.category} | ${tx.quality} | Evidence: ${tx.evidence}`,{size:7.1,gap:12,max:105});
+    b.write(`${displayEffectiveDate(tx)} | Recorded ${tx.recordedAt} | ${tx.shortId} | ${tx.type} | ${tx.amount}`,{size:7.5,font:'F2',gap:13,max:105});
+    b.write(`${tx.creditor} | ${displayCategory(tx,categoryMap)} | ${tx.quality} | Evidence: ${displayEvidence(tx)}`,{size:7.1,gap:12,max:105});
     const refs=[tx.method?`Method: ${tx.method}`:'',tx.reference?`Ref: ${tx.reference}`:'',tx.allocation?`Allocation: ${tx.allocation}`:''].filter(Boolean).join(' | ');
     if(refs)b.write(refs,{size:6.8,gap:11,max:110});
     if(tx.note)b.write(`Note: ${tx.note}`,{size:6.8,gap:11,max:110});
@@ -109,7 +136,10 @@ function finalizeBuilder(b){
 }
 function buildRawPages(model){
   const b=makeBuilder();summaryBlock(b,model);healthBlock(b,model);creditorTable(b,model);
-  if(model.reportType!=='summary')detailTransactions(b,model);
+  if(model.reportType!=='summary'){
+    if(b.y<720)b.push();
+    detailTransactions(b,model);
+  }
   return finalizeBuilder(b);
 }
 
