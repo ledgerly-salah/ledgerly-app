@@ -118,7 +118,12 @@ function columnChart(x,y,w,h,items){
   const max=Math.max(1,...items.map(i=>i.amount)),gap=8,bw=(w-gap*(items.length-1))/items.length;let s=line(x,y,x+w,y,.6,P.line);
   items.forEach((it,i)=>{const bh=Math.max(3,h*it.amount/max),bx=x+i*(bw+gap);s+=rect(bx,y,bw,bh,CAT[(i+1)%CAT.length]);s+=txt(bx,y-13,6.2,fit(it.label,8),'F1',P.muted);s+=txt(bx,y+bh+6,6.2,shortMoney(it.amount),'F2',P.ink);});return s;
 }
-function activityRow(y,tx){let s=rect(42,y-8,511,42,P.panel);s+=txt(54,y+16,7.2,`${tx.date} | ${fit(tx.creditor,26)}`,'F2',P.ink);s+=txt(54,y+2,6.8,`${tx.type} | ${tx.amount}`,'F1',P.muted);return s;}
+function activityRow(y,tx){
+  const labels=splitLabel(tx.creditor,24);let s=rect(42,y-10,511,46,P.panel);
+  s+=txt(54,y+18,7.2,`${tx.date} | ${labels[0]}`,'F2',P.ink);
+  if(labels[1])s+=txt(116,y+8,7.0,labels[1],'F2',P.ink);
+  s+=txt(54,y-3,6.8,`${tx.type} | ${tx.amount}`,'F1',P.muted);return s;
+}
 function pageThree(model){
   const v=model.visual,s=[];s.push(header(model,'Payments & Activity','Cash movement and recent ledger changes'));
   s.push(card(42,661,160,65,'Total paid',model.summary.paid,{accent:P.mint,soft:P.mintSoft}));
@@ -133,7 +138,7 @@ function pageThree(model){
     items.forEach((p,i)=>{s.push(rect(42,y-9,511,58,i%2?P.panel:P.mintSoft));s.push(txt(56,y+26,8,p.date,'F2',P.green));s.push(txt(148,y+26,8,fit(p.creditor,28),'F2',P.ink));s.push(txt(430,y+26,9,p.amountLabel,'F2',P.green));s.push(txt(148,y+8,6.8,p.method||'Recorded payment','F1',P.muted));y-=68;});
   }
   s.push(sectionTitle(362,'Recent activity','Latest transactions in the selected scope'));
-  let ry=316;v.latest.slice(0,5).forEach(tx=>{s.push(activityRow(ry,tx));ry-=53;});
+  let ry=316;v.latest.slice(0,5).forEach(tx=>{s.push(activityRow(ry,tx));ry-=55;});
   return s.join('');
 }
 
