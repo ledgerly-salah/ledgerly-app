@@ -27,18 +27,17 @@ function issueMeta(model){
   const d=new Date(model.generatedIso||Date.now());
   const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
   const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
-  const seed=`${model.reportId||''}|${model.reportType||''}|${model.generatedIso||''}`;let h=0;
-  for(let i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))>>>0;
-  return {ref:String(1000+(h%9000)),date,time};
+  const ref=String(model.issueRef||'0000').padStart(4,'0');
+  return {ref,date,time};
 }
-function watermark(){return `0.93 g BT /F2 42 Tf 0.707 0.707 -0.707 0.707 105 270 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
+function watermark(){return `0.955 g BT /F2 34 Tf 0.707 0.707 -0.707 0.707 125 292 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 
 function header(model,pageIndex,pageCount,title){
   const meta=issueMeta(model);let s='';
   s+=strokeBox(42,786,24,24,.8);s+=txt(50,793,11,'L','F2');
   s+=txt(75,800,10,'LEDGERLY','F2');
   s+=txt(75,783,18,title,'F2');
-  s+=txt(42,763,7.5,`Ref: ${meta.ref} | Issuing Date: ${meta.date} | Issuing Time: ${meta.time} | ${model.timezone}`,'F1');
+  s+=txt(42,763,7.8,`Ref: ${meta.ref} | Issue Date: ${meta.date} | Issue Time: ${meta.time} | ${model.timezone}`,'F1');
   s+=txt(42,751,7.5,`App v${model.version} | Build ${model.build} | Revision ${model.revision} | Currency ${model.currency} | Report format v2`,'F1');
   s+=line(42,742,553,742,.7);
   return s;
@@ -157,7 +156,7 @@ function pdfBytes(pageContents,model,title){
   const catalog=add('');const pagesObj=add('');
   const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
   const font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
-  const info=add(`<< /Title (${escPdf(title)}) /Author (Ledgerly) /Creator (Ledgerly Report v2) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly debt ledger report ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
+  const info=add(`<< /Title (${escPdf(title)}) /Author (Ledgerly) /Creator (Ledgerly Report v2) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly debt ledger report Ref ${escPdf(model.issueRef||'')} ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
   const pageIds=[];
   for(let i=0;i<pageContents.length;i++){
     const content=watermark()+header(model,i,pageContents.length,title)+pageContents[i].join('')+footer(model,i,pageContents.length);
