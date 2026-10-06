@@ -66,11 +66,11 @@ function page(model){
   s.push(line(42,350,553,350,.45,P.line));s.push(section(333,'Key insights','Decision-ready highlights'));s.push(insight(42,268,157,'Largest balance',v.insights.largest?.remainingLabel||'N/A',v.insights.largest?.name||'',P.red,P.redSoft));s.push(insight(219,268,157,'Most paid creditor',v.insights.mostPaid?.paidLabel||'N/A',v.insights.mostPaid?.name||'',P.mint,P.mintSoft));s.push(insight(396,268,157,'Estimated records',String(model.quality.estimated),model.quality.disputed?`${model.quality.disputed} disputed`:'No disputed records',P.amber,P.amberSoft));
 
   const rows=ledgerRows(v.creditors||[]);
-  s.push(section(245,'Mini ledger snapshot',rows.length<(v.creditors||[]).length?'Top creditors plus Others and total':'All creditors plus total'));
-  s.push(rect(42,70,511,158,P.panel,P.line,.35));
-  s.push(txt(52,214,6.1,'CREDITOR','F2',P.muted));s.push(txt(275,214,6.1,'ORIGINAL','F2',P.muted));s.push(txt(344,214,6.1,'ADJ.','F2',P.muted));s.push(txt(410,214,6.1,'PAID','F2',P.muted));s.push(txt(477,214,6.1,'REMAINING','F2',P.muted));
-  let ty=201;rows.forEach(c=>{const ra=rowAdjustment(c);s.push(txt(52,ty,6.2,fit(c.name,36),'F1',P.ink));s.push(txt(275,ty,6.0,fullMoney(c.original),'F1',P.ink));s.push(txt(344,ty,6.0,signedMoney(ra),'F1',ra?P.amber:P.muted));s.push(txt(410,ty,6.0,fullMoney(c.paid),'F1',P.green));s.push(txt(477,ty,6.0,fullMoney(c.remaining),'F2',P.ink));ty-=10.3;});
-  s.push(line(52,94,543,94,.4,P.line));s.push(txt(52,82,6.0,'TOTAL','F2',P.ink));s.push(txt(275,82,6.0,model.summary.original,'F2',P.ink));s.push(txt(344,82,6.0,signedMoney(adj),'F2',adj?P.amber:P.muted));s.push(txt(410,82,6.0,model.summary.paid,'F2',P.green));s.push(txt(477,82,6.0,model.summary.remaining,'F2',P.red));
+  s.push(section(252,'Mini ledger snapshot',rows.length<(v.creditors||[]).length?'Top creditors plus Others and total':'All creditors plus total'));
+  s.push(rect(42,70,511,168,P.panel,P.line,.35));
+  s.push(txt(52,224,6.7,'CREDITOR','F2',P.muted));s.push(txt(270,224,6.7,'ORIGINAL','F2',P.muted));s.push(txt(342,224,6.7,'ADJ.','F2',P.muted));s.push(txt(409,224,6.7,'PAID','F2',P.muted));s.push(txt(476,224,6.7,'REMAINING','F2',P.muted));
+  let ty=210;rows.forEach(c=>{const ra=rowAdjustment(c);s.push(txt(52,ty,6.9,fit(c.name,36),'F1',P.ink));s.push(txt(270,ty,6.6,fullMoney(c.original),'F1',P.ink));s.push(txt(342,ty,6.6,signedMoney(ra),'F1',ra?P.amber:P.muted));s.push(txt(409,ty,6.6,fullMoney(c.paid),'F1',P.green));s.push(txt(476,ty,6.6,fullMoney(c.remaining),'F2',P.ink));ty-=11.2;});
+  s.push(line(52,96,543,96,.4,P.line));s.push(txt(52,83,6.6,'TOTAL','F2',P.ink));s.push(txt(270,83,6.6,model.summary.original,'F2',P.ink));s.push(txt(342,83,6.6,signedMoney(adj),'F2',adj?P.amber:P.muted));s.push(txt(409,83,6.6,model.summary.paid,'F2',P.green));s.push(txt(476,83,6.6,model.summary.remaining,'F2',P.red));
 
   s.push(rect(42,43,511,22,'#EEF5F2'));s.push(txt(52,51,5.7,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));s.push(txt(187,51,5.7,`Audit: ${fit(model.health.audit,32)}`,'F2',P.green));s.push(txt(405,51,5.7,`Diagnostics: ${model.health.diagnostics}`,'F2',P.green));
   s.push(txt(42,31,5.5,'Visual summary only. Cleared may include payments and other reductions. For transaction-level detail, refer to the Detailed Ledger report.','F1',P.muted));
