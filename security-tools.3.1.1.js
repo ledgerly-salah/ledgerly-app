@@ -6,7 +6,7 @@ import {
   bytesToBase64, sha256Text, RECOVERY_ITERATIONS
 } from './crypto.3.1.0.js';
 
-const PATCH_BUILD='20261005-r3';
+const PATCH_BUILD='20261006-r4';
 const APP_VERSION='3.1.0';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
@@ -19,7 +19,7 @@ function patchBuildLabel(){
   if(label) label.textContent=`v${APP_VERSION} · ${PATCH_BUILD}`;
   const modal=document.getElementById('modal');
   const sub=modal?.querySelector('.modal-head p');
-  if(sub?.textContent?.includes('20261005-r1')||sub?.textContent?.includes('20261005-r2')) sub.textContent=`v${APP_VERSION} · ${PATCH_BUILD}`;
+  if(sub?.textContent?.includes('20261005-r1')||sub?.textContent?.includes('20261005-r2')||sub?.textContent?.includes('20261005-r3')) sub.textContent=`v${APP_VERSION} · ${PATCH_BUILD}`;
 }
 
 function makeOverlay(bodyHtml){
