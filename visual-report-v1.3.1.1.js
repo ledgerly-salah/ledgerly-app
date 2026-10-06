@@ -17,6 +17,11 @@ function ascii(value){
 }
 function escPdf(value){return ascii(value).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
 function fit(value,max=42){const s=ascii(value);return s.length<=max?s:s.slice(0,Math.max(1,max-3))+'...';}
+function splitLabel(value,max=24){
+  const s=ascii(value);if(s.length<=max)return [s];
+  const cut=s.lastIndexOf(' ',max);if(cut<8)return [fit(s,max+8)];
+  return [s.slice(0,cut),fit(s.slice(cut+1),max+8)];
+}
 function rgb(hex){const h=hex.replace('#','');const n=parseInt(h.length===3?h.split('').map(c=>c+c).join(''):h,16);return [((n>>16)&255)/255,((n>>8)&255)/255,(n&255)/255].map(x=>x.toFixed(3)).join(' ');}
 function fill(hex){return `${rgb(hex)} rg\n`;}
 function stroke(hex){return `${rgb(hex)} RG\n`;}
@@ -40,8 +45,15 @@ function donut(cx,cy,r,pct,centerTop,centerBottom){
   const p=Math.max(0,Math.min(100,Number(pct||0)));let s=strokeArc(cx,cy,r,0,360,13,P.line);if(p>0)s+=strokeArc(cx,cy,r,-90,-90+360*p/100,13,P.mint);
   s+=txt(cx-22,cy+2,15,`${p.toFixed(1)}%`,'F2',P.green);s+=txt(cx-24,cy-15,7,centerBottom||'paid','F1',P.muted);if(centerTop)s+=txt(cx-28,cy+24,6.8,fit(centerTop,16),'F1',P.muted);return s;
 }
-function progressBar(x,y,w,h,pct,fg=P.mint,bg=P.line){const p=Math.max(0,Math.min(100,Number(pct||0)));return rect(x,y,w,h,bg)+rect(x,y,w*p/100,h,fg);}
+function progressBar(x,y,w,h,pct,fg=P.mint,bg=P.line){const p=Math.max(0,Math.min(100,Number(pct||0)));let s=rect(x,y,w,h,bg);if(p>0)s+=rect(x,y,w*p/100,h,fg);return s;}
 function moneyNum(v){return Number(v||0)/100;}
+function fullMoney(v){return `SAR ${moneyNum(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;}
+function signedMoney(v){const n=Number(v||0);return `${n>0?'+':n<0?'-':''}${fullMoney(Math.abs(n))}`;}
+function reconciliationText(v){
+  const adj=Number(v.raw.liability||0)-Number(v.raw.original||0);const parts=[fullMoney(v.raw.original)];
+  if(adj!==0)parts.push(`${adj>0?'+':'-'} ${fullMoney(Math.abs(adj))}`);
+  parts.push(`- ${fullMoney(v.raw.reductions)} = ${fullMoney(v.raw.remaining)}`);return parts.join(' ');
+}
 function shortMoney(v){const n=moneyNum(v);if(Math.abs(n)>=1000000)return `SAR ${(n/1000000).toFixed(1)}m`;if(Math.abs(n)>=1000)return `SAR ${(n/1000).toFixed(n>=10000?0:1)}k`;return `SAR ${n.toFixed(0)}`;}
 function monthLabel(v){const [y,m]=String(v||'').split('-');const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m?`${names[Number(m)-1]} ${String(y).slice(2)}`:v;}
 
@@ -53,7 +65,9 @@ function footer(model,pageIndex,pageCount){let s=line(42,39,553,39,.4,P.line);s+
 function card(x,y,w,h,label,value,{accent=P.green,soft=P.panel,valueSize=15}={}){let s=rect(x,y,w,h,soft,P.line,.35);s+=rect(x,y,w,4,accent);s+=txt(x+12,y+h-20,7,label.toUpperCase(),'F2',P.muted);s+=txt(x+12,y+16,valueSize,fit(value,24),'F2',P.ink);return s;}
 function sectionTitle(y,title,sub=''){let s=txt(42,y,12,title,'F2',P.ink);if(sub)s+=txt(42,y-13,7,sub,'F1',P.muted);return s;}
 function hBar(x,y,w,label,value,max,color=P.green,valueLabel=''){
-  const ratio=max>0?Math.max(0,Math.min(1,value/max)):0;let s=txt(x,y+9,7.2,fit(label,25),'F1',P.black);s+=txt(x+w-64,y+9,7,valueLabel||shortMoney(value),'F2',P.ink);s+=rect(x,y,w,7,'#E8EFEC');s+=rect(x,y,w*ratio,7,color);return s;
+  const ratio=max>0?Math.max(0,Math.min(1,value/max)):0;const labels=splitLabel(label,25);let s='';
+  if(labels.length===1)s+=txt(x,y+9,7.2,labels[0],'F1',P.black);else{s+=txt(x,y+17,7,labels[0],'F1',P.black);s+=txt(x,y+9,7,labels[1],'F1',P.black);}
+  s+=txt(x+w-64,y+9,7,valueLabel||shortMoney(value),'F2',P.ink);s+=rect(x,y,w,7,'#E8EFEC');if(ratio>0)s+=rect(x,y,w*ratio,7,color);return s;
 }
 function statusPill(x,y,label,count,color,soft){let s=rect(x,y,150,42,soft);s+=circle(x+18,y+21,5,color);s+=txt(x+31,y+25,7,label,'F2',P.muted);s+=txt(x+31,y+10,13,String(count),'F2',P.ink);return s;}
 
@@ -62,21 +76,24 @@ function pageOne(model){
   // Hero
   s.push(rect(42,603,511,137,P.ink));s.push(txt(60,710,8,'TOTAL REMAINING','F2','#BFE2D5'));s.push(txt(60,670,29,model.summary.remaining,'F2',P.white));s.push(txt(60,646,8,`${v.repaymentPct.toFixed(1)}% repaid | ${v.statusCounts.open} open creditors`,'F1','#D8E7E2'));
   s.push(donut(472,671,42,v.repaymentPct,'REPAYMENT','repaid'));
-  // KPI cards
-  s.push(card(42,525,160,60,'Original debt',model.summary.original,{accent:P.blue,soft:P.blueSoft}));
-  s.push(card(216,525,160,60,'Paid',model.summary.paid,{accent:P.mint,soft:P.mintSoft}));
-  s.push(card(390,525,163,60,'Open creditors',String(v.statusCounts.open),{accent:P.red,soft:P.redSoft}));
-  s.push(sectionTitle(501,'Repayment progress','Paid against current liability'));
-  s.push(progressBar(42,470,511,13,v.repaymentPct,P.mint,'#E4ECE9'));s.push(txt(42,450,7,`${v.repaymentPct.toFixed(1)}% paid`,'F2',P.green));s.push(txt(492,450,7,`${(100-v.repaymentPct).toFixed(1)}% remaining`,'F2',P.red));
+  // KPI cards: original + net adjustments - reductions = remaining
+  const netAdjustments=Number(v.raw.liability||0)-Number(v.raw.original||0);
+  s.push(card(42,525,118,60,'Original debt',model.summary.original,{accent:P.blue,soft:P.blueSoft,valueSize:11}));
+  s.push(card(174,525,118,60,'Net adjustments',signedMoney(netAdjustments),{accent:P.amber,soft:P.amberSoft,valueSize:11}));
+  s.push(card(306,525,118,60,'Paid',model.summary.paid,{accent:P.mint,soft:P.mintSoft,valueSize:11}));
+  s.push(card(438,525,115,60,'Open creditors',String(v.statusCounts.open),{accent:P.red,soft:P.redSoft,valueSize:13}));
+  s.push(txt(42,507,7,`Reconciliation: ${reconciliationText(v)}`,'F2',P.ink));
+  s.push(sectionTitle(486,'Repayment progress','Paid and other reductions against current liability'));
+  s.push(progressBar(42,450,511,13,v.repaymentPct,P.mint,'#E4ECE9'));s.push(txt(42,432,7,`${v.repaymentPct.toFixed(1)}% repaid`,'F2',P.green));s.push(txt(492,432,7,`${(100-v.repaymentPct).toFixed(1)}% remaining`,'F2',P.red));
   // Top outstanding
-  s.push(sectionTitle(421,'Top outstanding balances','Largest current balances'));
-  const top=v.creditors.filter(c=>c.remaining>0).slice(0,5),max=Math.max(1,...top.map(c=>c.remaining));let y=384;
-  top.forEach((c,i)=>{s.push(hBar(42,y,511,c.name,c.remaining,max,CAT[i%CAT.length],c.remainingLabel));y-=45;});
+  s.push(sectionTitle(405,'Top outstanding balances','Largest current balances'));
+  const top=v.creditors.filter(c=>c.remaining>0).slice(0,5),max=Math.max(1,...top.map(c=>c.remaining));let y=370;
+  top.forEach((c,i)=>{s.push(hBar(42,y,511,c.name,c.remaining,max,CAT[i%CAT.length],c.remainingLabel));y-=40;});
   // Status
-  s.push(sectionTitle(145,'Creditor status'));
-  s.push(statusPill(42,81,'Outstanding',v.statusCounts.outstanding,P.red,P.redSoft));
-  s.push(statusPill(222,81,'Partially paid',v.statusCounts.partial,P.amber,P.amberSoft));
-  s.push(statusPill(402,81,'Fully paid',v.statusCounts.paid,P.mint,P.mintSoft));
+  s.push(sectionTitle(155,'Creditor status'));
+  s.push(statusPill(42,90,'Outstanding',v.statusCounts.outstanding,P.red,P.redSoft));
+  s.push(statusPill(222,90,'Partially paid',v.statusCounts.partial,P.amber,P.amberSoft));
+  s.push(statusPill(402,90,'Fully paid',v.statusCounts.paid,P.mint,P.mintSoft));
   return s.join('');
 }
 
@@ -128,7 +145,7 @@ function pageFour(model){
   s.push(insightCard(42,520,245,92,'Repayment rate',`${v.repaymentPct.toFixed(1)}%`,`${model.summary.paid} paid`,P.blue,P.blueSoft));
   s.push(insightCard(308,520,245,92,'Estimated records',String(model.quality.estimated),model.quality.disputed?`${model.quality.disputed} disputed`:'No disputed records',P.amber,P.amberSoft));
   s.push(sectionTitle(486,'Creditor repayment progress','Progress toward clearing each current balance'));
-  let y=450;v.creditors.slice(0,8).forEach((c,i)=>{s.push(txt(42,y+6,7,fit(c.name,25),'F1',P.ink));s.push(progressBar(205,y,250,8,c.progress,CAT[i%CAT.length],'#E7EEEB'));s.push(txt(471,y+4,7,`${c.progress.toFixed(0)}%`,'F2',P.muted));y-=31;});
+  let y=450;v.creditors.slice(0,8).forEach((c,i)=>{s.push(txt(42,y+6,6.7,fit(c.name,32),'F1',P.ink));s.push(progressBar(205,y,250,8,c.progress,CAT[i%CAT.length],'#E7EEEB'));s.push(txt(471,y+4,7,`${c.progress.toFixed(0)}%`,'F2',P.muted));y-=31;});
   s.push(sectionTitle(186,'Integrity & data quality'));
   s.push(rect(42,78,511,88,P.panel,P.line,.4));
   s.push(txt(56,142,7.5,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));
