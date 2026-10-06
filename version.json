@@ -2,12 +2,12 @@
   "app": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "build": "2026-10-05-r3",
+  "build": "2026-10-06-r4",
   "baseline": "Ledgerly 3.0.0 Approved Baseline",
   "currency": "SAR",
   "storage": "IndexedDB",
-  "security": "mandatory AES-GCM master password + recovery key rotation",
+  "security": "mandatory AES-GCM master password + recovery key rotation + protected financial actions",
   "newRecordEvidence": "required for debts and payments",
-  "pdfReport": "Report v2: summary, detailed, redacted, reconciliation and audit validation",
+  "pdfReport": "Report v2: summary, detailed, redacted, reconciliation and audit validation; Visual Financial Snapshot v1 with KPI cards, infographics and charts",
   "sync": "disabled-on-static-github-pages"
 }
