@@ -39,76 +39,30 @@ function moneyNum(v){return Number(v||0)/100;}
 function fullMoney(v){return `SAR ${moneyNum(v).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;}
 function signedMoney(v){const n=Number(v||0);return `${n>0?'+':n<0?'-':''}${fullMoney(Math.abs(n))}`;}
 function shortMoney(v){const n=moneyNum(v);if(Math.abs(n)>=1000000)return `SAR ${(n/1000000).toFixed(1)}m`;if(Math.abs(n)>=1000)return `SAR ${(n/1000).toFixed(n>=10000?0:1)}k`;return `SAR ${n.toFixed(0)}`;}
-function shortSignedMoney(v){const n=Number(v||0);return `${n>0?'+':n<0?'-':''}${shortMoney(Math.abs(n))}`;}
-function parseAmountHalalas(value){
-  const s=String(value??'').trim();if(!s)return 0;const sign=s.startsWith('-')?-1:1;const n=Number(s.replace(/[^0-9.]/g,''));return Number.isFinite(n)?Math.round(sign*n*100):0;
-}
-function adjustmentFor(model,creditor){
-  return (model.transactions||[]).reduce((sum,tx)=>tx.creditor===creditor&&String(tx.type||'').startsWith('Adjustment')?sum+parseAmountHalalas(tx.amount):sum,0);
-}
-function progressBar(x,y,w,h,pct,fg=P.mint,bg='#E7EEEB'){const p=Math.max(0,Math.min(100,Number(pct||0)));let s=rect(x,y,w,h,bg);if(p>0)s+=rect(x,y,w*p/100,h,fg);return s;}
 function section(y,title,sub=''){let s=txt(42,y,11.5,title,'F2',P.ink);if(sub)s+=txt(42,y-13,6.8,sub,'F1',P.muted);return s;}
 function card(x,y,w,h,label,value,accent,soft,valueSize=12){let s=rect(x,y,w,h,soft,P.line,.35);s+=rect(x,y,w,4,accent);s+=txt(x+10,y+h-17,6.2,label.toUpperCase(),'F2',P.muted);s+=txt(x+10,y+15,valueSize,fit(value,22),'F2',P.ink);return s;}
 function hBar(x,y,w,label,value,max,color,valueLabel=''){const ratio=max>0?Math.max(0,Math.min(1,value/max)):0;let s=txt(x,y+8,6.6,fit(label,26),'F1',P.black);s+=txt(x+w-62,y+8,6.4,valueLabel||shortMoney(value),'F2',P.ink);s+=rect(x,y,w,6,'#E8EFEC');if(ratio>0)s+=rect(x,y,w*ratio,6,color);return s;}
-function header(model){
-  let s=rect(0,768,595,74,P.green);s+=txt(42,813,8.5,'LEDGERLY','F2',P.white);s+=txt(42,786,19,'Infographic Report','F2',P.white);
-  s+=txt(42,773,6.8,`One-page visual summary | ${model.generated} | ${model.timezone}`,'F1','#D7E9E3');
-  s+=txt(428,811,6.4,`Revision ${model.revision}`,'F1','#D7E9E3');s+=txt(428,799,6.4,model.build,'F1','#D7E9E3');s+=txt(428,787,6.4,model.reportId,'F1','#D7E9E3');return s;
-}
-function progressRing(cx,cy,r,pct){
-  const p=Math.max(0,Math.min(100,Number(pct||0)));let s=strokeArc(cx,cy,r,0,360,12,'#DFE8E4');if(p>0)s+=strokeArc(cx,cy,r,-90,-90+360*p/100,12,P.mint);
-  s+=txt(cx-22,cy+2,16,`${p.toFixed(1)}%`,'F2',P.green);s+=txt(cx-18,cy-14,6.5,'cleared','F1',P.muted);return s;
-}
-function categoryDonut(cx,cy,r,categories,total){
-  let s=strokeArc(cx,cy,r,0,360,13,'#E5ECE9'),angle=-90;const cats=(categories||[]).filter(c=>Number(c.remaining)>0).slice(0,5);
-  cats.forEach((c,i)=>{const pct=total>0?Number(c.remaining)/total:0,end=angle+360*pct;if(pct>0)s+=strokeArc(cx,cy,r,angle,end,13,CAT[i%CAT.length]);angle=end;});
-  s+=txt(cx-17,cy+2,12,String(cats.length),'F2',P.ink);s+=txt(cx-23,cy-13,6.2,'categories','F1',P.muted);return s;
-}
+function header(model){let s=rect(0,768,595,74,P.green);s+=txt(42,813,8.5,'LEDGERLY','F2',P.white);s+=txt(42,786,19,'Infographic Report','F2',P.white);s+=txt(42,773,6.8,`One-page visual summary | ${model.generated} | ${model.timezone}`,'F1','#D7E9E3');s+=txt(428,811,6.4,`Revision ${model.revision}`,'F1','#D7E9E3');s+=txt(428,799,6.4,model.build,'F1','#D7E9E3');s+=txt(428,787,6.4,model.reportId,'F1','#D7E9E3');return s;}
+function progressRing(cx,cy,r,pct){const p=Math.max(0,Math.min(100,Number(pct||0)));let s=strokeArc(cx,cy,r,0,360,12,'#DFE8E4');if(p>0)s+=strokeArc(cx,cy,r,-90,-90+360*p/100,12,P.mint);s+=txt(cx-22,cy+2,16,`${p.toFixed(1)}%`,'F2',P.green);s+=txt(cx-18,cy-14,6.5,'cleared','F1',P.muted);return s;}
+function categoryDonut(cx,cy,r,categories,total){let s=strokeArc(cx,cy,r,0,360,13,'#E5ECE9'),angle=-90;const cats=(categories||[]).filter(c=>Number(c.remaining)>0).slice(0,5);cats.forEach((c,i)=>{const pct=total>0?Number(c.remaining)/total:0,end=angle+360*pct;if(pct>0)s+=strokeArc(cx,cy,r,angle,end,13,CAT[i%CAT.length]);angle=end;});s+=txt(cx-17,cy+2,12,String(cats.length),'F2',P.ink);s+=txt(cx-23,cy-13,6.2,'categories','F1',P.muted);return s;}
 function insight(x,y,w,title,value,sub,color,soft){let s=rect(x,y,w,53,soft);s+=rect(x,y,4,53,color);s+=txt(x+11,y+36,5.8,title.toUpperCase(),'F2',P.muted);s+=txt(x+11,y+20,10.5,fit(value,24),'F2',P.ink);if(sub)s+=txt(x+11,y+7,5.8,fit(sub,32),'F1',P.muted);return s;}
+function rowAdjustment(c){if(Number.isFinite(Number(c.adjustments)))return Number(c.adjustments);return Number(c.remaining||0)+Number(c.paid||0)-Number(c.original||0);}
 
 function page(model){
   const v=model.visual,s=[];s.push(header(model));
-  s.push(rect(42,642,511,104,P.ink));s.push(txt(57,718,7,'TOTAL REMAINING','F2','#BDE0D4'));s.push(txt(57,682,27,model.summary.remaining,'F2',P.white));
-  s.push(txt(57,658,7,`${v.statusCounts.open} open creditors | ${model.counts.transactions} transactions`,'F1','#D7E7E2'));s.push(progressRing(484,693,36,v.repaymentPct));
-
+  s.push(rect(42,642,511,104,P.ink));s.push(txt(57,718,7,'TOTAL REMAINING','F2','#BDE0D4'));s.push(txt(57,682,27,model.summary.remaining,'F2',P.white));s.push(txt(57,658,7,`${v.statusCounts.open} open creditors | ${model.counts.transactions} transactions`,'F1','#D7E7E2'));s.push(progressRing(484,693,36,v.repaymentPct));
   const adj=Number(v.raw.liability||0)-Number(v.raw.original||0);
-  s.push(card(42,578,119,48,'Original',model.summary.original,P.blue,P.blueSoft,10));
-  s.push(card(173,578,119,48,'Adjustments',signedMoney(adj),P.amber,P.amberSoft,10));
-  s.push(card(304,578,119,48,'Paid',model.summary.paid,P.mint,P.mintSoft,10));
-  s.push(card(435,578,118,48,'Open creditors',String(v.statusCounts.open),P.red,P.redSoft,11));
-  s.push(txt(42,561,6.8,`Reconciliation: ${fullMoney(v.raw.original)} ${adj>=0?'+':'-'} ${fullMoney(Math.abs(adj))} - ${fullMoney(v.raw.reductions)} = ${fullMoney(v.raw.remaining)}`,'F2',P.ink));
-
+  s.push(card(42,578,119,48,'Original',model.summary.original,P.blue,P.blueSoft,10));s.push(card(173,578,119,48,'Adjustments',signedMoney(adj),P.amber,P.amberSoft,10));s.push(card(304,578,119,48,'Paid',model.summary.paid,P.mint,P.mintSoft,10));s.push(card(435,578,118,48,'Open creditors',String(v.statusCounts.open),P.red,P.redSoft,11));s.push(txt(42,561,6.8,`Reconciliation: ${fullMoney(v.raw.original)} ${adj>=0?'+':'-'} ${fullMoney(Math.abs(adj))} - ${fullMoney(v.raw.reductions)} = ${fullMoney(v.raw.remaining)}`,'F2',P.ink));
   s.push(section(535,'Top 5 outstanding creditors','Largest current balances'));
-  const top=(v.creditors||[]).filter(c=>c.remaining>0).slice(0,5),max=Math.max(1,...top.map(c=>c.remaining));let y=500;
-  top.forEach((c,i)=>{s.push(hBar(42,y,300,c.name,c.remaining,max,CAT[i%CAT.length],c.remainingLabel));y-=34;});
-
-  s.push(txt(377,535,11.5,'Debt composition','F2',P.ink));s.push(txt(377,522,6.8,'Outstanding by category','F1',P.muted));
-  s.push(categoryDonut(463,455,48,v.categories,v.raw.remaining));
-  let ly=390;(v.categories||[]).filter(c=>c.remaining>0).slice(0,4).forEach((c,i)=>{s.push(circle(382,ly+2,4,CAT[i%CAT.length]));s.push(txt(392,ly,6.4,fit(c.category,20),'F1',P.ink));const pct=v.raw.remaining>0?c.remaining/v.raw.remaining*100:0;s.push(txt(506,ly,6.4,`${pct.toFixed(1)}%`,'F2',P.muted));ly-=17;});
-
-  s.push(line(42,320,553,320,.45,P.line));s.push(section(300,'Key insights','Decision-ready highlights'));
-  s.push(insight(42,232,157,'Largest balance',v.insights.largest?.remainingLabel||'N/A',v.insights.largest?.name||'',P.red,P.redSoft));
-  s.push(insight(219,232,157,'Most paid creditor',v.insights.mostPaid?.paidLabel||'N/A',v.insights.mostPaid?.name||'',P.mint,P.mintSoft));
-  s.push(insight(396,232,157,'Estimated records',String(model.quality.estimated),model.quality.disputed?`${model.quality.disputed} disputed`:'No disputed records',P.amber,P.amberSoft));
-
-  s.push(section(209,'Mini ledger snapshot','Top balances plus total'));
-  s.push(rect(42,124,511,68,P.panel,P.line,.35));
-  s.push(txt(52,179,5.8,'CREDITOR','F2',P.muted));s.push(txt(268,179,5.8,'ORIGINAL','F2',P.muted));s.push(txt(336,179,5.8,'ADJ.','F2',P.muted));s.push(txt(402,179,5.8,'PAID','F2',P.muted));s.push(txt(468,179,5.8,'REMAINING','F2',P.muted));
-  let ty=164;top.slice(0,4).forEach(c=>{const cadj=adjustmentFor(model,c.name);s.push(txt(52,ty,6.0,fit(c.name,30),'F1',P.ink));s.push(txt(268,ty,6.0,shortMoney(c.original),'F1',P.ink));s.push(txt(336,ty,6.0,shortSignedMoney(cadj),'F1',cadj===0?P.muted:P.amber));s.push(txt(402,ty,6.0,shortMoney(c.paid),'F1',P.green));s.push(txt(468,ty,6.0,shortMoney(c.remaining),'F2',P.ink));ty-=12;});
-  s.push(line(52,114,543,114,.4,P.line));s.push(txt(52,102,6.2,'TOTAL','F2',P.ink));s.push(txt(268,102,5.9,model.summary.original,'F2',P.ink));s.push(txt(336,102,5.9,signedMoney(adj),'F2',adj===0?P.muted:P.amber));s.push(txt(402,102,5.9,model.summary.paid,'F2',P.green));s.push(txt(468,102,5.9,model.summary.remaining,'F2',P.red));
-
-  s.push(rect(42,57,511,31,'#EEF5F2'));s.push(txt(52,76,6.2,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));s.push(txt(187,76,6.2,`Audit: ${fit(model.health.audit,32)}`,'F2',P.green));s.push(txt(405,76,6.2,`Diagnostics: ${model.health.diagnostics}`,'F2',P.green));
-  s.push(txt(42,43,5.9,'Visual summary only. Cleared % includes all ledger reductions; for transaction-level detail, refer to the Detailed Ledger report.','F1',P.muted));
-  s.push(txt(42,25,5.7,'PRIVATE & CONFIDENTIAL | Generated from Ledgerly encrypted local ledger','F1',P.muted));s.push(txt(491,25,5.7,'Page 1 of 1','F1',P.muted));
-  return s.join('');
+  const top=(v.creditors||[]).filter(c=>c.remaining>0).slice(0,5),max=Math.max(1,...top.map(c=>c.remaining));let y=500;top.forEach((c,i)=>{s.push(hBar(42,y,300,c.name,c.remaining,max,CAT[i%CAT.length],c.remainingLabel));y-=34;});
+  s.push(txt(377,535,11.5,'Debt composition','F2',P.ink));s.push(txt(377,522,6.8,'Outstanding by category','F1',P.muted));s.push(categoryDonut(463,455,48,v.categories,v.raw.remaining));let ly=390;(v.categories||[]).filter(c=>c.remaining>0).slice(0,4).forEach((c,i)=>{s.push(circle(382,ly+2,4,CAT[i%CAT.length]));s.push(txt(392,ly,6.4,fit(c.category,20),'F1',P.ink));const pct=v.raw.remaining>0?c.remaining/v.raw.remaining*100:0;s.push(txt(506,ly,6.4,`${pct.toFixed(1)}%`,'F2',P.muted));ly-=17;});
+  s.push(line(42,320,553,320,.45,P.line));s.push(section(300,'Key insights','Decision-ready highlights'));s.push(insight(42,232,157,'Largest balance',v.insights.largest?.remainingLabel||'N/A',v.insights.largest?.name||'',P.red,P.redSoft));s.push(insight(219,232,157,'Most paid creditor',v.insights.mostPaid?.paidLabel||'N/A',v.insights.mostPaid?.name||'',P.mint,P.mintSoft));s.push(insight(396,232,157,'Estimated records',String(model.quality.estimated),model.quality.disputed?`${model.quality.disputed} disputed`:'No disputed records',P.amber,P.amberSoft));
+  s.push(section(209,'Mini ledger snapshot','Top balances plus total'));s.push(rect(42,124,511,68,P.panel,P.line,.35));
+  s.push(txt(52,179,5.8,'CREDITOR','F2',P.muted));s.push(txt(262,179,5.8,'ORIGINAL','F2',P.muted));s.push(txt(333,179,5.8,'ADJ.','F2',P.muted));s.push(txt(397,179,5.8,'PAID','F2',P.muted));s.push(txt(466,179,5.8,'REMAINING','F2',P.muted));
+  let ty=164;top.slice(0,4).forEach(c=>{const ra=rowAdjustment(c);s.push(txt(52,ty,6.1,fit(c.name,28),'F1',P.ink));s.push(txt(262,ty,6,shortMoney(c.original),'F1',P.ink));s.push(txt(333,ty,6,signedMoney(ra),'F1',ra?P.amber:P.muted));s.push(txt(397,ty,6,shortMoney(c.paid),'F1',P.green));s.push(txt(466,ty,6,shortMoney(c.remaining),'F2',P.ink));ty-=12;});
+  s.push(line(52,114,543,114,.4,P.line));s.push(txt(52,102,6.2,'TOTAL','F2',P.ink));s.push(txt(262,102,6.2,model.summary.original,'F2',P.ink));s.push(txt(333,102,6.2,signedMoney(adj),'F2',adj?P.amber:P.muted));s.push(txt(397,102,6.2,model.summary.paid,'F2',P.green));s.push(txt(466,102,6.2,model.summary.remaining,'F2',P.red));
+  s.push(rect(42,57,511,31,'#EEF5F2'));s.push(txt(52,76,6.2,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));s.push(txt(187,76,6.2,`Audit: ${fit(model.health.audit,32)}`,'F2',P.green));s.push(txt(405,76,6.2,`Diagnostics: ${model.health.diagnostics}`,'F2',P.green));s.push(txt(42,43,5.9,'Visual summary only. Cleared may include payments and other reductions. For transaction-level detail, refer to the Detailed Ledger report.','F1',P.muted));s.push(txt(42,25,5.7,'PRIVATE & CONFIDENTIAL | Generated from Ledgerly encrypted local ledger','F1',P.muted));s.push(txt(491,25,5.7,'Page 1 of 1','F1',P.muted));return s.join('');
 }
 function pdfDate(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(2,'0');return `D:${d.getUTCFullYear()}${p(d.getUTCMonth()+1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}Z`;}
-function pdfBytes(content,model){
-  const objects=[],add=s=>{objects.push(s);return objects.length;},catalog=add(''),pages=add(''),f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
-  const info=add(`<< /Title (Ledgerly Infographic Report) /Author (Ledgerly) /Creator (Ledgerly Infographic Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly infographic debt summary ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
-  const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`),page=add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${stream} 0 R >>`);
-  objects[catalog-1]=`<< /Type /Catalog /Pages ${pages} 0 R >>`;objects[pages-1]=`<< /Type /Pages /Kids [${page} 0 R] /Count 1 >>`;
-  let out='%PDF-1.4\n%Ledgerly Infographic Report v1\n',offsets=[0];for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}
-  const xref=enc.encode(out).length;out+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objects.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';out+=`trailer\n<< /Size ${objects.length+1} /Root ${catalog} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF`;return enc.encode(out);
-}
+function pdfBytes(content,model){const objects=[],add=s=>{objects.push(s);return objects.length;},catalog=add(''),pages=add(''),f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');const info=add(`<< /Title (Ledgerly Infographic Report) /Author (Ledgerly) /Creator (Ledgerly Infographic Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly infographic debt summary ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`),page=add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${stream} 0 R >>`);objects[catalog-1]=`<< /Type /Catalog /Pages ${pages} 0 R >>`;objects[pages-1]=`<< /Type /Pages /Kids [${page} 0 R] /Count 1 >>`;let out='%PDF-1.4\n%Ledgerly Infographic Report v1\n',offsets=[0];for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}const xref=enc.encode(out).length;out+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objects.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';out+=`trailer\n<< /Size ${objects.length+1} /Root ${catalog} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF`;return enc.encode(out);}
 export function buildInfographicReportPdf(model){return pdfBytes(page(model),model);}
