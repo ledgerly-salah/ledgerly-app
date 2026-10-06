@@ -23,21 +23,30 @@ function pdfDate(iso){
   const p=n=>String(n).padStart(2,'0');
   return `D:${d.getUTCFullYear()}${p(d.getUTCMonth()+1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}Z`;
 }
+function issueMeta(model){
+  const d=new Date(model.generatedIso||Date.now());
+  const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
+  const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
+  const seed=`${model.reportId||''}|${model.reportType||''}|${model.generatedIso||''}`;let h=0;
+  for(let i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))>>>0;
+  return {ref:String(1000+(h%9000)),date,time};
+}
+function watermark(){return `0.93 g BT /F2 42 Tf 0.707 0.707 -0.707 0.707 105 270 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 
 function header(model,pageIndex,pageCount,title){
-  let s='';
+  const meta=issueMeta(model);let s='';
   s+=strokeBox(42,786,24,24,.8);s+=txt(50,793,11,'L','F2');
   s+=txt(75,800,10,'LEDGERLY','F2');
   s+=txt(75,783,18,title,'F2');
-  s+=txt(42,763,7.5,`${model.generated} | ${model.timezone} | App v${model.version} | Build ${model.build} | Revision ${model.revision}`,'F1');
-  s+=txt(42,751,7.5,`Snapshot ${model.reportId} | Currency ${model.currency} | Report format v2`,'F1');
+  s+=txt(42,763,7.5,`Ref: ${meta.ref} | Issuing Date: ${meta.date} | Issuing Time: ${meta.time} | ${model.timezone}`,'F1');
+  s+=txt(42,751,7.5,`App v${model.version} | Build ${model.build} | Revision ${model.revision} | Currency ${model.currency} | Report format v2`,'F1');
   s+=line(42,742,553,742,.7);
   return s;
 }
 function footer(model,pageIndex,pageCount){
-  let s='';
+  const meta=issueMeta(model);let s='';
   s+=line(42,42,553,42,.4);
-  s+=txt(42,29,7,model.redacted?'REDACTED REPORT | Ledgerly local encrypted ledger':'PRIVATE & CONFIDENTIAL | Ledgerly local encrypted ledger','F1');
+  s+=txt(42,29,7,model.redacted?`REDACTED REPORT | STRICTLY CONFIDENTIAL | Ref ${meta.ref}`:`STRICTLY CONFIDENTIAL | Ledgerly local encrypted ledger | Ref ${meta.ref}`,'F1');
   s+=txt(42,18,6.5,'Personal ledger record only; not creditor confirmation or independent legal proof of debt.','F1');
   s+=txt(476,29,7,`Page ${pageIndex+1} of ${pageCount}`,'F1');
   return s;
@@ -151,7 +160,7 @@ function pdfBytes(pageContents,model,title){
   const info=add(`<< /Title (${escPdf(title)}) /Author (Ledgerly) /Creator (Ledgerly Report v2) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly debt ledger report ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
   const pageIds=[];
   for(let i=0;i<pageContents.length;i++){
-    const content=header(model,i,pageContents.length,title)+pageContents[i].join('')+footer(model,i,pageContents.length);
+    const content=watermark()+header(model,i,pageContents.length,title)+pageContents[i].join('')+footer(model,i,pageContents.length);
     const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`);
     const page=add(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${stream} 0 R >>`);pageIds.push(page);
   }
