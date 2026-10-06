@@ -60,15 +60,14 @@ function issueMeta(model){
   const d=new Date(model.generatedIso||Date.now());
   const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
   const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
-  const seed=`${model.reportId||''}|${model.reportType||''}|${model.generatedIso||''}`;let h=0;
-  for(let i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))>>>0;
-  return {ref:String(1000+(h%9000)),date,time};
+  const ref=String(model.issueRef||'0000').padStart(4,'0');
+  return {ref,date,time};
 }
-function watermark(){return `0.92 g BT /F2 42 Tf 0.707 0.707 -0.707 0.707 105 270 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
+function watermark(){return `0.955 g BT /F2 34 Tf 0.707 0.707 -0.707 0.707 125 292 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 
 function header(model,title,subtitle=''){
   const meta=issueMeta(model);let s=rect(0,766,595,76,P.green);s+=txt(42,811,9,'LEDGERLY','F2',P.white);s+=txt(42,786,20,title,'F2',P.white);if(subtitle)s+=txt(42,772,7.2,`${subtitle} | ${model.timezone}`,'F1','#D6E9E2');
-  s+=txt(408,810,6.5,`Ref: ${meta.ref}`,'F2','#D6E9E2');s+=txt(408,798,6.5,`Issuing Date: ${meta.date}`,'F1','#D6E9E2');s+=txt(408,786,6.5,`Issuing Time: ${meta.time}`,'F1','#D6E9E2');return s;
+  s+=txt(404,811,7.0,`Ref: ${meta.ref}`,'F2','#D6E9E2');s+=txt(404,798,7.0,`Issue Date: ${meta.date}`,'F1','#D6E9E2');s+=txt(404,785,7.0,`Issue Time: ${meta.time}`,'F1','#D6E9E2');return s;
 }
 function footer(model,pageIndex,pageCount){const meta=issueMeta(model);let s=line(42,39,553,39,.4,P.line);s+=txt(42,24,6.5,`STRICTLY CONFIDENTIAL | Ref ${meta.ref} | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted);s+=txt(481,24,6.5,`Page ${pageIndex+1} of ${pageCount}`,'F1',P.muted);return s;}
 function card(x,y,w,h,label,value,{accent=P.green,soft=P.panel,valueSize=15}={}){let s=rect(x,y,w,h,soft,P.line,.35);s+=rect(x,y,w,4,accent);s+=txt(x+12,y+h-20,7,label.toUpperCase(),'F2',P.muted);s+=txt(x+12,y+16,valueSize,fit(value,24),'F2',P.ink);return s;}
@@ -82,10 +81,8 @@ function statusPill(x,y,label,count,color,soft){let s=rect(x,y,150,42,soft);s+=c
 
 function pageOne(model){
   const v=model.visual,s=[];s.push(header(model,'Visual Financial Snapshot','Executive debt position and repayment progress'));
-  // Hero
   s.push(rect(42,603,511,137,P.ink));s.push(txt(60,710,8,'TOTAL REMAINING','F2','#BFE2D5'));s.push(txt(60,670,29,model.summary.remaining,'F2',P.white));s.push(txt(60,646,8,`${v.repaymentPct.toFixed(1)}% repaid | ${v.statusCounts.open} open creditors`,'F1','#D8E7E2'));
   s.push(donut(472,671,42,v.repaymentPct,'REPAYMENT','repaid'));
-  // KPI cards: original + net adjustments - reductions = remaining
   const netAdjustments=Number(v.raw.liability||0)-Number(v.raw.original||0);
   s.push(card(42,525,118,60,'Original debt',model.summary.original,{accent:P.blue,soft:P.blueSoft,valueSize:11}));
   s.push(card(174,525,118,60,'Net adjustments',signedMoney(netAdjustments),{accent:P.amber,soft:P.amberSoft,valueSize:11}));
@@ -94,11 +91,9 @@ function pageOne(model){
   s.push(txt(42,507,7,`Reconciliation: ${reconciliationText(v)}`,'F2',P.ink));
   s.push(sectionTitle(486,'Repayment progress','Paid and other reductions against current liability'));
   s.push(progressBar(42,450,511,13,v.repaymentPct,P.mint,'#E4ECE9'));s.push(txt(42,432,7,`${v.repaymentPct.toFixed(1)}% repaid`,'F2',P.green));s.push(txt(492,432,7,`${(100-v.repaymentPct).toFixed(1)}% remaining`,'F2',P.red));
-  // Top outstanding
   s.push(sectionTitle(405,'Top outstanding balances','Largest current balances'));
   const top=v.creditors.filter(c=>c.remaining>0).slice(0,5),max=Math.max(1,...top.map(c=>c.remaining));let y=370;
   top.forEach((c,i)=>{s.push(hBar(42,y,511,c.name,c.remaining,max,CAT[i%CAT.length],c.remainingLabel));y-=40;});
-  // Status
   s.push(sectionTitle(155,'Creditor status'));
   s.push(statusPill(42,90,'Outstanding',v.statusCounts.outstanding,P.red,P.redSoft));
   s.push(statusPill(222,90,'Partially paid',v.statusCounts.partial,P.amber,P.amberSoft));
@@ -115,7 +110,6 @@ function pageTwo(model){
   s.push(sectionTitle(307,'Debt composition by category','Current outstanding balance after allocated reductions'));
   const cats=v.categories.slice(0,6),catMax=Math.max(1,...cats.map(c=>c.remaining));y=270;
   cats.forEach((c,i)=>{s.push(hBar(42,y,330,c.category,c.remaining,catMax,CAT[(i+1)%CAT.length],c.remainingLabel));const pct=v.raw.remaining>0?c.remaining/v.raw.remaining*100:0;s.push(txt(395,y+8,7,`${pct.toFixed(1)}%`,'F2',P.muted));y-=36;});
-  // category legend summary on right/bottom
   s.push(card(410,222,143,67,'Categories',String(v.categories.length),{accent:P.violet,soft:'#EEEAF5'}));
   s.push(card(410,143,143,67,'Largest category',v.categories[0]?.category||'N/A',{accent:P.green,soft:P.mintSoft,valueSize:10}));
   s.push(card(410,64,143,67,'Largest share',v.categories[0]?`${(v.categories[0].remaining/Math.max(1,v.raw.remaining)*100).toFixed(1)}%`:'0%',{accent:P.amber,soft:P.amberSoft}));
@@ -175,7 +169,7 @@ function pageFour(model){
 function pdfDate(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(2,'0');return `D:${d.getUTCFullYear()}${p(d.getUTCMonth()+1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}Z`;}
 function pdfBytes(contents,model){
   const objects=[],add=s=>{objects.push(s);return objects.length;};const catalog=add(''),pagesObj=add('');const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');const font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
-  const info=add(`<< /Title (Ledgerly Visual Financial Snapshot) /Author (Ledgerly) /Creator (Ledgerly Visual Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly visual debt dashboard infographic charts ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
+  const info=add(`<< /Title (Ledgerly Visual Financial Snapshot) /Author (Ledgerly) /Creator (Ledgerly Visual Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly visual debt dashboard infographic charts Ref ${escPdf(model.issueRef||'')} ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
   const pageIds=[];for(let i=0;i<contents.length;i++){const content=watermark()+contents[i]+footer(model,i,contents.length);const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`);pageIds.push(add(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${stream} 0 R >>`));}
   objects[catalog-1]=`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`;objects[pagesObj-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>`${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`;
   let out='%PDF-1.4\n%Ledgerly Visual Report v1\n',offsets=[0];for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}
