@@ -6,7 +6,7 @@ import {
   bytesToBase64, sha256Text, RECOVERY_ITERATIONS
 } from './crypto.3.1.0.js';
 
-const PATCH_BUILD='20261006-r4';
+const PATCH_BUILD='20261006-r5';
 const APP_VERSION='3.1.0';
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
