@@ -56,12 +56,21 @@ function reconciliationText(v){
 }
 function shortMoney(v){const n=moneyNum(v);if(Math.abs(n)>=1000000)return `SAR ${(n/1000000).toFixed(1)}m`;if(Math.abs(n)>=1000)return `SAR ${(n/1000).toFixed(n>=10000?0:1)}k`;return `SAR ${n.toFixed(0)}`;}
 function monthLabel(v){const [y,m]=String(v||'').split('-');const names=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m?`${names[Number(m)-1]} ${String(y).slice(2)}`:v;}
+function issueMeta(model){
+  const d=new Date(model.generatedIso||Date.now());
+  const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
+  const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
+  const seed=`${model.reportId||''}|${model.reportType||''}|${model.generatedIso||''}`;let h=0;
+  for(let i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))>>>0;
+  return {ref:String(1000+(h%9000)),date,time};
+}
+function watermark(){return `0.92 g BT /F2 42 Tf 0.707 0.707 -0.707 0.707 105 270 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 
 function header(model,title,subtitle=''){
-  let s=rect(0,766,595,76,P.green);s+=txt(42,811,9,'LEDGERLY','F2',P.white);s+=txt(42,786,20,title,'F2',P.white);if(subtitle)s+=txt(42,772,7.5,subtitle,'F1','#D6E9E2');
-  s+=txt(417,810,6.7,`Revision ${model.revision}`,'F1','#D6E9E2');s+=txt(417,798,6.7,`Build ${model.build}`,'F1','#D6E9E2');s+=txt(417,786,6.7,model.reportId,'F1','#D6E9E2');return s;
+  const meta=issueMeta(model);let s=rect(0,766,595,76,P.green);s+=txt(42,811,9,'LEDGERLY','F2',P.white);s+=txt(42,786,20,title,'F2',P.white);if(subtitle)s+=txt(42,772,7.2,`${subtitle} | ${model.timezone}`,'F1','#D6E9E2');
+  s+=txt(408,810,6.5,`Ref: ${meta.ref}`,'F2','#D6E9E2');s+=txt(408,798,6.5,`Issuing Date: ${meta.date}`,'F1','#D6E9E2');s+=txt(408,786,6.5,`Issuing Time: ${meta.time}`,'F1','#D6E9E2');return s;
 }
-function footer(model,pageIndex,pageCount){let s=line(42,39,553,39,.4,P.line);s+=txt(42,24,6.5,'PRIVATE & CONFIDENTIAL | Visual snapshot from Ledgerly encrypted local ledger','F1',P.muted);s+=txt(481,24,6.5,`Page ${pageIndex+1} of ${pageCount}`,'F1',P.muted);return s;}
+function footer(model,pageIndex,pageCount){const meta=issueMeta(model);let s=line(42,39,553,39,.4,P.line);s+=txt(42,24,6.5,`STRICTLY CONFIDENTIAL | Ref ${meta.ref} | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted);s+=txt(481,24,6.5,`Page ${pageIndex+1} of ${pageCount}`,'F1',P.muted);return s;}
 function card(x,y,w,h,label,value,{accent=P.green,soft=P.panel,valueSize=15}={}){let s=rect(x,y,w,h,soft,P.line,.35);s+=rect(x,y,w,4,accent);s+=txt(x+12,y+h-20,7,label.toUpperCase(),'F2',P.muted);s+=txt(x+12,y+16,valueSize,fit(value,24),'F2',P.ink);return s;}
 function sectionTitle(y,title,sub=''){let s=txt(42,y,12,title,'F2',P.ink);if(sub)s+=txt(42,y-13,7,sub,'F1',P.muted);return s;}
 function hBar(x,y,w,label,value,max,color=P.green,valueLabel=''){
@@ -72,7 +81,7 @@ function hBar(x,y,w,label,value,max,color=P.green,valueLabel=''){
 function statusPill(x,y,label,count,color,soft){let s=rect(x,y,150,42,soft);s+=circle(x+18,y+21,5,color);s+=txt(x+31,y+25,7,label,'F2',P.muted);s+=txt(x+31,y+10,13,String(count),'F2',P.ink);return s;}
 
 function pageOne(model){
-  const v=model.visual,s=[];s.push(header(model,'Visual Financial Snapshot',`${model.generated} | ${model.timezone}`));
+  const v=model.visual,s=[];s.push(header(model,'Visual Financial Snapshot','Executive debt position and repayment progress'));
   // Hero
   s.push(rect(42,603,511,137,P.ink));s.push(txt(60,710,8,'TOTAL REMAINING','F2','#BFE2D5'));s.push(txt(60,670,29,model.summary.remaining,'F2',P.white));s.push(txt(60,646,8,`${v.repaymentPct.toFixed(1)}% repaid | ${v.statusCounts.open} open creditors`,'F1','#D8E7E2'));
   s.push(donut(472,671,42,v.repaymentPct,'REPAYMENT','repaid'));
@@ -167,7 +176,7 @@ function pdfDate(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(
 function pdfBytes(contents,model){
   const objects=[],add=s=>{objects.push(s);return objects.length;};const catalog=add(''),pagesObj=add('');const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');const font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
   const info=add(`<< /Title (Ledgerly Visual Financial Snapshot) /Author (Ledgerly) /Creator (Ledgerly Visual Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly visual debt dashboard infographic charts ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
-  const pageIds=[];for(let i=0;i<contents.length;i++){const content=contents[i]+footer(model,i,contents.length);const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`);pageIds.push(add(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${stream} 0 R >>`));}
+  const pageIds=[];for(let i=0;i<contents.length;i++){const content=watermark()+contents[i]+footer(model,i,contents.length);const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`);pageIds.push(add(`<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> /Contents ${stream} 0 R >>`));}
   objects[catalog-1]=`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`;objects[pagesObj-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>`${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`;
   let out='%PDF-1.4\n%Ledgerly Visual Report v1\n',offsets=[0];for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}
   const xref=enc.encode(out).length;out+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objects.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';out+=`trailer\n<< /Size ${objects.length+1} /Root ${catalog} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF`;return enc.encode(out);
