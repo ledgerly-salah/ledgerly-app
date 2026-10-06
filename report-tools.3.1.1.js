@@ -10,6 +10,7 @@ import { buildInfographicReportPdf } from './infographic-report-v1.3.1.1.js';
 
 const BUILD_ID='20261006-r5';
 const REPORT_FORMAT='2';
+const REPORT_REF_KEY='ledgerly-report-reference-sequence-v1';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 function toast(title,message=''){
@@ -72,7 +73,7 @@ function openReportCenter(){
         <div class="settings-row"><span>Infographic privacy</span><select name="infographicPrivacy"><option value="full">Full names</option><option value="masked">Masked names</option><option value="private">Private labels</option></select></div>
         <label class="settings-row"><span>Include notes</span><input name="includeNotes" type="checkbox" checked></label>
       </div>
-      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Report ID, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status and PDF metadata. Visual and Infographic reports use the same validated ledger snapshot as the audit-ready reports.</p></div>
+      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Sequential 4-digit reference, issue date and time, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status and PDF metadata. Visual and Infographic reports use the same validated ledger snapshot as the audit-ready reports.</p></div>
     </div>
     <div class="form-actions"><button class="btn btn-soft" type="button" id="reportCancel">Cancel</button><button class="btn btn-primary" type="submit">Continue to authorization</button></div>
   </form>`;
@@ -123,10 +124,11 @@ async function verifyAuditChain(state){
 function tzLabel(){
   const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';const mins=-new Date().getTimezoneOffset();const sign=mins>=0?'+':'-';const h=Math.floor(Math.abs(mins)/60);const m=Math.abs(mins)%60;return `Time Zone: ${zone} (UTC${sign}${h}${m?':'+String(m).padStart(2,'0'):''})`;
 }
-function reportRef(reportId,reportType,generatedIso){
-  const seed=`${reportId||''}|${reportType||''}|${generatedIso||''}`;let h=0;
-  for(let i=0;i<seed.length;i++)h=(h*31+seed.charCodeAt(i))>>>0;
-  return String(1000+(h%9000));
+function nextReportRef(){
+  let last=Number.parseInt(localStorage.getItem(REPORT_REF_KEY)||'0',10);
+  if(!Number.isFinite(last)||last<0)last=0;
+  if(last>=9999)throw new Error('Report reference sequence reached 9999.');
+  const next=last+1;localStorage.setItem(REPORT_REF_KEY,String(next));return String(next).padStart(4,'0');
 }
 function typeLabel(tx){
   let label=({debt:'Debt',payment:'Payment',waiver:'Waiver',adjustment:tx.adjustmentDirection==='decrease'?'Adjustment decrease':'Adjustment increase',reversal:'Reversal'})[tx.type]||String(tx.type||'Record');
@@ -228,7 +230,7 @@ async function generateReport(options,password){
   const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`);
   const equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
   const model={reportType:redacted?'detailed':options.reportType,redacted,infographicPrivacy:privacy,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
-  model.issueRef=reportRef(model.reportId,model.reportType,model.generatedIso);
+  model.issueRef=nextReportRef();
   if(visual||infographic)model.visual=visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability},infographic?creditorNames:null);
 
   const bytes=infographic?buildInfographicReportPdf(model):visual?buildVisualReportPdf(model):buildLedgerReportPdf(model);const d=new Date();const p=n=>String(n).padStart(2,'0');const stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_R${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`;const kind=redacted?'Redacted':infographic?'Infographic':visual?'Visual':options.reportType==='summary'?'Summary':'Detailed';dl(bytes,`Ledgerly_${kind}_REF-${model.issueRef}_${stamp}.pdf`);
