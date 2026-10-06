@@ -2,13 +2,14 @@ import { getStateRecord, listAttachments } from './storage.3.1.0.js';
 import { unlockSecurity, decryptJson, checksumObject, sha256Text } from './crypto.3.1.0.js';
 import {
   APP_VERSION, reconcileState, validateState, diagnostics, overallSummary,
-  txEffect, formatSAR, shortDate, shortDateTime, safeDate
+  txEffect, formatSAR, shortDate, shortDateTime, safeDate, categoryBalances
 } from './ledger-core.3.1.0.js';
 import { buildLedgerReportPdf } from './pdf-report-v2.3.1.1.js';
+import { buildVisualReportPdf } from './visual-report-v1.3.1.1.js';
 
-const BUILD_ID='20261005-r3';
+const BUILD_ID='20261006-r4';
 const REPORT_FORMAT='2';
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 function toast(title,message=''){
   const stack=document.getElementById('toastStack');if(!stack)return;
@@ -33,6 +34,7 @@ function ensureReportStyles(){
     body:not(.dark) #ledgerlyReportOverlay .settings-row select,
     body:not(.dark) #ledgerlyReportOverlay .settings-row input[type="date"]{color-scheme:light;}
     #ledgerlyReportOverlay .settings-row select option{background:var(--surface);color:var(--ink);}
+    #ledgerlyReportOverlay .report-visual-note{font-size:12px;color:var(--muted);margin:-2px 0 8px 0;}
     @media(max-width:620px){
       #ledgerlyReportOverlay .settings-row{align-items:center;}
       #ledgerlyReportOverlay .settings-row select,
@@ -48,13 +50,15 @@ function bindClose(wrap){wrap.querySelector('#reportClose')?.addEventListener('c
 function patchBuildLabel(){const el=document.getElementById('versionLabel');if(el)el.textContent=`v${APP_VERSION} · ${BUILD_ID}`;}
 
 function openReportCenter(){
-  const html=`${header('Report center','Ledgerly Report v2 · audit-ready exports')}
-  <div class="notice"><strong>Report v2</strong> validates reconciliation and the current cryptographic audit chain before it creates a PDF. Older imported audit history is preserved and identified separately.</div>
+  const html=`${header('Report center','Audit-ready records + visual financial snapshots')}
+  <div class="notice"><strong>Validated exports.</strong> Every report validates reconciliation and the current cryptographic audit chain before creating a PDF.</div>
   <form id="reportV2Form">
     <div class="settings-sections">
       <div class="settings-card"><h3>Report type</h3>
         <label class="settings-row"><span>Summary report</span><input type="radio" name="reportType" value="summary" checked></label>
         <label class="settings-row"><span>Detailed ledger</span><input type="radio" name="reportType" value="detailed"></label>
+        <label class="settings-row"><span>Visual financial snapshot</span><input type="radio" name="reportType" value="visual"></label>
+        <div class="report-visual-note">Color infographic PDF with KPI cards, repayment charts, creditor exposure, categories, activity and insights.</div>
         <label class="settings-row"><span>Redacted ledger</span><input type="radio" name="reportType" value="redacted"></label>
       </div>
       <div class="settings-card"><h3>Scope</h3>
@@ -64,7 +68,7 @@ function openReportCenter(){
         <div class="settings-row"><span>Transaction order</span><select name="order"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div>
         <label class="settings-row"><span>Include notes</span><input name="includeNotes" type="checkbox" checked></label>
       </div>
-      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Report ID, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status, total row, short transaction IDs, payment allocation, evidence status, PDF metadata, and multi-page footers.</p></div>
+      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Report ID, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status and PDF metadata. Visual Snapshot additionally builds dynamic charts from the same validated ledger snapshot.</p></div>
     </div>
     <div class="form-actions"><button class="btn btn-soft" type="button" id="reportCancel">Cancel</button><button class="btn btn-primary" type="submit">Continue to authorization</button></div>
   </form>`;
@@ -73,13 +77,14 @@ function openReportCenter(){
 }
 
 function openAuthorization(options){
-  const wrap=overlay(`${header('Authorize report export','Sensitive financial export · master password required')}
+  const visual=options.reportType==='visual';
+  const wrap=overlay(`${header('Authorize report export',visual?'Visual financial export · master password required':'Sensitive financial export · master password required')}
     <div class="notice">Your password is used only on this device to unlock the encrypted ledger for this export. It is never written into the report.</div>
     <form id="reportAuthForm"><div class="form-grid"><div class="field full"><label>Master password</label><input name="password" type="password" autocomplete="current-password" minlength="8" required></div></div><div id="reportAuthError" class="form-error"></div><div class="form-actions"><button id="reportBack" class="btn btn-soft" type="button">Back</button><button id="reportGenerate" class="btn btn-primary" type="submit">Generate report</button></div></form>`,false);
   bindClose(wrap);wrap.querySelector('#reportBack').addEventListener('click',openReportCenter);
   wrap.querySelector('#reportAuthForm').addEventListener('submit',async e=>{
     e.preventDefault();const btn=wrap.querySelector('#reportGenerate');const err=wrap.querySelector('#reportAuthError');btn.disabled=true;btn.textContent='Validating…';err.textContent='';
-    try{await generateReport(options,new FormData(e.currentTarget).get('password'));closeOverlay();toast('Report exported','Report v2 passed reconciliation and current audit-chain checks before export.');}
+    try{await generateReport(options,new FormData(e.currentTarget).get('password'));closeOverlay();toast('Report exported',visual?'Visual Snapshot passed reconciliation and audit validation before export.':'Report passed reconciliation and current audit-chain checks before export.');}
     catch(ex){console.error(ex);err.textContent=ex?.message||'Report generation failed.';btn.disabled=false;btn.textContent='Generate report';}
   });
   setTimeout(()=>wrap.querySelector('input[name="password"]')?.focus(),50);
@@ -132,6 +137,29 @@ function isLegacyTransaction(tx){
   const v=String(tx?.createdByVersion||'').toLowerCase();
   return !v||v==='legacy'||v.includes('migration')||v.startsWith('3.0');
 }
+function visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability}){
+  const creditorRows=summaries.map(s=>({
+    name:s.creditor.name,original:Number(s.original||0),paid:Number(s.paid||0),remaining:Number(s.remaining||0),progress:Number(s.progress||0),status:s.status,
+    originalLabel:formatSAR(s.original),paidLabel:formatSAR(s.paid),remainingLabel:formatSAR(s.remaining)
+  }));
+  const asOfTx=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&(!asOf||safeDate(tx.effectiveDate)<=asOf));
+  const scopedState={...state,creditors:state.creditors.filter(c=>creditorIds.has(c.id)),transactions:asOfTx};
+  const categories=categoryBalances(scopedState).map(c=>({...c,remainingLabel:formatSAR(c.remaining)}));
+  const reversed=new Set(state.transactions.filter(r=>!r.voidedAt&&r.type==='reversal'&&r.reversedTransactionId).map(r=>r.reversedTransactionId));
+  const payments=txs.filter(tx=>tx.type==='payment'&&!tx.voidedAt&&!reversed.has(tx.id)).map(tx=>({
+    date:shortDate(tx.effectiveDate),creditor:state.creditors.find(c=>c.id===tx.creditorId)?.name||'Unknown',amount:Number(tx.amountHalalas||0),amountLabel:formatSAR(tx.amountHalalas),method:String(tx.method||'')
+  }));
+  const monthly=new Map();for(const tx of txs){if(tx.type!=='payment'||tx.voidedAt||reversed.has(tx.id))continue;const month=safeDate(tx.effectiveDate).slice(0,7);if(!month)continue;monthly.set(month,(monthly.get(month)||0)+Number(tx.amountHalalas||0));}
+  const paymentMonths=[...monthly.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([month,amount])=>({month,label:month,amount}));
+  const open=creditorRows.filter(c=>c.remaining>0),largest=open[0]||null,lowest=[...open].sort((a,b)=>a.remaining-b.remaining)[0]||null,mostPaid=[...creditorRows].sort((a,b)=>b.paid-a.paid)[0]||null;
+  const latest=txRows.slice(0,5).map(t=>({date:t.effectiveDate,creditor:t.creditor,type:t.type,amount:t.amount}));
+  return {
+    raw:{original,paid,reductions,remaining,liability},repaymentPct:liability>0?Math.max(0,Math.min(100,reductions/liability*100)):0,
+    creditors:creditorRows,categories,paymentEvents:payments.length,payments,paymentMonths,latest,
+    statusCounts:{open:open.length,outstanding:creditorRows.filter(c=>c.status==='Outstanding').length,partial:creditorRows.filter(c=>c.status==='Partially Paid').length,paid:creditorRows.filter(c=>c.status==='Paid').length},
+    insights:{largest,lowest,mostPaid}
+  };
+}
 
 async function generateReport(options,password){
   const record=await getStateRecord();if(!record)throw new Error('Ledger record was not found on this device.');
@@ -160,7 +188,7 @@ async function generateReport(options,password){
   }
 
   const checksum=await checksumObject(state);const reportId=`LGR-${String(checksum).replace(/[^A-Za-z0-9]/g,'').slice(0,10).toUpperCase()}`;
-  const redacted=options.reportType==='redacted';const creditorNames=new Map();summaries.forEach((s,i)=>creditorNames.set(s.creditor.id,redacted?`Creditor ${String(i+1).padStart(2,'0')}`:s.creditor.name));
+  const redacted=options.reportType==='redacted';const visual=options.reportType==='visual';const creditorNames=new Map();summaries.forEach((s,i)=>creditorNames.set(s.creditor.id,redacted?`Creditor ${String(i+1).padStart(2,'0')}`:s.creditor.name));
   const creditorRows=summaries.map(s=>({
     name:creditorNames.get(s.creditor.id),original:moneyOrRedacted(s.original,redacted),paid:moneyOrRedacted(s.paid,redacted),remaining:moneyOrRedacted(s.remaining,redacted),status:s.status,progress:redacted?'--':`${Math.round(s.progress)}%`,nextDue:s.nextDue?shortDate(s.nextDue):'--',quality:qualityForSummary(s)
   }));
@@ -178,9 +206,10 @@ async function generateReport(options,password){
   const generatedIso=new Date().toISOString();const generated=shortDateTime(generatedIso);const rangeFrom=options.from?shortDate(options.from):'start';const rangeTo=options.to?shortDate(options.to):'current';const scopeText=`${options.scope==='outstanding'?'Outstanding creditors only':'All creditors'}; balances as of ${options.to?shortDate(options.to):'current snapshot'}; transactions ${rangeFrom} through ${rangeTo}`;
   const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`);
   const equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
-  const model={reportType:options.reportType==='redacted'?'detailed':options.reportType,redacted,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
+  const model={reportType:redacted?'detailed':options.reportType,redacted,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
+  if(visual)model.visual=visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability});
 
-  const bytes=buildLedgerReportPdf(model);const d=new Date();const p=n=>String(n).padStart(2,'0');const stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_R${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`;const kind=redacted?'Redacted':options.reportType==='summary'?'Summary':'Detailed';dl(bytes,`Ledgerly_${kind}_${stamp}.pdf`);
+  const bytes=visual?buildVisualReportPdf(model):buildLedgerReportPdf(model);const d=new Date();const p=n=>String(n).padStart(2,'0');const stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_R${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`;const kind=redacted?'Redacted':visual?'Visual':options.reportType==='summary'?'Summary':'Detailed';dl(bytes,`Ledgerly_${kind}_${stamp}.pdf`);
 }
 
 document.addEventListener('click',e=>{
