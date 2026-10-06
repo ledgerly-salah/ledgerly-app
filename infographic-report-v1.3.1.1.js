@@ -69,7 +69,7 @@ function page(model){
   s.push(section(209,'Mini ledger snapshot',rows.length<(v.creditors||[]).length?'Top creditors plus Others and total':'All creditors plus total'));
   s.push(rect(42,82,511,110,P.panel,P.line,.35));
   s.push(txt(52,181,5.6,'CREDITOR','F2',P.muted));s.push(txt(275,181,5.6,'ORIGINAL','F2',P.muted));s.push(txt(344,181,5.6,'ADJ.','F2',P.muted));s.push(txt(410,181,5.6,'PAID','F2',P.muted));s.push(txt(477,181,5.6,'REMAINING','F2',P.muted));
-  let ty=168;rows.forEach(c=>{const ra=rowAdjustment(c);s.push(txt(52,ty,5.35,fit(c.name,34),'F1',P.ink));s.push(txt(275,ty,5.2,shortMoney(c.original),'F1',P.ink));s.push(txt(344,ty,5.2,signedMoney(ra),'F1',ra?P.amber:P.muted));s.push(txt(410,ty,5.2,shortMoney(c.paid),'F1',P.green));s.push(txt(477,ty,5.2,shortMoney(c.remaining),'F2',P.ink));ty-=8.2;});
+  let ty=168;rows.forEach(c=>{const ra=rowAdjustment(c);s.push(txt(52,ty,5.35,fit(c.name,34),'F1',P.ink));s.push(txt(275,ty,5.0,fullMoney(c.original),'F1',P.ink));s.push(txt(344,ty,5.0,signedMoney(ra),'F1',ra?P.amber:P.muted));s.push(txt(410,ty,5.0,fullMoney(c.paid),'F1',P.green));s.push(txt(477,ty,5.0,fullMoney(c.remaining),'F2',P.ink));ty-=8.2;});
   s.push(line(52,84,543,84,.4,P.line));s.push(txt(52,73,5.5,'TOTAL','F2',P.ink));s.push(txt(275,73,5.4,model.summary.original,'F2',P.ink));s.push(txt(344,73,5.4,signedMoney(adj),'F2',adj?P.amber:P.muted));s.push(txt(410,73,5.4,model.summary.paid,'F2',P.green));s.push(txt(477,73,5.4,model.summary.remaining,'F2',P.red));
 
   s.push(rect(42,43,511,22,'#EEF5F2'));s.push(txt(52,51,5.7,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));s.push(txt(187,51,5.7,`Audit: ${fit(model.health.audit,32)}`,'F2',P.green));s.push(txt(405,51,5.7,`Diagnostics: ${model.health.diagnostics}`,'F2',P.green));
