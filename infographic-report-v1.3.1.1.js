@@ -4,7 +4,7 @@ const enc=new TextEncoder();
 
 const P={
   ink:'#12362F',muted:'#6A7A75',green:'#0F5B4B',mint:'#2EA67D',mintSoft:'#DDF3EA',
-  red:'#C95A5A',redSoft:'#F8E5E3',amber:'#C58B2A',amberSoft:'#FAF0D9',blue:'#4D78A8',
+  red:'#C95A5A',refRed:'#FF6B6B',redSoft:'#F8E5E3',amber:'#C58B2A',amberSoft:'#FAF0D9',blue:'#4D78A8',
   blueSoft:'#E6EEF8',violet:'#735F9E',teal:'#3F8F91',line:'#DDE5E2',panel:'#F5F8F7',white:'#FFFFFF',black:'#1E2926'
 };
 const CAT=[P.green,P.mint,P.blue,P.amber,P.violet,P.teal,P.red,'#6E8B74','#9B785A','#6D7785'];
@@ -46,11 +46,11 @@ function issueMeta(model){
   const d=new Date(model.generatedIso||Date.now());
   const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
   const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
-  const ref=String(model.issueRef||'0000').padStart(4,'0');
+  const ref=String(model.issueRef||'?-0000');
   return {ref,date,time};
 }
 function watermark(){return `0.955 g BT /F2 34 Tf 0.707 0.707 -0.707 0.707 125 292 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
-function header(model){const meta=issueMeta(model);let s=rect(0,768,595,74,P.green);s+=txt(42,813,8.5,'LEDGERLY','F2',P.white);s+=txt(42,786,19,'Infographic Report','F2',P.white);s+=txt(42,773,6.8,`One-page visual summary | ${model.timezone}`,'F1','#D7E9E3');s+=txt(410,812,7.0,`Ref: ${meta.ref}`,'F2','#D7E9E3');s+=txt(410,799,7.0,`Issue Date: ${meta.date}`,'F1','#D7E9E3');s+=txt(410,786,7.0,`Issue Time: ${meta.time}`,'F1','#D7E9E3');return s;}
+function header(model){const meta=issueMeta(model);let s=rect(0,768,595,74,P.green);s+=txt(42,813,8.5,'LEDGERLY','F2',P.white);s+=txt(42,786,19,'Infographic Report','F2',P.white);s+=txt(42,773,6.8,`One-page visual summary | ${model.timezone}`,'F1','#D7E9E3');s+=txt(410,812,7.4,`Ref: ${meta.ref}`,'F2',P.refRed);s+=txt(410,799,7.0,`Issue Date: ${meta.date}`,'F1','#D7E9E3');s+=txt(410,786,7.0,`Issue Time: ${meta.time}`,'F1','#D7E9E3');return s;}
 function progressRing(cx,cy,r,pct){const p=Math.max(0,Math.min(100,Number(pct||0)));let s=strokeArc(cx,cy,r,0,360,12,'#DFE8E4');if(p>0)s+=strokeArc(cx,cy,r,-90,-90+360*p/100,12,P.mint);s+=txt(cx-22,cy+2,16,`${p.toFixed(1)}%`,'F2',P.green);s+=txt(cx-18,cy-14,6.5,'cleared','F1',P.muted);return s;}
 function categoryDonut(cx,cy,r,categories,total){let s=strokeArc(cx,cy,r,0,360,13,'#E5ECE9'),angle=-90;const cats=(categories||[]).filter(c=>Number(c.remaining)>0).slice(0,5);cats.forEach((c,i)=>{const pct=total>0?Number(c.remaining)/total:0,end=angle+360*pct;if(pct>0)s+=strokeArc(cx,cy,r,angle,end,13,CAT[i%CAT.length]);angle=end;});s+=txt(cx-17,cy+2,12,String(cats.length),'F2',P.ink);s+=txt(cx-23,cy-13,6.2,'categories','F1',P.muted);return s;}
 function insight(x,y,w,title,value,sub,color,soft){let s=rect(x,y,w,53,soft);s+=rect(x,y,4,53,color);s+=txt(x+11,y+36,5.8,title.toUpperCase(),'F2',P.muted);s+=txt(x+11,y+20,10.5,fit(value,24),'F2',P.ink);if(sub)s+=txt(x+11,y+7,5.8,fit(sub,32),'F1',P.muted);return s;}
@@ -82,7 +82,7 @@ function page(model){
 
   const meta=issueMeta(model);s.push(rect(42,43,511,22,'#EEF5F2'));s.push(txt(52,51,5.7,`Reconciliation: ${model.health.reconciliation}`,'F2',P.green));s.push(txt(187,51,5.7,`Audit: ${fit(model.health.audit,32)}`,'F2',P.green));s.push(txt(405,51,5.7,`Diagnostics: ${model.health.diagnostics}`,'F2',P.green));
   s.push(txt(42,31,5.5,'Visual summary only. Cleared may include payments and other reductions. For transaction-level detail, refer to the Detailed Ledger report.','F1',P.muted));
-  s.push(txt(42,17,5.4,`STRICTLY CONFIDENTIAL | Ref ${meta.ref} | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted));s.push(txt(491,17,5.4,'Page 1 of 1','F1',P.muted));return s.join('');
+  s.push(txt(42,17,5.4,`STRICTLY CONFIDENTIAL | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted));s.push(txt(300,17,5.8,`Ref ${meta.ref}`,'F2',P.red));s.push(txt(491,17,5.4,'Page 1 of 1','F1',P.muted));return s.join('');
 }
 function pdfDate(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(2,'0');return `D:${d.getUTCFullYear()}${p(d.getUTCMonth()+1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}Z`;}
 function pdfBytes(content,model){const objects=[],add=s=>{objects.push(s);return objects.length;},catalog=add(''),pages=add(''),f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'),f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');const info=add(`<< /Title (Ledgerly Infographic Report) /Author (Ledgerly) /Creator (Ledgerly Infographic Report v1) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly infographic debt summary Ref ${escPdf(model.issueRef||'')} ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);const stream=add(`<< /Length ${enc.encode(content).length} >>\nstream\n${content}endstream`),page=add(`<< /Type /Page /Parent ${pages} 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${stream} 0 R >>`);objects[catalog-1]=`<< /Type /Catalog /Pages ${pages} 0 R >>`;objects[pages-1]=`<< /Type /Pages /Kids [${page} 0 R] /Count 1 >>`;let out='%PDF-1.4\n%Ledgerly Infographic Report v1\n',offsets=[0];for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}const xref=enc.encode(out).length;out+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;for(let i=1;i<=objects.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';out+=`trailer\n<< /Size ${objects.length+1} /Root ${catalog} 0 R /Info ${info} 0 R >>\nstartxref\n${xref}\n%%EOF`;return enc.encode(out);}
