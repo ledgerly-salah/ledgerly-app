@@ -1,4 +1,4 @@
-const CACHE='ledgerly-shell-3.1.0-20261007-r27';
+const CACHE='ledgerly-shell-3.1.0-20261007-r28';
 const SHELL=[
   './','./index.html','./styles.3.1.0.css','./app.3.1.0.js','./security-tools.3.1.1.js','./financial-action-guard.3.1.1.js','./report-tools.3.1.1.js','./pdf-report-v2.3.1.1.js','./visual-report-v1.3.1.1.js','./infographic-report-v1.3.1.1.js','./ledger-core.3.1.0.js','./storage.3.1.0.js','./crypto.3.1.0.js','./migrations.3.1.0.js','./i18n.3.1.0.js','./pdf.3.1.0.js',
   './ledgerly-v2.webmanifest','./logo.svg','./icon-192.png','./icon-512.png','./icon-maskable-512.png'
