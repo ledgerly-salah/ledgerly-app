@@ -8,11 +8,11 @@ import { buildLedgerReportPdf } from './pdf-report-v2.3.1.1.js';
 import { buildVisualReportPdf } from './visual-report-v1.3.1.1.js';
 import { buildInfographicReportPdf } from './infographic-report-v1.3.1.1.js';
 
-const BUILD_ID='20261007-r7';
+const BUILD_ID='20261007-r8';
 const REPORT_FORMAT='3';
 const REPORT_REF_KEY='ledgerly-report-reference-sequences-v2';
 const REPORT_REF_PREFIX={summary:'S',detailed:'D',redacted:'R',infographic:'I',visual:'V'};
-const REPORT_TEMPLATE={summary:'Ledger v2',detailed:'Ledger v2',redacted:'Ledger v2',infographic:'Infographic v2',visual:'Visual v2'};
+const REPORT_TEMPLATE={summary:'Ledger v3',detailed:'Ledger v3',redacted:'Ledger v3',infographic:'Infographic v2',visual:'Visual v2'};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 function toast(title,message=''){
@@ -197,7 +197,7 @@ async function generateReport(options,password){
   const checksumState=JSON.parse(JSON.stringify(state));if(checksumState.meta)delete checksumState.meta.reportReferenceSequences;
   const checksum=await checksumObject(checksumState),reportId=`${infographic?'INF':'LGR'}-${String(checksum).replace(/[^A-Za-z0-9]/g,'').slice(0,10).toUpperCase()}`;
   const creditorNames=new Map();summaries.forEach((s,i)=>{let name=s.creditor.name;if(redacted||infographic&&privacy==='private')name=`Creditor ${String(i+1).padStart(2,'0')}`;else if(infographic&&privacy==='masked')name=maskName(name);creditorNames.set(s.creditor.id,name);});
-  const creditorRows=summaries.map(s=>({name:creditorNames.get(s.creditor.id),original:moneyOrRedacted(s.original,redacted),paid:moneyOrRedacted(s.paid,redacted),remaining:moneyOrRedacted(s.remaining,redacted),status:s.status,progress:redacted?'--':`${Math.round(s.progress)}%`,nextDue:s.nextDue?shortDate(s.nextDue):'--',quality:qualityForSummary(s)}));
+  const creditorRows=summaries.map(s=>({name:creditorNames.get(s.creditor.id),original:moneyOrRedacted(s.original,redacted),adjustment:redacted?'REDACTED':`${s.liability-s.original>0?'+':s.liability-s.original<0?'-':''}${formatSAR(Math.abs(s.liability-s.original))}`,paid:moneyOrRedacted(s.paid,redacted),remaining:moneyOrRedacted(s.remaining,redacted),status:s.status,progress:redacted?'--':`${Number(s.progress||0).toFixed(1)}%`,nextDue:s.nextDue?shortDate(s.nextDue):'--',quality:qualityForSummary(s)}));
 
   const txRows=[];for(const tx of txs){
     const h=await sha256Text(tx.id),att=byTx.get(tx.id)||[],legacy=isLegacyTransaction(tx);let evidence=attachmentTypeSummary(att);if(!evidence){if(['debt','payment'].includes(tx.type))evidence=legacy?'Legacy - no evidence':'Missing';else evidence='N/A';}
@@ -211,7 +211,7 @@ async function generateReport(options,password){
   const scopeText=`${options.scope==='outstanding'?'Outstanding creditors only':'All creditors'}; balances as of ${options.to?shortDate(options.to):'current snapshot'}; transactions ${rangeFrom} through ${rangeTo}`;
   const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`),equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
   const candidate=reportRefCandidate(rawState,options.reportType);
-  const model={reportType:redacted?'detailed':options.reportType,redacted,infographicPrivacy:privacy,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,templateRevision:REPORT_TEMPLATE[options.reportType]||'Ledger v2',revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,scopeLabel,asOfLabel,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows,issueRef:candidate.ref};
+  const model={reportType:redacted?'detailed':options.reportType,redacted,infographicPrivacy:privacy,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,templateRevision:REPORT_TEMPLATE[options.reportType]||'Ledger v2',revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,scopeLabel,asOfLabel,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,waived:moneyOrRedacted(waivers,redacted),adjustment:redacted?'REDACTED':`${adjustments>0?'+':adjustments<0?'-':''}${formatSAR(Math.abs(adjustments))}`,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows,issueRef:candidate.ref};
   if(visual||infographic)model.visual=visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability},infographic?creditorNames:null);
 
   const bytes=infographic?buildInfographicReportPdf(model):visual?buildVisualReportPdf(model):buildLedgerReportPdf(model);
@@ -222,4 +222,5 @@ async function generateReport(options,password){
 
 document.addEventListener('click',e=>{const target=e.target.closest?.('[data-action="report-menu"]');if(!target)return;e.preventDefault();e.stopImmediatePropagation();openReportCenter();},true);
 window.addEventListener('load',()=>{ensureReportStyles();patchBuildLabel();});
+
 

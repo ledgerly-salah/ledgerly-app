@@ -1,4 +1,4 @@
-// Ledgerly Report v2 — dependency-free PDF generator.
+// Ledgerly Report v3 — dependency-free PDF generator.
 // Uses built-in PDF Helvetica fonts and stays fully offline.
 const enc=new TextEncoder();
 
@@ -40,8 +40,9 @@ function header(model,pageIndex,pageCount,title){
   s+=txt(75,783,18,title,'F2');
   s+=refTxt(42,763,8.3,`Ref: ${meta.ref}`);
   s+=txt(116,763,7.8,`| Issue Date: ${meta.date} | Issue Time: ${meta.time} | ${model.timezone}`,'F1');
-  s+=txt(42,751,7.5,`App v${model.version} | Build ${model.build} | Revision ${model.revision} | Currency ${model.currency} | Report format v2`,'F1');
-  s+=line(42,742,553,742,.7);
+  s+=txt(42,751,7.5,`App v${model.version} | Ledger Rev. ${model.revision} | Currency ${model.currency} | Report format ${model.reportFormat||'3'}`,'F1');
+  s+=txt(42,739,7.5,`Template ${model.templateRevision||'Ledger v3'} | Build ${model.build}`,'F1');
+  s+=line(42,730,553,730,.7);
   return s;
 }
 function footer(model,pageIndex,pageCount){
@@ -69,7 +70,9 @@ function summaryBlock(b,model){
   b.add(box(42,626,511,96,.95));
   b.add(txt(54,704,7,'TOTAL ORIGINAL DEBT','F1'));b.add(txt(54,685,14,model.summary.original,'F2'));
   b.add(txt(188,704,7,'PAID','F1'));b.add(txt(188,685,14,model.summary.paid,'F2'));
-  b.add(txt(307,704,7,'WAIVED / ADJ.','F1'));b.add(txt(307,685,10,model.summary.waivedAdjusted,'F2'));
+  b.add(txt(307,704,7,'WAIVED / ADJ.','F1'));
+  b.add(txt(307,689,8.5,`W ${model.summary.waived||'SAR 0.00'}`,'F2'));
+  b.add(txt(307,676,8.5,`A ${model.summary.adjustment||model.summary.waivedAdjusted}`,'F2'));
   b.add(txt(430,704,7,'REMAINING','F1'));b.add(txt(430,685,14,model.summary.remaining,'F2'));
   b.add(txt(54,656,7.5,`Reconciliation: ${model.summary.equation}`,'F2'));
   b.add(txt(54,640,7.2,`${model.counts.creditors} creditors | ${model.counts.transactions} transactions | ${model.counts.active} open creditors | ${model.counts.completed} fully paid`,'F1'));
@@ -87,13 +90,30 @@ function healthBlock(b,model){
 }
 
 function creditorTable(b,model){
-  b.write('Creditor summary',{size:11,font:'F2',gap:18});
-  const widths=[150,65,62,68,60,58,48];
-  const heads=['Creditor','Original','Paid','Remaining','Status','Due','Progress'];
-  const row=(vals,bold=false)=>{b.ensure(17);let x=42;vals.forEach((v,i)=>{b.add(txt(x,b.y,7,fit(v,i===0?27:14),bold?'F2':'F1'));x+=widths[i];});b.add(line(42,b.y-5,553,b.y-5,.22));b.y-=17;};
-  row(heads,true);
-  for(const c of model.creditors){row([c.name,c.original,c.paid,c.remaining,c.status,c.nextDue,c.progress],false);}
-  row(['TOTAL',model.summary.original,model.summary.paid,model.summary.remaining,'','',''],true);
+  b.write('Creditor summary',{size:11,font:'F2',gap:17});
+  b.write(`Amounts in ${model.currency||'SAR'} | Net adjustments exclude waivers`,{size:7.2,gap:17});
+  const widths=[140,58,58,58,65,60,36,36];
+  const heads=['Creditor','Original','Net adj.','Paid','Remaining','Status','Due','Cleared'];
+  const numberText=v=>String(v??'').replace(/SAR\s*/g,'');
+  const row=(vals,bold=false)=>{
+    const name=ascii(vals[0]);const cut=name.length>28?name.lastIndexOf(' ',28):-1;
+    const names=cut>0?[name.slice(0,cut),name.slice(cut+1)]:[name];
+    const height=names.length>1?27:19;b.ensure(height);let x=42;
+    vals.forEach((value,i)=>{
+      let v=i>=1&&i<=4?numberText(value):String(value??'');
+      if(i===0){names.forEach((part,j)=>b.add(txt(x,b.y-j*10,7.2,fit(part,32),bold?'F2':'F1')));}
+      else if(i>=1&&i<=4&&v==='REDACTED'){b.add(txt(x+3,b.y,6.8,v,bold?'F2':'F1'));}
+      else if(i>=1&&i<=4){const w=[...v].reduce((n,c)=>n+(c==='.'||c===','?.278:c==='-'?.333:c==='+'?.584:.556),0)*7.2;b.add(txt(x+widths[i]-6-w,b.y,7.2,v,bold?'F2':'F1'));}
+      else b.add(txt(x,b.y,7.2,fit(v,i===5?14:12),bold?'F2':'F1'));
+      x+=widths[i];
+    });
+    b.add(line(42,b.y-height+10,553,b.y-height+10,.22));b.y-=height;
+  };
+  const heading=()=>{let x=42;heads.forEach((h,i)=>{b.add(txt(x,b.y,7.2,h,'F2'));x+=widths[i];});b.add(line(42,b.y-5,553,b.y-5,.3));b.y-=19;};
+  heading();
+  for(const c of model.creditors){if(b.y-27<58){b.push();heading();}row([c.name,c.original,c.adjustment,c.paid,c.remaining,c.status,c.nextDue,c.progress]);}
+  if(b.y-19<58){b.push();heading();}
+  row(['TOTAL',model.summary.original,model.summary.adjustment,model.summary.paid,model.summary.remaining,'','',''],true);
   b.spacer(8);
 }
 
@@ -159,7 +179,7 @@ function pdfBytes(pageContents,model,title){
   const catalog=add('');const pagesObj=add('');
   const font1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
   const font2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
-  const info=add(`<< /Title (${escPdf(title)}) /Author (Ledgerly) /Creator (Ledgerly Report v2) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly debt ledger report Ref ${escPdf(model.issueRef||'')} ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
+  const info=add(`<< /Title (${escPdf(title)}) /Author (Ledgerly) /Creator (Ledgerly Report v3) /Subject (${escPdf(model.scopeText)}) /Keywords (Ledgerly debt ledger report Ref ${escPdf(model.issueRef||'')} ${escPdf(model.reportId)}) /CreationDate (${pdfDate(model.generatedIso)}) >>`);
   const pageIds=[];
   for(let i=0;i<pageContents.length;i++){
     const content=watermark()+header(model,i,pageContents.length,title)+pageContents[i].join('')+footer(model,i,pageContents.length);
@@ -168,7 +188,7 @@ function pdfBytes(pageContents,model,title){
   }
   objects[catalog-1]=`<< /Type /Catalog /Pages ${pagesObj} 0 R >>`;
   objects[pagesObj-1]=`<< /Type /Pages /Kids [${pageIds.map(id=>`${id} 0 R`).join(' ')}] /Count ${pageIds.length} >>`;
-  let out='%PDF-1.4\n%Ledgerly Report v2\n';const offsets=[0];
+  let out='%PDF-1.4\n%Ledgerly Report v3\n';const offsets=[0];
   for(let i=0;i<objects.length;i++){offsets[i+1]=enc.encode(out).length;out+=`${i+1} 0 obj\n${objects[i]}\nendobj\n`;}
   const xref=enc.encode(out).length;out+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
   for(let i=1;i<=objects.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
@@ -180,3 +200,4 @@ export function buildLedgerReportPdf(model){
   const title=model.reportType==='summary'?'Personal Debt Summary':model.redacted?'Redacted Debt Ledger':'Detailed Personal Debt Ledger';
   return pdfBytes(buildRawPages(model),model,title);
 }
+
