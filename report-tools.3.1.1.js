@@ -1,5 +1,5 @@
-import { getStateRecord, listAttachments } from './storage.3.1.0.js';
-import { unlockSecurity, decryptJson, checksumObject, sha256Text } from './crypto.3.1.0.js';
+import { getStateRecord, saveStateRecord, listAttachments } from './storage.3.1.0.js';
+import { unlockSecurity, decryptJson, encryptJson, checksumObject, sha256Text } from './crypto.3.1.0.js';
 import {
   APP_VERSION, reconcileState, validateState, diagnostics, overallSummary,
   txEffect, formatSAR, shortDate, shortDateTime, safeDate, categoryBalances
@@ -8,10 +8,11 @@ import { buildLedgerReportPdf } from './pdf-report-v2.3.1.1.js';
 import { buildVisualReportPdf } from './visual-report-v1.3.1.1.js';
 import { buildInfographicReportPdf } from './infographic-report-v1.3.1.1.js';
 
-const BUILD_ID='20261006-r5';
-const REPORT_FORMAT='2';
+const BUILD_ID='20261007-r6';
+const REPORT_FORMAT='3';
 const REPORT_REF_KEY='ledgerly-report-reference-sequences-v2';
 const REPORT_REF_PREFIX={summary:'S',detailed:'D',redacted:'R',infographic:'I',visual:'V'};
+const REPORT_TEMPLATE={summary:'Ledger v2',detailed:'Ledger v2',redacted:'Ledger v2',infographic:'Infographic v2',visual:'Visual v1'};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 function toast(title,message=''){
@@ -74,7 +75,7 @@ function openReportCenter(){
         <div class="settings-row"><span>Infographic privacy</span><select name="infographicPrivacy"><option value="full">Full names</option><option value="masked">Masked names</option><option value="private">Private labels</option></select></div>
         <label class="settings-row"><span>Include notes</span><input name="includeNotes" type="checkbox" checked></label>
       </div>
-      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Type-specific sequential reference (S/D/R/I/V + 4 digits), issue date and time, build and revision, timezone, reconciliation equation, data-quality exceptions, current audit-chain status, legacy audit-history status and PDF metadata. Visual and Infographic reports use the same validated ledger snapshot as the audit-ready reports.</p></div>
+      <div class="settings-card"><h3>Included automatically</h3><p class="tx-meta">Persistent type-specific reference (S/D/R/I/V), issue date/time, report scope, balances-as-of context, ledger revision, report template/build, timezone, reconciliation, data-quality exceptions and audit integrity. Reference counters are stored with the encrypted ledger and therefore travel with ledger backups.</p></div>
     </div>
     <div class="form-actions"><button class="btn btn-soft" type="button" id="reportCancel">Cancel</button><button class="btn btn-primary" type="submit">Continue to authorization</button></div>
   </form>`;
@@ -98,8 +99,7 @@ function openAuthorization(options){
 }
 
 function isCurrentAuditEntry(entry){
-  const id=String(entry?.id||'');
-  const app=String(entry?.appVersion||'');
+  const id=String(entry?.id||'');const app=String(entry?.appVersion||'');
   return app===APP_VERSION && /^audit_[a-z0-9]{8,}_[a-z0-9]{8,}$/i.test(id) && typeof entry?.hash==='string' && entry.hash.length>=40;
 }
 async function verifyAuditChain(state){
@@ -125,12 +125,21 @@ async function verifyAuditChain(state){
 function tzLabel(){
   const zone=Intl.DateTimeFormat().resolvedOptions().timeZone||'Local';const mins=-new Date().getTimezoneOffset();const sign=mins>=0?'+':'-';const h=Math.floor(Math.abs(mins)/60);const m=Math.abs(mins)%60;return `Time Zone: ${zone} (UTC${sign}${h}${m?':'+String(m).padStart(2,'0'):''})`;
 }
-function nextReportRef(reportType){
-  const type=REPORT_REF_PREFIX[reportType]?reportType:'summary';const prefix=REPORT_REF_PREFIX[type];let seq={};
-  try{seq=JSON.parse(localStorage.getItem(REPORT_REF_KEY)||'{}')||{};}catch{seq={};}
-  let last=Number.parseInt(seq[type]||'0',10);if(!Number.isFinite(last)||last<0)last=0;
-  if(last>=9999)throw new Error(`${type} report reference sequence reached 9999.`);
-  const next=last+1;seq[type]=next;localStorage.setItem(REPORT_REF_KEY,JSON.stringify(seq));return `${prefix}-${String(next).padStart(4,'0')}`;
+function parseSeq(value){const n=Number.parseInt(value||'0',10);return Number.isFinite(n)&&n>0?n:0;}
+function localRefSequences(){try{return JSON.parse(localStorage.getItem(REPORT_REF_KEY)||'{}')||{};}catch{return {};}}
+function reportRefCandidate(state,reportType){
+  const type=REPORT_REF_PREFIX[reportType]?reportType:'summary',prefix=REPORT_REF_PREFIX[type];
+  const persisted=state.meta?.reportReferenceSequences||{},legacy=localRefSequences(),base={};
+  for(const key of Object.keys(REPORT_REF_PREFIX))base[key]=Math.max(parseSeq(persisted[key]),parseSeq(legacy[key]));
+  const next=base[type]+1;const seq={...base,[type]:next};return {type,ref:`${prefix}-${String(next).padStart(4,'0')}`,seq};
+}
+async function persistReportRef(record,state,dek,candidate){
+  const nextState={...state,meta:{...(state.meta||{}),reportReferenceSequences:candidate.seq}};
+  let nextRecord;
+  if(record.encrypted){const envelope=await encryptJson(nextState,dek);nextRecord={...record,envelope,payload:null,revision:Number(record.revision||0)};}
+  else nextRecord={...record,payload:nextState,revision:Number(record.revision||0)};
+  await saveStateRecord(nextRecord,{expectedRevision:Number(record.revision||0)});
+  try{localStorage.setItem(REPORT_REF_KEY,JSON.stringify(candidate.seq));}catch{}
 }
 function typeLabel(tx){
   let label=({debt:'Debt',payment:'Payment',waiver:'Waiver',adjustment:tx.adjustmentDirection==='decrease'?'Adjustment decrease':'Adjustment increase',reversal:'Reversal'})[tx.type]||String(tx.type||'Record');
@@ -142,54 +151,37 @@ function signedAmount(state,tx,redacted=false){
 }
 function shortStable(hash){return `TX-${String(hash||'').replace(/[^A-Za-z0-9]/g,'').slice(0,7).toUpperCase()||'UNKNOWN'}`;}
 function attachmentTypeSummary(items){
-  if(!items.length)return '';
-  let pdf=0,img=0,other=0;for(const a of items){const t=String(a.type||'').toLowerCase();if(t.includes('pdf'))pdf++;else if(t.startsWith('image/'))img++;else other++;}
+  if(!items.length)return '';let pdf=0,img=0,other=0;for(const a of items){const t=String(a.type||'').toLowerCase();if(t.includes('pdf'))pdf++;else if(t.startsWith('image/'))img++;else other++;}
   return [pdf?`${pdf} PDF`:'',img?`${img} image${img===1?'':'s'}`:'',other?`${other} file${other===1?'':'s'}`:''].filter(Boolean).join(' + ');
 }
 function qualityForSummary(summary){const q=new Set(summary.transactions.filter(x=>!x.voidedAt).map(x=>x.quality||'Confirmed'));return q.has('Disputed')?'Disputed':q.has('Estimated')?'Estimated':'Confirmed';}
-function isLegacyTransaction(tx){
-  const v=String(tx?.createdByVersion||'').toLowerCase();
-  return !v||v==='legacy'||v.includes('migration')||v.startsWith('3.0');
-}
-function maskName(name){
-  return String(name||'').split(/\s+/).filter(Boolean).map(p=>p.length<=1?p:`${p[0]}${'*'.repeat(Math.min(6,p.length-1))}`).join(' ');
-}
+function isLegacyTransaction(tx){const v=String(tx?.createdByVersion||'').toLowerCase();return !v||v==='legacy'||v.includes('migration')||v.startsWith('3.0');}
+function maskName(name){return String(name||'').split(/\s+/).filter(Boolean).map(p=>p.length<=1?p:`${p[0]}${'*'.repeat(Math.min(6,p.length-1))}`).join(' ');}
 function visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability},nameMap=null){
   const displayName=id=>nameMap?.get(id)||state.creditors.find(c=>c.id===id)?.name||'Unknown';
-  const creditorRows=summaries.map(s=>({
-    name:displayName(s.creditor.id),original:Number(s.original||0),paid:Number(s.paid||0),remaining:Number(s.remaining||0),progress:Number(s.progress||0),status:s.status,
-    originalLabel:formatSAR(s.original),paidLabel:formatSAR(s.paid),remainingLabel:formatSAR(s.remaining)
-  }));
+  const creditorRows=summaries.map(s=>({name:displayName(s.creditor.id),original:Number(s.original||0),paid:Number(s.paid||0),remaining:Number(s.remaining||0),progress:Number(s.progress||0),status:s.status,originalLabel:formatSAR(s.original),paidLabel:formatSAR(s.paid),remainingLabel:formatSAR(s.remaining)}));
   const asOfTx=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&(!asOf||safeDate(tx.effectiveDate)<=asOf));
   const scopedState={...state,creditors:state.creditors.filter(c=>creditorIds.has(c.id)),transactions:asOfTx};
   const categories=categoryBalances(scopedState).map(c=>({...c,remainingLabel:formatSAR(c.remaining)}));
   const reversed=new Set(state.transactions.filter(r=>!r.voidedAt&&r.type==='reversal'&&r.reversedTransactionId).map(r=>r.reversedTransactionId));
-  const payments=txs.filter(tx=>tx.type==='payment'&&!tx.voidedAt&&!reversed.has(tx.id)).map(tx=>({
-    date:shortDate(tx.effectiveDate),creditor:displayName(tx.creditorId),amount:Number(tx.amountHalalas||0),amountLabel:formatSAR(tx.amountHalalas),method:String(tx.method||'')
-  }));
+  const payments=txs.filter(tx=>tx.type==='payment'&&!tx.voidedAt&&!reversed.has(tx.id)).map(tx=>({date:shortDate(tx.effectiveDate),creditor:displayName(tx.creditorId),amount:Number(tx.amountHalalas||0),amountLabel:formatSAR(tx.amountHalalas),method:String(tx.method||'')}));
   const monthly=new Map();for(const tx of txs){if(tx.type!=='payment'||tx.voidedAt||reversed.has(tx.id))continue;const month=safeDate(tx.effectiveDate).slice(0,7);if(!month)continue;monthly.set(month,(monthly.get(month)||0)+Number(tx.amountHalalas||0));}
   const paymentMonths=[...monthly.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([month,amount])=>({month,label:month,amount}));
   const open=creditorRows.filter(c=>c.remaining>0),largest=open[0]||null,lowest=[...open].sort((a,b)=>a.remaining-b.remaining)[0]||null,mostPaid=[...creditorRows].sort((a,b)=>b.paid-a.paid)[0]||null;
   const latest=txRows.slice(0,5).map(t=>({date:t.effectiveDate,creditor:t.creditor,type:t.type,amount:t.amount}));
-  return {
-    raw:{original,paid,reductions,remaining,liability},repaymentPct:liability>0?Math.max(0,Math.min(100,reductions/liability*100)):0,
-    creditors:creditorRows,categories,paymentEvents:payments.length,payments,paymentMonths,latest,
-    statusCounts:{open:open.length,outstanding:creditorRows.filter(c=>c.status==='Outstanding').length,partial:creditorRows.filter(c=>c.status==='Partially Paid').length,paid:creditorRows.filter(c=>c.status==='Paid').length},
-    insights:{largest,lowest,mostPaid}
-  };
+  return {raw:{original,paid,reductions,remaining,liability},repaymentPct:liability>0?Math.max(0,Math.min(100,reductions/liability*100)):0,creditors:creditorRows,categories,paymentEvents:payments.length,payments,paymentMonths,latest,statusCounts:{open:open.length,outstanding:creditorRows.filter(c=>c.status==='Outstanding').length,partial:creditorRows.filter(c=>c.status==='Partially Paid').length,paid:creditorRows.filter(c=>c.status==='Paid').length},insights:{largest,lowest,mostPaid}};
 }
 
 async function generateReport(options,password){
   const record=await getStateRecord();if(!record)throw new Error('Ledger record was not found on this device.');
-  let state;if(record.encrypted){if(!password)throw new Error('Master password is required.');const dek=await unlockSecurity(record.security,password,{recovery:false});state=await decryptJson(record.envelope,dek);}else state=record.payload;
-  state=reconcileState(state);validateState(state);
+  let rawState,dek=null;if(record.encrypted){if(!password)throw new Error('Master password is required.');dek=await unlockSecurity(record.security,password,{recovery:false});rawState=await decryptJson(record.envelope,dek);}else rawState=record.payload;
+  const state=reconcileState(rawState);validateState(state);
   const diag=diagnostics(state);if(!diag.ok)throw new Error('Report blocked: ledger diagnostics found an integrity error.');
   const audit=await verifyAuditChain(state);if(!audit.ok)throw new Error(`Report blocked: ${audit.reason}.`);
 
   const asOf=safeDate(options.to)||null;const allSummary=overallSummary(state,asOf);let summaries=[...allSummary.summaries];if(options.scope==='outstanding')summaries=summaries.filter(s=>s.remaining>0);
   summaries.sort((a,b)=>b.remaining-a.remaining||String(a.creditor.name).localeCompare(String(b.creditor.name)));
-  const creditorIds=new Set(summaries.map(s=>s.creditor.id));
-  const total=key=>summaries.reduce((n,s)=>n+Number(s[key]||0),0);
+  const creditorIds=new Set(summaries.map(s=>s.creditor.id));const total=key=>summaries.reduce((n,s)=>n+Number(s[key]||0),0);
   const original=total('original'),adjustments=total('adjustments'),liability=total('liability'),paid=total('paid'),waivers=total('waivers'),reductions=total('reductions'),remaining=Math.max(0,liability-reductions);
   const sumRemaining=summaries.reduce((n,s)=>n+s.remaining,0);if(sumRemaining!==remaining)throw new Error('Report blocked: creditor balances do not reconcile to the report total.');
 
@@ -197,48 +189,36 @@ async function generateReport(options,password){
   let txs=state.transactions.filter(tx=>creditorIds.has(tx.creditorId));if(options.from)txs=txs.filter(tx=>safeDate(tx.effectiveDate)>=safeDate(options.from));if(options.to)txs=txs.filter(tx=>safeDate(tx.effectiveDate)<=safeDate(options.to));
   txs.sort((a,b)=>{const d=String(a.effectiveDate).localeCompare(String(b.effectiveDate))||String(a.createdAt).localeCompare(String(b.createdAt));return options.order==='oldest'?d:-d;});
 
-  const estimated=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&tx.quality==='Estimated').length;
-  const disputed=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&tx.quality==='Disputed').length;
-  let legacyNoEvidence=0,missingEvidence=0;
-  for(const tx of state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&!tx.voidedAt&&['debt','payment'].includes(tx.type))){
-    const has=(byTx.get(tx.id)||[]).length>0||(tx.attachmentIds||[]).length>0;if(has)continue;
-    if(isLegacyTransaction(tx))legacyNoEvidence++;else missingEvidence++;
-  }
+  const qualityScope=state.transactions.filter(tx=>creditorIds.has(tx.creditorId)&&(!asOf||safeDate(tx.effectiveDate)<=asOf));
+  const estimated=qualityScope.filter(tx=>!tx.voidedAt&&tx.quality==='Estimated').length,disputed=qualityScope.filter(tx=>!tx.voidedAt&&tx.quality==='Disputed').length;
+  let legacyNoEvidence=0,missingEvidence=0;for(const tx of qualityScope.filter(tx=>!tx.voidedAt&&['debt','payment'].includes(tx.type))){const has=(byTx.get(tx.id)||[]).length>0||(tx.attachmentIds||[]).length>0;if(has)continue;if(isLegacyTransaction(tx))legacyNoEvidence++;else missingEvidence++;}
 
-  const redacted=options.reportType==='redacted',visual=options.reportType==='visual',infographic=options.reportType==='infographic';
-  const privacy=infographic?(options.infographicPrivacy||'full'):'full';
-  const checksum=await checksumObject(state);const reportId=`${infographic?'INF':'LGR'}-${String(checksum).replace(/[^A-Za-z0-9]/g,'').slice(0,10).toUpperCase()}`;
-  const creditorNames=new Map();summaries.forEach((s,i)=>{
-    let name=s.creditor.name;
-    if(redacted||infographic&&privacy==='private')name=`Creditor ${String(i+1).padStart(2,'0')}`;
-    else if(infographic&&privacy==='masked')name=maskName(name);
-    creditorNames.set(s.creditor.id,name);
-  });
-  const creditorRows=summaries.map(s=>({
-    name:creditorNames.get(s.creditor.id),original:moneyOrRedacted(s.original,redacted),paid:moneyOrRedacted(s.paid,redacted),remaining:moneyOrRedacted(s.remaining,redacted),status:s.status,progress:redacted?'--':`${Math.round(s.progress)}%`,nextDue:s.nextDue?shortDate(s.nextDue):'--',quality:qualityForSummary(s)
-  }));
+  const redacted=options.reportType==='redacted',visual=options.reportType==='visual',infographic=options.reportType==='infographic',privacy=infographic?(options.infographicPrivacy||'full'):'full';
+  const checksumState=JSON.parse(JSON.stringify(state));if(checksumState.meta)delete checksumState.meta.reportReferenceSequences;
+  const checksum=await checksumObject(checksumState),reportId=`${infographic?'INF':'LGR'}-${String(checksum).replace(/[^A-Za-z0-9]/g,'').slice(0,10).toUpperCase()}`;
+  const creditorNames=new Map();summaries.forEach((s,i)=>{let name=s.creditor.name;if(redacted||infographic&&privacy==='private')name=`Creditor ${String(i+1).padStart(2,'0')}`;else if(infographic&&privacy==='masked')name=maskName(name);creditorNames.set(s.creditor.id,name);});
+  const creditorRows=summaries.map(s=>({name:creditorNames.get(s.creditor.id),original:moneyOrRedacted(s.original,redacted),paid:moneyOrRedacted(s.paid,redacted),remaining:moneyOrRedacted(s.remaining,redacted),status:s.status,progress:redacted?'--':`${Math.round(s.progress)}%`,nextDue:s.nextDue?shortDate(s.nextDue):'--',quality:qualityForSummary(s)}));
 
   const txRows=[];for(const tx of txs){
-    const h=await sha256Text(tx.id);const att=byTx.get(tx.id)||[];const legacy=isLegacyTransaction(tx);
-    let evidence=attachmentTypeSummary(att);if(!evidence){if(['debt','payment'].includes(tx.type))evidence=legacy?'Legacy - no evidence':'Missing';else evidence='N/A';}
+    const h=await sha256Text(tx.id),att=byTx.get(tx.id)||[],legacy=isLegacyTransaction(tx);let evidence=attachmentTypeSummary(att);if(!evidence){if(['debt','payment'].includes(tx.type))evidence=legacy?'Legacy - no evidence':'Missing';else evidence='N/A';}
     let allocation='';if(['payment','waiver'].includes(tx.type)){const n=(tx.allocations||[]).length;allocation=n?`${n} debt record${n===1?'':'s'} | ${tx.allocationMode||'allocated'}`:'Unallocated';}
     let verification='';if(!redacted){const parts=[];if(tx.verificationSource)parts.push(tx.verificationSource);if(tx.verifiedAt)parts.push(shortDate(tx.verifiedAt));if(tx.verified)parts.push('Verified');verification=parts.join(' | ');}
-    txRows.push({
-      effectiveDate:tx.effectiveDateUnknown?'Date pending':shortDate(tx.effectiveDate),recordedAt:shortDateTime(tx.createdAt),shortId:shortStable(h),creditor:creditorNames.get(tx.creditorId)||'Unknown',type:typeLabel(tx),amount:signedAmount(state,tx,redacted),category:redacted?'REDACTED':(tx.category||'Personal'),quality:tx.quality||'Confirmed',evidence,method:redacted?'':(tx.method||''),reference:redacted?'':(tx.reference||''),allocation:redacted?'':allocation,note:(!redacted&&options.includeNotes)?String(tx.notes||tx.description||'').trim():'',verification
-    });
+    txRows.push({effectiveDate:tx.effectiveDateUnknown?'Date pending':shortDate(tx.effectiveDate),recordedAt:shortDateTime(tx.createdAt),shortId:shortStable(h),creditor:creditorNames.get(tx.creditorId)||'Unknown',type:typeLabel(tx),amount:signedAmount(state,tx,redacted),category:redacted?'REDACTED':(tx.category||'Personal'),quality:tx.quality||'Confirmed',evidence,method:redacted?'':(tx.method||''),reference:redacted?'':(tx.reference||''),allocation:redacted?'':allocation,note:(!redacted&&options.includeNotes)?String(tx.notes||tx.description||'').trim():'',verification});
   }
 
-  const generatedIso=new Date().toISOString();const generated=shortDateTime(generatedIso);const rangeFrom=options.from?shortDate(options.from):'start';const rangeTo=options.to?shortDate(options.to):'current';const scopeText=`${options.scope==='outstanding'?'Outstanding creditors only':'All creditors'}; balances as of ${options.to?shortDate(options.to):'current snapshot'}; transactions ${rangeFrom} through ${rangeTo}`;
-  const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`);
-  const equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
-  const model={reportType:redacted?'detailed':options.reportType,redacted,infographicPrivacy:privacy,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows};
-  model.issueRef=nextReportRef(options.reportType);
+  const generatedIso=new Date().toISOString(),generated=shortDateTime(generatedIso),rangeFrom=options.from?shortDate(options.from):'start',rangeTo=options.to?shortDate(options.to):'current';
+  const scopeLabel=options.scope==='outstanding'?'Outstanding only':'All creditors',asOfLabel=options.to?`Balances as of ${shortDate(options.to)}`:'Balances: current snapshot';
+  const scopeText=`${options.scope==='outstanding'?'Outstanding creditors only':'All creditors'}; balances as of ${options.to?shortDate(options.to):'current snapshot'}; transactions ${rangeFrom} through ${rangeTo}`;
+  const adjText=redacted?'REDACTED':(waivers===0&&adjustments===0?'SAR 0.00':`W ${formatSAR(waivers)} / A ${(adjustments<0?'-':'+')+formatSAR(Math.abs(adjustments))}`),equation=redacted?'REDACTED':`${formatSAR(liability)} - ${formatSAR(reductions)} = ${formatSAR(remaining)}`;
+  const candidate=reportRefCandidate(rawState,options.reportType);
+  const model={reportType:redacted?'detailed':options.reportType,redacted,infographicPrivacy:privacy,generatedIso,generated,timezone:tzLabel(),version:APP_VERSION,build:BUILD_ID,templateRevision:REPORT_TEMPLATE[options.reportType]||'Ledger v2',revision:Number(record.revision||state.meta?.revision||0),reportFormat:REPORT_FORMAT,reportId,currency:state.meta?.currency||'SAR',scopeText,scopeLabel,asOfLabel,transactionRange:`${rangeFrom} to ${rangeTo}`,orderLabel:options.order==='oldest'?'Oldest first':'Newest first',summary:{original:moneyOrRedacted(original,redacted),paid:moneyOrRedacted(paid,redacted),waivedAdjusted:adjText,remaining:moneyOrRedacted(remaining,redacted),equation},counts:{creditors:summaries.length,transactions:txs.length,active:summaries.filter(s=>s.remaining>0).length,completed:summaries.filter(s=>s.remaining<=0).length},health:{reconciliation:'PASSED',audit:audit.label,diagnostics:'PASSED'},quality:{estimated,disputed,legacyNoEvidence,missingEvidence},creditors:creditorRows,transactions:txRows,issueRef:candidate.ref};
   if(visual||infographic)model.visual=visualData(state,summaries,creditorIds,asOf,txs,txRows,{original,paid,reductions,remaining,liability},infographic?creditorNames:null);
 
-  const bytes=infographic?buildInfographicReportPdf(model):visual?buildVisualReportPdf(model):buildLedgerReportPdf(model);const d=new Date();const p=n=>String(n).padStart(2,'0');const stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_R${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`;const kind=redacted?'Redacted':infographic?'Infographic':visual?'Visual':options.reportType==='summary'?'Summary':'Detailed';dl(bytes,`Ledgerly_${kind}_${model.issueRef}_${stamp}.pdf`);
+  const bytes=infographic?buildInfographicReportPdf(model):visual?buildVisualReportPdf(model):buildLedgerReportPdf(model);
+  await persistReportRef(record,rawState,dek,candidate);
+  const d=new Date(),p=n=>String(n).padStart(2,'0'),stamp=`${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_LR${model.revision}_${p(d.getHours())}${p(d.getMinutes())}`,kind=redacted?'Redacted':infographic?'Infographic':visual?'Visual':options.reportType==='summary'?'Summary':'Detailed';
+  dl(bytes,`Ledgerly_${kind}_${model.issueRef}_${stamp}.pdf`);
 }
 
-document.addEventListener('click',e=>{
-  const target=e.target.closest?.('[data-action="report-menu"]');if(!target)return;e.preventDefault();e.stopImmediatePropagation();openReportCenter();
-},true);
+document.addEventListener('click',e=>{const target=e.target.closest?.('[data-action="report-menu"]');if(!target)return;e.preventDefault();e.stopImmediatePropagation();openReportCenter();},true);
 window.addEventListener('load',()=>{ensureReportStyles();patchBuildLabel();});
