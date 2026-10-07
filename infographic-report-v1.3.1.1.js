@@ -57,7 +57,12 @@ function issueMeta(model){
 }
 function watermark(){return `0.975 g BT /F2 30 Tf 0.707 0.707 -0.707 0.707 145 300 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 function header(model){
-  const meta=issueMeta(model);const scope=fit(`${model.scopeLabel||'All creditors'} | ${model.asOfLabel||'Current snapshot'} | ${model.timezone}`,72);
+  const meta=issueMeta(model);
+  const scopePart=String(model.scopeLabel||'All creditors');
+  let balancePart=String(model.asOfLabel||'Current snapshot').replace(/^Balances:\s*/i,'').replace(/^Balances as of\s*/i,'As of ');
+  balancePart=balancePart?balancePart[0].toUpperCase()+balancePart.slice(1):'Current snapshot';
+  const zonePart=String(model.timezone||'').replace(/^Time Zone:\s*/i,'');
+  const scope=fit(`${scopePart} | ${balancePart} | ${zonePart}`,64);
   let s=rect(0,768,595,74,P.green);s+=txt(42,813,9.4,'LEDGERLY','F2',P.white);s+=txt(42,786,20,'Infographic Report','F2',P.white);s+=txt(42,773,7.2,scope,'F1','#D7E9E3');
   s+=txt(410,812,8.2,`Ref: ${meta.ref}`,'F2',P.refRed);s+=txt(410,799,7.7,`Issue Date: ${meta.date}`,'F1','#D7E9E3');s+=txt(410,786,7.7,`Issue Time: ${meta.time}`,'F1','#D7E9E3');return s;
 }
@@ -103,16 +108,16 @@ function page(model){
   const led=ledgerRows(v.creditors||[]),rows=led.rows;
   s.push(section(246,'Mini ledger snapshot'));
   s.push(rect(42,82,511,150,P.panel,P.line,.35));
-  s.push(txt(52,217,8.2,'CREDITOR','F2',P.muted));s.push(txtRight(337,217,8.0,'ORIGINAL (SAR)','F2',P.muted));s.push(txtRight(405,217,8.0,'ADJUST. (SAR)','F2',P.muted));s.push(txtRight(472,217,8.0,'PAID (SAR)','F2',P.muted));s.push(txtRight(543,217,8.0,'REMAINING (SAR)','F2',P.muted));
-  let ty=201;rows.forEach((c,i)=>{const ra=rowAdjustment(c);s.push(txt(52,ty,8.4,fit(c.name,38),'F1',P.ink));s.push(txtRight(337,ty,8.1,numMoney(c.original),'F1',P.ink));s.push(txtRight(405,ty,8.1,signedNum(ra),'F1',ra?P.amber:P.muted));s.push(txtRight(472,ty,8.1,numMoney(c.paid),'F1',P.green));s.push(txtRight(543,ty,8.2,numMoney(c.remaining),'F2',P.ink));if(i<rows.length-1)s.push(line(52,ty-4,543,ty-4,.25,P.rowLine));ty-=11.5;});
-  s.push(line(52,87,543,87,.65,P.line));s.push(txt(52,84,8.3,'TOTAL','F2',P.ink));s.push(txtRight(337,84,8.3,numMoney(v.raw.original),'F2',P.ink));s.push(txtRight(405,84,8.3,signedNum(adj),'F2',adj?P.amber:P.muted));s.push(txtRight(472,84,8.3,numMoney(v.raw.paid),'F2',P.green));s.push(txtRight(543,84,8.3,numMoney(v.raw.remaining),'F2',P.red));
+  s.push(txt(52,217,8.2,'CREDITOR','F2',P.muted));s.push(txtRight(330,217,8.0,'ORIGINAL (SAR)','F2',P.muted));s.push(txtRight(401,217,8.0,'ADJUST. (SAR)','F2',P.muted));s.push(txtRight(459,217,8.0,'PAID (SAR)','F2',P.muted));s.push(txtRight(543,217,8.0,'REMAINING (SAR)','F2',P.muted));
+  let ty=201;rows.forEach((c,i)=>{const ra=rowAdjustment(c);s.push(txt(52,ty,8.4,fit(c.name,38),'F1',P.ink));s.push(txtRight(330,ty,8.1,numMoney(c.original),'F1',P.ink));s.push(txtRight(401,ty,8.1,signedNum(ra),'F1',ra?P.amber:P.muted));s.push(txtRight(463,ty,8.1,numMoney(c.paid),'F1',P.green));s.push(txtRight(543,ty,8.2,numMoney(c.remaining),'F2',P.ink));if(i<rows.length-1)s.push(line(52,ty-4,543,ty-4,.25,P.rowLine));ty-=11.5;});
+  s.push(line(52,87,543,87,.65,P.line));s.push(txt(52,84,8.3,'TOTAL','F2',P.ink));s.push(txtRight(330,84,8.3,numMoney(v.raw.original),'F2',P.ink));s.push(txtRight(401,84,8.3,signedNum(adj),'F2',adj?P.amber:P.muted));s.push(txtRight(463,84,8.3,numMoney(v.raw.paid),'F2',P.green));s.push(txtRight(543,84,8.3,numMoney(v.raw.remaining),'F2',P.red));
 
   s.push(healthBadge(42,52,155,'Reconciliation'));s.push(healthBadge(204,52,172,'Audit integrity'));s.push(healthBadge(383,52,170,'Diagnostics'));
   s.push(txt(42,38,7.2,'Cleared may include payments and other reductions. See Detailed Ledger for transaction details.','F1',P.muted));
   if(led.others)s.push(txtRight(553,38,6.2,`${led.others} creditors grouped as Others`,'F1',P.muted));
 
   const meta=issueMeta(model);s.push(line(42,27,553,27,.45,P.line));s.push(txt(42,16,8.0,'STRICTLY CONFIDENTIAL','F2',P.ink));s.push(txt(178,16,8.0,`Ref ${meta.ref}`,'F2',P.red));s.push(txtRight(553,16,8.0,'Page 1 of 1','F2',P.ink));
-  s.push(txt(42,6,7.0,`Ledger Rev. ${model.revision} | Template ${model.templateRevision||'Infographic v2'} | Build ${model.build}`,'F1',P.muted));
+  s.push(txt(42,6,7.8,`Ledger Rev. ${model.revision} | Template ${model.templateRevision||'Infographic v2'} | Build ${model.build}`,'F1',P.muted));
   return s.join('');
 }
 function pdfDate(iso){const d=new Date(iso||Date.now()),p=n=>String(n).padStart(2,'0');return `D:${d.getUTCFullYear()}${p(d.getUTCMonth()+1)}${p(d.getUTCDate())}${p(d.getUTCHours())}${p(d.getUTCMinutes())}${p(d.getUTCSeconds())}Z`;}
