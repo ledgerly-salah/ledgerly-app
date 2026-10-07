@@ -15,6 +15,7 @@ function ascii(value){
 function escPdf(value){return ascii(value).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
 function fit(value,max=40){const s=ascii(value);return s.length<=max?s:s.slice(0,Math.max(1,max-3))+'...';}
 function txt(x,y,size,value,font='F1'){return `BT /${font} ${size} Tf ${x} ${y} Td (${escPdf(value)}) Tj ET\n`;}
+function refTxt(x,y,size,value){return `0.72 0.08 0.08 rg BT /F2 ${size} Tf ${x} ${y} Td (${escPdf(value)}) Tj ET 0 g\n`;}
 function line(x1,y1,x2,y2,w=.5){return `${w} w ${x1} ${y1} m ${x2} ${y2} l S\n`;}
 function box(x,y,w,h,gray=.96){return `${gray} g ${x} ${y} ${w} ${h} re f 0 g\n`;}
 function strokeBox(x,y,w,h,width=.6){return `${width} w ${x} ${y} ${w} ${h} re S\n`;}
@@ -27,7 +28,7 @@ function issueMeta(model){
   const d=new Date(model.generatedIso||Date.now());
   const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
   const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
-  const ref=String(model.issueRef||'0000').padStart(4,'0');
+  const ref=String(model.issueRef||'?-0000');
   return {ref,date,time};
 }
 function watermark(){return `0.955 g BT /F2 34 Tf 0.707 0.707 -0.707 0.707 125 292 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
@@ -37,7 +38,8 @@ function header(model,pageIndex,pageCount,title){
   s+=strokeBox(42,786,24,24,.8);s+=txt(50,793,11,'L','F2');
   s+=txt(75,800,10,'LEDGERLY','F2');
   s+=txt(75,783,18,title,'F2');
-  s+=txt(42,763,7.8,`Ref: ${meta.ref} | Issue Date: ${meta.date} | Issue Time: ${meta.time} | ${model.timezone}`,'F1');
+  s+=refTxt(42,763,8.3,`Ref: ${meta.ref}`);
+  s+=txt(116,763,7.8,`| Issue Date: ${meta.date} | Issue Time: ${meta.time} | ${model.timezone}`,'F1');
   s+=txt(42,751,7.5,`App v${model.version} | Build ${model.build} | Revision ${model.revision} | Currency ${model.currency} | Report format v2`,'F1');
   s+=line(42,742,553,742,.7);
   return s;
@@ -45,7 +47,8 @@ function header(model,pageIndex,pageCount,title){
 function footer(model,pageIndex,pageCount){
   const meta=issueMeta(model);let s='';
   s+=line(42,42,553,42,.4);
-  s+=txt(42,29,7,model.redacted?`REDACTED REPORT | STRICTLY CONFIDENTIAL | Ref ${meta.ref}`:`STRICTLY CONFIDENTIAL | Ledgerly local encrypted ledger | Ref ${meta.ref}`,'F1');
+  s+=txt(42,29,7,model.redacted?'REDACTED REPORT | STRICTLY CONFIDENTIAL':'STRICTLY CONFIDENTIAL | Ledgerly local encrypted ledger','F1');
+  s+=refTxt(330,29,7,`Ref ${meta.ref}`);
   s+=txt(42,18,6.5,'Personal ledger record only; not creditor confirmation or independent legal proof of debt.','F1');
   s+=txt(476,29,7,`Page ${pageIndex+1} of ${pageCount}`,'F1');
   return s;
