@@ -8,11 +8,11 @@ import { buildLedgerReportPdf } from './pdf-report-v2.3.1.1.js';
 import { buildVisualReportPdf } from './visual-report-v1.3.1.1.js';
 import { buildInfographicReportPdf } from './infographic-report-v1.3.1.1.js';
 
-const BUILD_ID='20261007-r6';
+const BUILD_ID='20261007-r7';
 const REPORT_FORMAT='3';
 const REPORT_REF_KEY='ledgerly-report-reference-sequences-v2';
 const REPORT_REF_PREFIX={summary:'S',detailed:'D',redacted:'R',infographic:'I',visual:'V'};
-const REPORT_TEMPLATE={summary:'Ledger v2',detailed:'Ledger v2',redacted:'Ledger v2',infographic:'Infographic v2',visual:'Visual v1'};
+const REPORT_TEMPLATE={summary:'Ledger v2',detailed:'Ledger v2',redacted:'Ledger v2',infographic:'Infographic v2',visual:'Visual v2'};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#039;'}[c]));
 
 function toast(title,message=''){
@@ -222,3 +222,4 @@ async function generateReport(options,password){
 
 document.addEventListener('click',e=>{const target=e.target.closest?.('[data-action="report-menu"]');if(!target)return;e.preventDefault();e.stopImmediatePropagation();openReportCenter();},true);
 window.addEventListener('load',()=>{ensureReportStyles();patchBuildLabel();});
+
