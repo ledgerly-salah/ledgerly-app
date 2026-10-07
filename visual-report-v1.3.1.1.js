@@ -4,7 +4,7 @@ const enc=new TextEncoder();
 
 const P={
   ink:'#12362F',muted:'#687A75',green:'#0F5B4B',mint:'#2EA67D',mintSoft:'#DDF3EA',
-  red:'#C95A5A',redSoft:'#F8E5E3',amber:'#C58B2A',amberSoft:'#FAF0D9',blue:'#4D78A8',
+  red:'#C95A5A',refRed:'#FF6B6B',redSoft:'#F8E5E3',amber:'#C58B2A',amberSoft:'#FAF0D9',blue:'#4D78A8',
   blueSoft:'#E6EEF8',violet:'#735F9E',teal:'#3F8F91',line:'#DDE5E2',panel:'#F5F8F7',white:'#FFFFFF',black:'#1E2926'
 };
 const CAT=[P.green,P.mint,P.blue,P.amber,P.violet,P.teal,P.red,'#6E8B74','#9B785A','#6D7785'];
@@ -60,16 +60,16 @@ function issueMeta(model){
   const d=new Date(model.generatedIso||Date.now());
   const date=new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(d);
   const time=new Intl.DateTimeFormat('en-US',{hour:'2-digit',minute:'2-digit',hour12:true}).format(d).replace(/^0/,'').toUpperCase();
-  const ref=String(model.issueRef||'0000').padStart(4,'0');
+  const ref=String(model.issueRef||'?-0000');
   return {ref,date,time};
 }
 function watermark(){return `0.955 g BT /F2 34 Tf 0.707 0.707 -0.707 0.707 125 292 Tm (STRICTLY CONFIDENTIAL) Tj ET 0 g\n`;}
 
 function header(model,title,subtitle=''){
   const meta=issueMeta(model);let s=rect(0,766,595,76,P.green);s+=txt(42,811,9,'LEDGERLY','F2',P.white);s+=txt(42,786,20,title,'F2',P.white);if(subtitle)s+=txt(42,772,7.2,`${subtitle} | ${model.timezone}`,'F1','#D6E9E2');
-  s+=txt(404,811,7.0,`Ref: ${meta.ref}`,'F2','#D6E9E2');s+=txt(404,798,7.0,`Issue Date: ${meta.date}`,'F1','#D6E9E2');s+=txt(404,785,7.0,`Issue Time: ${meta.time}`,'F1','#D6E9E2');return s;
+  s+=txt(404,811,7.4,`Ref: ${meta.ref}`,'F2',P.refRed);s+=txt(404,798,7.0,`Issue Date: ${meta.date}`,'F1','#D6E9E2');s+=txt(404,785,7.0,`Issue Time: ${meta.time}`,'F1','#D6E9E2');return s;
 }
-function footer(model,pageIndex,pageCount){const meta=issueMeta(model);let s=line(42,39,553,39,.4,P.line);s+=txt(42,24,6.5,`STRICTLY CONFIDENTIAL | Ref ${meta.ref} | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted);s+=txt(481,24,6.5,`Page ${pageIndex+1} of ${pageCount}`,'F1',P.muted);return s;}
+function footer(model,pageIndex,pageCount){const meta=issueMeta(model);let s=line(42,39,553,39,.4,P.line);s+=txt(42,24,6.5,`STRICTLY CONFIDENTIAL | Revision ${model.revision} | Build ${model.build}`,'F1',P.muted);s+=txt(335,24,6.8,`Ref ${meta.ref}`,'F2',P.red);s+=txt(481,24,6.5,`Page ${pageIndex+1} of ${pageCount}`,'F1',P.muted);return s;}
 function card(x,y,w,h,label,value,{accent=P.green,soft=P.panel,valueSize=15}={}){let s=rect(x,y,w,h,soft,P.line,.35);s+=rect(x,y,w,4,accent);s+=txt(x+12,y+h-20,7,label.toUpperCase(),'F2',P.muted);s+=txt(x+12,y+16,valueSize,fit(value,24),'F2',P.ink);return s;}
 function sectionTitle(y,title,sub=''){let s=txt(42,y,12,title,'F2',P.ink);if(sub)s+=txt(42,y-13,7,sub,'F1',P.muted);return s;}
 function hBar(x,y,w,label,value,max,color=P.green,valueLabel=''){
