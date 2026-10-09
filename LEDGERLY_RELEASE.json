@@ -2,132 +2,136 @@
   "product": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "buildDate": "2026-10-05",
-  "buildId": "20261005-r1",
-  "baseline": "Ledgerly 3.0.0 Approved Baseline",
+  "buildDate": "2026-10-09",
+  "buildId": "20261009-integrity-r1",
   "entry": "index.html",
-  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261005-r1",
-  "security": "mandatory",
-  "requiredEvidence": [
-    "debt",
-    "payment"
-  ],
-  "pdfReport": true,
+  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261009-integrity-r1",
+  "releasePath": "releases/20261009-integrity-r1",
   "files": [
     {
-      "name": ".nojekyll",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "name": "index.html",
+      "bytes": 12620,
+      "sha256": "cb3cca1915e23fa7ca63211378d5647e5433246a48dbc747392197086c259e50"
     },
     {
-      "name": "app.3.1.0.js",
-      "bytes": 135907,
-      "sha256": "a956245de3fd6e14003c933087e015cc2aa607935a6fceac2adbb423fa85e018"
+      "name": "service-worker.js",
+      "bytes": 2343,
+      "sha256": "19f9cf2b01f171368701abf8ab5cd7b4f1a5e8792632f36100b3c7fdf9116859"
     },
     {
-      "name": "BASELINE.txt",
-      "bytes": 173,
-      "sha256": "17cb9df76b36681444edc9002b2b44ee0dd9f288fc3ae220883d068893c7131c"
+      "name": "version.json",
+      "bytes": 653,
+      "sha256": "b1aa54e73d7b3fce768539333d5b1cd7eff8568c0eadf0abe39873b9c4642517"
     },
     {
-      "name": "crypto.3.1.0.js",
-      "bytes": 7125,
-      "sha256": "dd649225c89573b961e89779656ef48677ac669cfdbdc4fb04418582e464c4a8"
+      "name": "releases/20261009-integrity-r1/BIDI-LICENSE.txt",
+      "bytes": 1071,
+      "sha256": "49d4d143fed599deb502a0fe6e02f49832f87e9a3a4cd0502e469596d50faa6d"
     },
     {
-      "name": "i18n.3.1.0.js",
+      "name": "releases/20261009-integrity-r1/FONT-LICENSE.txt",
+      "bytes": 3859,
+      "sha256": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9"
+    },
+    {
+      "name": "releases/20261009-integrity-r1/app.3.1.0.js",
+      "bytes": 141905,
+      "sha256": "6b45f70c899a603c36a8fa2ffc97d6bd4f16a236db8ca967ab130d92ebab5af1"
+    },
+    {
+      "name": "releases/20261009-integrity-r1/crypto.3.1.0.js",
+      "bytes": 7238,
+      "sha256": "98b6b9c8b6e87613c5c124bbe1eec20f768f0ad4d40e2f661180708428dd8034"
+    },
+    {
+      "name": "releases/20261009-integrity-r1/financial-action-guard.3.1.1.js",
+      "bytes": 3421,
+      "sha256": "d24e5fee3884759f6564a5bc20cbac115df5f80ab9ba661a1b7209520c9df00d"
+    },
+    {
+      "name": "releases/20261009-integrity-r1/i18n.3.1.0.js",
       "bytes": 9963,
       "sha256": "9f15903aaae8d340cda567b937bed9c3e8563d30e932cc62f2b239c5cedca7cb"
     },
     {
-      "name": "icon-192.png",
-      "bytes": 1119,
-      "sha256": "6d911b11fe22f762da940c057262eaa9e372200f05b0ec2cc96e5dbf9c38e46a"
+      "name": "releases/20261009-integrity-r1/infographic-report-v1.3.1.1.js",
+      "bytes": 15086,
+      "sha256": "c7cb2a91067f6fc2507bab05bfddea5b56472339ed399d2281e93e1f8c8b3807"
     },
     {
-      "name": "icon-512.png",
-      "bytes": 3240,
-      "sha256": "f0f6980e4d341f2ce75eb470429de91c10bfb04c42973bd3580705e3b770f643"
+      "name": "releases/20261009-integrity-r1/ledger-core.3.1.0.js",
+      "bytes": 23673,
+      "sha256": "07b4e2ad59b5a8cec76d9c9ea8ae6781b4cced8d327e79d2e70b73ae1a70e368"
     },
     {
-      "name": "icon-maskable-512.png",
-      "bytes": 3246,
-      "sha256": "86c8f6458b4924d9eb563047ea3e460bf44a5d8455a24f565eb7f67fff3c8cb4"
+      "name": "releases/20261009-integrity-r1/migrations.3.1.0.js",
+      "bytes": 5999,
+      "sha256": "bb80f755c13391a0fba58b679c50a21b1aa0fd2d6a2fa32fc1c74c3741d8551e"
     },
     {
-      "name": "index.html",
-      "bytes": 12389,
-      "sha256": "7120e49d3bf4958dd939ad988aad4a6489284070d54c244c7d1c27242baf9aad"
+      "name": "releases/20261009-integrity-r1/pdf-arabic-forms.3.1.1.js",
+      "bytes": 2289,
+      "sha256": "e710823dd37a62bd2875c2df1f4fb88a9095707f6b57b417ea976690ecb9bf7b"
     },
     {
-      "name": "ledger-core.3.1.0.js",
-      "bytes": 18923,
-      "sha256": "013d878758d576fc899d18f2885351e95c2c031aa1cfe8df997fd78c2e03df72"
+      "name": "releases/20261009-integrity-r1/pdf-bidi.3.1.1.js",
+      "bytes": 11975,
+      "sha256": "4613e4f3ab710f76c5608bd8a93b502a121592e9d552beaa8d1b8367fbd20c4c"
     },
     {
-      "name": "ledgerly_update.html",
-      "bytes": 601,
-      "sha256": "e545ce2ee663fe1396eb255c9bbdbdae06051c2ab50ba293887af33978607fc7"
+      "name": "releases/20261009-integrity-r1/pdf-font-data.3.1.1.js",
+      "bytes": 176953,
+      "sha256": "5d184265d9cff05c5d4aeef9b575d648c92cf746106b2f373324ad8320230989"
     },
     {
-      "name": "logo.svg",
-      "bytes": 449,
-      "sha256": "7f5e2925cefbffec011ee6ed953c9a9d8212d9dac1f929a1a90d6f24d6c45ec3"
+      "name": "releases/20261009-integrity-r1/pdf-report-v2.3.1.1.js",
+      "bytes": 12043,
+      "sha256": "f30d64b661d624bbe6947268eabb94265fa21c1d824e62b129136550b3d69bb2"
     },
     {
-      "name": "manifest.webmanifest",
-      "bytes": 873,
-      "sha256": "e43165eb144eca34d230982491f1cca69081b27f3fc3abcacbc9b3a06231d2a8"
+      "name": "releases/20261009-integrity-r1/pdf-unicode.3.1.1.js",
+      "bytes": 3732,
+      "sha256": "62b6486ad7b2b15e81189b5da47d36020dbb2a49a55a655cfdd85ba3b381401f"
     },
     {
-      "name": "migrations.3.1.0.js",
-      "bytes": 7368,
-      "sha256": "59cef05cd22b55d7270bba3504fb285c0bece18da1f26f673b8ea943203465ff"
-    },
-    {
-      "name": "pdf.3.1.0.js",
+      "name": "releases/20261009-integrity-r1/pdf.3.1.0.js",
       "bytes": 4427,
       "sha256": "8255b3e2c083ded267d7f1af553e125a49dd0afd628509b3c4fad520a3b0131f"
     },
     {
-      "name": "Personal_Debt_Dashboard.html",
-      "bytes": 259,
-      "sha256": "7bb6e7650bedf00d35c2f3c16af5ffc84fd9aec449c160b08507b582dcb5ad46"
+      "name": "releases/20261009-integrity-r1/release.3.1.1.js",
+      "bytes": 47,
+      "sha256": "e107855ee179815a8051a13eef55967e89875627c3a53026d8390d73e4c903dc"
     },
     {
-      "name": "RELEASE_NOTES.txt",
-      "bytes": 1824,
-      "sha256": "dc6965a75d076a1a2c8e5b7f62f066cfd8f3302bbf86817dbfe2dc1eade63888"
+      "name": "releases/20261009-integrity-r1/report-tools.3.1.1.js",
+      "bytes": 26106,
+      "sha256": "4143d1b23f568455882692e54bbf25c9eecf2ea517c15205b8caa6143981debb"
     },
     {
-      "name": "service-worker.js",
-      "bytes": 1490,
-      "sha256": "a13117d568db1c52d4557e2f45b32f17246500a3714088de147d9bbbcc79109c"
+      "name": "releases/20261009-integrity-r1/security-tools.3.1.1.js",
+      "bytes": 8110,
+      "sha256": "dd5f667a8679ddb6124b23e5b5f8231a14781a918bc8978028a3dcb1f390b9a9"
     },
     {
-      "name": "storage.3.1.0.js",
-      "bytes": 10091,
-      "sha256": "e74938f3275a174aabce438bd98cc36f9c499e146cf69714dc40c2ef4f456515"
+      "name": "releases/20261009-integrity-r1/storage.3.1.0.js",
+      "bytes": 11913,
+      "sha256": "e8bee795de2b3fa8939433a6ee32a46ad04245f53a1842c1a87632d95a0ab469"
     },
     {
-      "name": "styles.3.1.0.css",
-      "bytes": 26193,
-      "sha256": "819551a33d14fdd1dfa3cf9958ffd12134139f983784a40b0b968fe29b420a40"
+      "name": "releases/20261009-integrity-r1/styles.3.1.0.css",
+      "bytes": 28671,
+      "sha256": "90ea734ab22422529e077d613f05f28d3df285a299c5e6d83100a501a8b3e40a"
     },
     {
-      "name": "TEST_CHECKLIST.txt",
-      "bytes": 940,
-      "sha256": "16eb1dfe190632e71f80301a3674722fa595ca55076c0792e71e579a87abe108"
+      "name": "releases/20261009-integrity-r1/ui-accessibility.3.1.1.js",
+      "bytes": 2149,
+      "sha256": "98f7c39484bf30a38bc35d336a327abd0a059117e060876619091b7f77e995fb"
     },
     {
-      "name": "UPLOAD_INSTRUCTIONS.txt",
-      "bytes": 1187,
-      "sha256": "58d017e6a8dd602d2cd98704324f7dbe84b14bba8f7c07076d39a5d358540dfa"
-    },
-    {
-      "name": "version.json",
-      "bytes": 367,
-      "sha256": "b1c2218d79c76fdc7f265a9f1e148eb593de469cfcce7b6fabb056d9863ae0b9"
+      "name": "releases/20261009-integrity-r1/visual-report-v1.3.1.1.js",
+      "bytes": 17799,
+      "sha256": "104ce5f1d765d084ad809096c9b718d2884ca0851ba27dbbc3e24dc4ae041c8c"
     }
   ]
 }
