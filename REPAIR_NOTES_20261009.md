@@ -42,3 +42,8 @@ This is a review package, not a production deployment. Merge only after the Andr
 ## Android acceptance and password requirement
 
 Owner confirmed SAR 100 debt / SAR 25 paid / SAR 75 remaining, Lock now and backup test on Android. Build integrity-r2 requires a fresh master password for every debt and payment submission, including template-generated debts. Cancel or wrong password preserves the live input form and selected evidence. Tests cover rejection, one-shot authorization and a lock during password verification. Device acceptance of this new gate is pending.
+
+## Attachment preview — integrity-r4
+Preview now opens JPEG/PNG/WebP/GIF/AVIF/BMP inside the ledger, with Download as a separate explicit action. PDFs render locally using vendored PDF.js 4.10.38, including standard fonts and character maps, with bounded single-page canvases and Previous/Next controls. No external document service or CDN is used. Unsupported formats show an explicit download fallback. Close, modal replacement and Lock Now revoke image URLs, clear retained bytes, destroy PDF workers and erase canvases; asynchronous reads cannot reopen files after lock. The release shell precaches renderer resources for offline use.
+
+Validation: 35 automated regression tests passed, including image no-download/cleanup, lock during attachment read, and PDF page bounds. A real six-page report was rendered with the vendored renderer and font resources; Android rendering still needs user acceptance. User reported successful lock, wrong/correct password, cancelled debt authorization retaining form contents, backup test and restore on the disposable test ledger. Production main remains unchanged pending acceptance.
