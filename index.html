@@ -21,7 +21,7 @@
   <div id="app" class="app" hidden>
     <header class="topbar shell" id="top">
       <a class="brand" href="#top" aria-label="Ledgerly home">
-        <span class="brand-mark"><img src="./logo.svg" alt=""></span>
+        <span class="brand-mark"><img src="./branding/icon-navy.svg" alt=""></span>
         <span class="brand-copy"><strong>ledgerly</strong><small data-i18n="tag">private debt clarity</small></span>
       </a>
       <nav class="top-nav" aria-label="Primary navigation">
@@ -98,14 +98,14 @@
   <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
   <div class="lock-screen" id="setupScreen" hidden>
-    <div class="lock-card"><img src="./logo.svg" alt="" class="lock-logo"><span class="eyebrow">Required protection</span><h1>Protect Ledgerly before continuing</h1><p>A master password is mandatory for the app and website. It will also be required before correcting or voiding debts and payments.</p>
+    <div class="lock-card"><img src="./branding/icon-navy.svg" alt="" class="lock-logo"><span class="eyebrow">Required protection</span><h1>Protect Ledgerly before continuing</h1><p>A master password is mandatory for the app and website. It will also be required before correcting or voiding debts and payments.</p>
       <form id="mandatorySecurityForm"><label>Master password<input id="setupPassword" name="password" type="password" autocomplete="new-password" minlength="8" required></label><label>Confirm password<input name="confirm" type="password" autocomplete="new-password" minlength="8" required></label><label class="setup-check"><input name="recovery" type="checkbox" checked> Create an offline recovery key</label><div id="setupError" class="form-error"></div><button class="btn btn-primary full" type="submit">Encrypt & open Ledgerly</button></form>
       <div class="notice" style="margin-top:12px">Keep the password and recovery key safe. Ledgerly cannot read encrypted data without one of them.</div>
     </div>
   </div>
 
   <div class="lock-screen" id="lockScreen" hidden>
-    <div class="lock-card"><img src="./logo.svg" alt="" class="lock-logo"><span class="eyebrow">Encrypted local ledger</span><h1>Ledgerly is locked</h1><p>Enter your master password, or use the recovery key you saved when protection was enabled.</p>
+    <div class="lock-card"><img src="./branding/icon-navy.svg" alt="" class="lock-logo"><span class="eyebrow">Encrypted local ledger</span><h1>Ledgerly is locked</h1><p>Enter your master password, or use the recovery key you saved when protection was enabled.</p>
       <form id="unlockForm"><label>Master password<input id="unlockPassword" type="password" autocomplete="current-password" minlength="8"></label><button class="btn btn-primary full" type="submit">Unlock securely</button></form>
       <button class="text-btn" id="useRecoveryBtn" type="button">Use recovery key instead</button><div id="unlockError" class="form-error"></div>
     </div>

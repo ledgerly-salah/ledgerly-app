@@ -29,3 +29,30 @@ body.reduce-motion *,body.reduce-motion *:before,body.reduce-motion *:after{scro
 /* Ledgerly 3.1.0 refinements */
 .field-hint{display:block;margin-top:4px;color:var(--muted);font-size:9px;font-weight:650}.setup-check{display:flex!important;align-items:center;gap:8px;margin:4px 0 12px!important;color:var(--ink)!important}.setup-check input{width:auto!important;min-height:auto!important;margin:0!important}.creditor-main.expanded{grid-template-columns:minmax(0,1fr) auto}.creditor-main.expanded .identity{grid-column:auto}.tx-more{display:none}.required-evidence{color:var(--brand2);font-weight:850}
 @media(max-width:680px){body{padding-bottom:132px;scroll-padding-bottom:132px}.app{padding-bottom:calc(132px + var(--safe-bottom))}.creditor-card{scroll-margin-bottom:130px}.creditor-main.expanded{grid-template-columns:1fr auto}.creditor-main.expanded .identity{grid-column:auto}.mobile-nav{grid-template-columns:repeat(5,1fr)}.tx-secondary{display:none!important}.tx-more{display:inline-flex}.tx-actions{gap:6px}.tx-actions .btn{padding-left:9px;padding-right:9px}.hero-actions{gap:7px}.hero-actions .btn{flex:1 1 auto}.top-actions .desktop-add{display:none}}
+
+/* Visual review: readable controls, unified mark and compact mobile overview. */
+.settings-row select{color:var(--ink);max-width:100%;min-width:0}
+.settings-row select option{background:var(--surface2);color:var(--ink)}
+body.dark .settings-row select,body.dark .settings-row input[type="checkbox"]{color-scheme:dark}
+.settings-row input[type="checkbox"]{accent-color:var(--brand2);width:18px;height:18px;flex:none}
+.modal-close{color:var(--ink);flex:none;font-size:22px;line-height:1;min-width:40px;min-height:40px}
+.brand-mark{background:#fff;border-radius:50%;overflow:hidden}
+.brand-mark img{width:100%;height:100%;display:block}
+.lock-logo{background:#fff;padding:0;border-radius:50%}
+html{scroll-padding-top:90px}
+@media(max-width:680px){
+  html{scroll-padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+  body{padding-bottom:0}
+  .app{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+  .hero-main{padding:22px 24px;min-height:0}
+  .hero-main>.eyebrow{margin-top:16px;font-size:9px}
+  .hero-main h1{font-size:32px;line-height:1.04;margin:10px 0}
+  .hero-main p{font-size:13px;line-height:1.5;margin:10px 0}
+  .hero-actions{margin-top:18px}
+  .hero-actions .btn{min-height:40px}
+  .settings-row{flex-wrap:wrap}
+  .settings-row select{min-height:40px}
+  .modal-close{width:40px;height:40px}
+  .mobile-nav{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .toast-stack{bottom:calc(100px + env(safe-area-inset-bottom))}
+}
