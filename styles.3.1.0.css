@@ -56,3 +56,13 @@ html{scroll-padding-top:90px}
   .mobile-nav{grid-template-columns:repeat(5,minmax(0,1fr))}
   .toast-stack{bottom:calc(100px + env(safe-area-inset-bottom))}
 }
+
+/* Creditor review: readable paid amounts and explicit summary action. */
+body.dark .paid{color:#62d5ae!important}
+body.dark .tx-amount.credit{color:#62d5ae}
+.card-copy{width:auto;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 10px;font-size:11px;color:var(--ink)}
+.card-actions{flex-wrap:wrap}
+@media(max-width:680px){
+  .card-actions .card-icon{min-height:40px;min-width:40px}
+  .card-copy{font-size:11px}
+}
