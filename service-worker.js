@@ -1,7 +1,7 @@
-const CACHE='ledgerly-shell-3.1.0-20261007-r30';
+const CACHE='ledgerly-shell-3.1.0-20261009-icon-r31';
 const SHELL=[
   './','./index.html','./styles.3.1.0.css','./app.3.1.0.js','./security-tools.3.1.1.js','./financial-action-guard.3.1.1.js','./report-tools.3.1.1.js','./pdf-report-v2.3.1.1.js','./visual-report-v1.3.1.1.js','./infographic-report-v1.3.1.1.js','./ledger-core.3.1.0.js','./storage.3.1.0.js','./crypto.3.1.0.js','./migrations.3.1.0.js','./i18n.3.1.0.js','./pdf.3.1.0.js',
-  './ledgerly-v2.webmanifest','./logo.svg','./icon-192.png','./icon-512.png','./icon-maskable-512.png'
+  './ledgerly-v2.webmanifest','./logo.svg','./branding/icon-navy-192.png','./branding/icon-navy-512.png','./branding/icon-navy-maskable-512.png'
 ];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});
