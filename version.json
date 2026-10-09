@@ -2,7 +2,7 @@
   "app": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "build": "20261009-integrity-r1",
+  "build": "20261009-integrity-r2",
   "baseline": "Ledgerly 3.0.0 Approved Baseline",
   "currency": "SAR",
   "storage": "IndexedDB",
@@ -10,5 +10,5 @@
   "newRecordEvidence": "required for debts and payments",
   "pdfReport": "Report v2: summary, detailed, redacted, reconciliation and audit validation; Visual Financial Snapshot v1; Infographic Report v1 one-page executive summary with privacy modes",
   "sync": "disabled-on-static-github-pages",
-  "releasePath": "releases/20261009-integrity-r1"
+  "releasePath": "releases/20261009-integrity-r2"
 }

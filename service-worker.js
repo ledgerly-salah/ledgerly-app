@@ -1,4 +1,4 @@
-const CACHE='ledgerly-shell-3.1.0-20261009-integrity-r1';
+const CACHE='ledgerly-shell-3.1.0-20261009-integrity-r2';
 const SHELL=[
   "./",
   "./index.html",
@@ -7,26 +7,26 @@ const SHELL=[
   "./icon-192.png",
   "./icon-512.png",
   "./icon-maskable-512.png",
-  "./releases/20261009-integrity-r1/app.3.1.0.js",
-  "./releases/20261009-integrity-r1/crypto.3.1.0.js",
-  "./releases/20261009-integrity-r1/financial-action-guard.3.1.1.js",
-  "./releases/20261009-integrity-r1/i18n.3.1.0.js",
-  "./releases/20261009-integrity-r1/infographic-report-v1.3.1.1.js",
-  "./releases/20261009-integrity-r1/ledger-core.3.1.0.js",
-  "./releases/20261009-integrity-r1/migrations.3.1.0.js",
-  "./releases/20261009-integrity-r1/pdf-arabic-forms.3.1.1.js",
-  "./releases/20261009-integrity-r1/pdf-bidi.3.1.1.js",
-  "./releases/20261009-integrity-r1/pdf-font-data.3.1.1.js",
-  "./releases/20261009-integrity-r1/pdf-report-v2.3.1.1.js",
-  "./releases/20261009-integrity-r1/pdf-unicode.3.1.1.js",
-  "./releases/20261009-integrity-r1/pdf.3.1.0.js",
-  "./releases/20261009-integrity-r1/release.3.1.1.js",
-  "./releases/20261009-integrity-r1/report-tools.3.1.1.js",
-  "./releases/20261009-integrity-r1/security-tools.3.1.1.js",
-  "./releases/20261009-integrity-r1/storage.3.1.0.js",
-  "./releases/20261009-integrity-r1/styles.3.1.0.css",
-  "./releases/20261009-integrity-r1/ui-accessibility.3.1.1.js",
-  "./releases/20261009-integrity-r1/visual-report-v1.3.1.1.js"
+  "./releases/20261009-integrity-r2/app.3.1.0.js",
+  "./releases/20261009-integrity-r2/crypto.3.1.0.js",
+  "./releases/20261009-integrity-r2/financial-action-guard.3.1.1.js",
+  "./releases/20261009-integrity-r2/i18n.3.1.0.js",
+  "./releases/20261009-integrity-r2/infographic-report-v1.3.1.1.js",
+  "./releases/20261009-integrity-r2/ledger-core.3.1.0.js",
+  "./releases/20261009-integrity-r2/migrations.3.1.0.js",
+  "./releases/20261009-integrity-r2/pdf-arabic-forms.3.1.1.js",
+  "./releases/20261009-integrity-r2/pdf-bidi.3.1.1.js",
+  "./releases/20261009-integrity-r2/pdf-font-data.3.1.1.js",
+  "./releases/20261009-integrity-r2/pdf-report-v2.3.1.1.js",
+  "./releases/20261009-integrity-r2/pdf-unicode.3.1.1.js",
+  "./releases/20261009-integrity-r2/pdf.3.1.0.js",
+  "./releases/20261009-integrity-r2/release.3.1.1.js",
+  "./releases/20261009-integrity-r2/report-tools.3.1.1.js",
+  "./releases/20261009-integrity-r2/security-tools.3.1.1.js",
+  "./releases/20261009-integrity-r2/storage.3.1.0.js",
+  "./releases/20261009-integrity-r2/styles.3.1.0.css",
+  "./releases/20261009-integrity-r2/ui-accessibility.3.1.1.js",
+  "./releases/20261009-integrity-r2/visual-report-v1.3.1.1.js"
 ];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)));});
 self.addEventListener('message',event=>{if(event.data?.type==='SKIP_WAITING')self.skipWaiting();});

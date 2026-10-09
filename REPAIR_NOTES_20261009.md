@@ -1,4 +1,4 @@
-# Ledgerly integrity repair: 20261009-integrity-r1
+# Ledgerly integrity repair: 20261009-integrity-r2
 
 This package addresses the unified diagnosis F01–F23. It preserves schema 4, the existing password, the approved infographic page structure, and all recorded financial amounts. It does not rewrite existing valid records as a migration.
 
@@ -21,7 +21,7 @@ This package addresses the unified diagnosis F01–F23. It preserves schema 4, t
 
 Run `npm ci --ignore-scripts` and `npm test` on Node 24+. The suite uses synthetic data, jsdom and fake-indexeddb; it does not read the owner's phone ledger.
 
-29 tests passed locally, including 500 generated valid ledgers, 10 MiB Base64, large encrypted payloads, failed attachment-write rollback, revision conflict, reference sequencing and safe-mode restore under a different backup key. Arabic detailed and one-page infographic PDFs were rendered and inspected with Poppler. The screenshot example 13,482.16 minus 1,010.00 equals 12,472.16 remains unchanged in the synthetic arithmetic test.
+32 tests passed locally, including 500 generated valid ledgers, 10 MiB Base64, large encrypted payloads, failed attachment-write rollback, revision conflict, reference sequencing and safe-mode restore under a different backup key. Arabic detailed and one-page infographic PDFs were rendered and inspected with Poppler. The screenshot example 13,482.16 minus 1,010.00 equals 12,472.16 remains unchanged in the synthetic arithmetic test.
 
 ## Acceptance still required before merge/publication
 
@@ -35,6 +35,10 @@ Run `npm ci --ignore-scripts` and `npm test` on Node 24+. The suite uses synthet
 
 ## Packaging and publication
 
-All new code lives in `releases/20261009-integrity-r1/`; existing root scripts remain available so older controlled tabs cannot fetch changed script bodies at their original URLs. The root index and service worker select the complete new module set. No automatic skipWaiting occurs. The older release's own already-installed update behavior cannot be changed retroactively.
+All new code lives in `releases/20261009-integrity-r2/`; existing root scripts remain available so older controlled tabs cannot fetch changed script bodies at their original URLs. The root index and service worker select the complete new module set. No automatic skipWaiting occurs. The older release's own already-installed update behavior cannot be changed retroactively.
 
 This is a review package, not a production deployment. Merge only after the Android acceptance list above passes. Keep the existing downloaded backup and export a fresh backup before applying an approved release.
+
+## Android acceptance and password requirement
+
+Owner confirmed SAR 100 debt / SAR 25 paid / SAR 75 remaining, Lock now and backup test on Android. Build integrity-r2 requires a fresh master password for every debt and payment submission, including template-generated debts. Cancel or wrong password preserves the live input form and selected evidence. Tests cover rejection, one-shot authorization and a lock during password verification. Device acceptance of this new gate is pending.
