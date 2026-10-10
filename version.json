@@ -2,12 +2,13 @@
   "app": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "build": "2026-10-06-r5",
+  "build": "20261009-integrity-r4",
   "baseline": "Ledgerly 3.0.0 Approved Baseline",
   "currency": "SAR",
   "storage": "IndexedDB",
   "security": "mandatory AES-GCM master password + recovery key rotation + protected financial actions",
   "newRecordEvidence": "required for debts and payments",
   "pdfReport": "Report v2: summary, detailed, redacted, reconciliation and audit validation; Visual Financial Snapshot v1; Infographic Report v1 one-page executive summary with privacy modes",
-  "sync": "disabled-on-static-github-pages"
+  "sync": "disabled-on-static-github-pages",
+  "releasePath": "releases/20261009-integrity-r4"
 }
