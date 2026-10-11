@@ -1,0 +1,73 @@
+
+> test
+> node --test tests/*.test.mjs
+
+✔ D01 password form rotates data key, evidence and snapshots; new recovery works; old backup remains readable (820.367049ms)
+✔ D01 atomic rotation rejects revision/snapshot conflicts, cancellation and bad file without losing snapshots or drafts (8.017111ms)
+✔ D02 stale reload cannot repopulate locked state or overwrite a newer session (76.271777ms)
+✔ D03 pending attachment list stops quietly after lock without metadata or modal (26.962253ms)
+✔ D04 oldest overdue wins; paid debt excluded; today is upcoming (7.954939ms)
+✔ D05 legacy advances reconcile across dates and reversal; newly backdated allocation rejected (1.797553ms)
+✔ D06 reversed allocation still permits voiding debt (0.351713ms)
+✔ D07 success, pending and failed journal omit free text (7.099207ms)
+✔ D07 opening an existing v4 database scrubs historical journal without a schema downgrade barrier (2.220252ms)
+✔ D08 authenticated identity/metadata, format downgrade and content substitution reject (4.037044ms)
+✔ D08 real unlock migrates legacy evidence, preserves snapshot, creditor merge rebinds metadata (170.028905ms)
+✔ D09 missing, mismatched and still-referenced deletion reject atomically; valid unlink succeeds (26.65076ms)
+✔ D10 equivalent debt/payment/reversal IDs normalize; true financial conflict stays blocked (21.652477ms)
+✔ D11 real duplicate-transaction import adds evidence exactly once, rejects different content atomically (30.677068ms)
+✔ D12 lock at each async report stage prevents export and clears built output (67.689435ms)
+✔ D12 real reference writer rejects cancellation without incrementing revision (2.413779ms)
+✔ D05 report states advance credit, checks arithmetic and blocks false reconciliation (18.502306ms)
+✔ D11 evidence ID collision remaps deterministically and repeated import stays single (33.647507ms)
+✔ D05 historical category exposure stays equal to remaining when allocation targets a future debt (0.624792ms)
+✔ D08 attachment substitution is blocked at preview, not just during a later save (104.764325ms)
+✔ D01 lock while password is verified prevents key rotation and success UI (26.294269ms)
+✔ D09 locking an in-flight IndexedDB write aborts state and evidence together (2.997509ms)
+✔ D01 recovery rotation also changes data key atomically while preserving master password and snapshots (462.88009ms)
+✔ D08 rollback upgrades legacy evidence in the same atomic write and keeps balances (102.368389ms)
+✔ baseline balances are unchanged (4.124614ms)
+✔ Base64 roundtrip at advertised 10 MiB limit (1475.453652ms)
+✔ large encrypted ledger roundtrip (56.595712ms)
+✔ negative or excessive allocations cannot be saved (1.165007ms)
+✔ correction below allocated debt is rejected (0.451173ms)
+✔ decreases reconcile debt and category exposure (0.632553ms)
+✔ unallocated increases are explicit exposure and consumed by payments (0.412355ms)
+✔ 500 valid mixed ledgers keep categories equal to creditor balance (19.770237ms)
+✔ future schema and invalid dates rejected before normalization (1.110786ms)
+✔ duplicate, cross-creditor and circular reversals rejected (0.756418ms)
+✔ archiving a card does not remove outstanding liabilities (0.243163ms)
+✔ cash paid stays separate from waived (0.138427ms)
+✔ weekly and monthly plans produce different targets; paid debt ignored (0.46279ms)
+✔ settled debt does not determine next due date (6.629425ms)
+✔ CSV treats formula-like labels as text (5.907198ms)
+✔ legacy migration preserves named creditor, extra payments and numeric IDs (1.264926ms)
+✔ financial merge conflicts include adjustment direction (118.348179ms)
+✔ lock removes every sensitive overlay and title (39.241257ms)
+✔ all close paths settle duplicate confirmation (104.821746ms)
+✔ commit rejects conflicts so no caller enters success path (25.095016ms)
+✔ complete before/after correction is stored in audit (20.750919ms)
+✔ Arabic PDF text uses embedded Unicode glyphs, not question marks (3.535902ms)
+✔ invalid evidence reference rejected (0.232998ms)
+✔ snapshot preserves deleted evidence; state and attachments roll back atomically (10.205526ms)
+✔ failure in attachment mutation aborts the state write too (1.320539ms)
+✔ concurrent reference writes have unique revision lease (3.069031ms)
+✔ safe-mode restore reencrypts evidence and preserves the current security keys (34.712089ms)
+✔ release manifest hashes and relative module imports are complete (9.249271ms)
+✔ install waits for an explicit update and offline navigation uses one cached shell (1.622919ms)
+✔ core save paths cannot add debt or payment without password even without guard listeners (67.020505ms)
+✔ core authorization rejects wrong password and cancel preserves input and evidence nodes (36.960427ms)
+✔ core authorization checks every attempt and fails if locked during verification (26.126684ms)
+✔ image Preview displays inline without downloading and releases plaintext on close (24.043087ms)
+✔ locking while attachment decrypts prevents preview and download (43.854842ms)
+✔ PDF preview pages clamp at boundaries and render one bounded canvas (14.500119ms)
+ACCEPTANCE: 70 → 60 → 40; paid 30; waiver reversal → 60; payment reversal → 90; duplicate reversal rejected; merge preserves total and references.
+✔ autonomous acceptance: real form saves 100 debt, 30 payment, 10 decrease, 20 waiver, reversal and atomic creditor merge (41.403711ms)
+ℹ tests 60
+ℹ suites 0
+ℹ pass 60
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2754.566327

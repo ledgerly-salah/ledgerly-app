@@ -2,7 +2,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/integrity.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "release:manifest": "node scripts/update-release-manifest.mjs"
   },
   "devDependencies": {
     "fake-indexeddb": "6.2.5",
