@@ -1,0 +1,4 @@
+FAIL A06 password change keeps the newly issued recovery key visible New recovery key closed by delayed navigation
+
+0 !== 1
+

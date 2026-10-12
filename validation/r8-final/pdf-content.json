@@ -1,0 +1,42 @@
+[
+  {
+    "file": "visual.pdf",
+    "has75": true,
+    "has100": true,
+    "has25": true,
+    "hasName": true,
+    "pages": 4
+  },
+  {
+    "file": "detailed.pdf",
+    "has75": true,
+    "has100": true,
+    "has25": true,
+    "hasName": true,
+    "pages": 2
+  },
+  {
+    "file": "redacted.pdf",
+    "has75": false,
+    "has100": false,
+    "has25": false,
+    "hasName": false,
+    "pages": 2
+  },
+  {
+    "file": "infographic.pdf",
+    "has75": true,
+    "has100": true,
+    "has25": true,
+    "hasName": true,
+    "pages": 1
+  },
+  {
+    "file": "summary.pdf",
+    "has75": true,
+    "has100": true,
+    "has25": true,
+    "hasName": true,
+    "pages": 1
+  }
+]

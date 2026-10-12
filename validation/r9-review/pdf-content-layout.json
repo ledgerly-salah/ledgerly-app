@@ -1,0 +1,37 @@
+[
+  {
+    "file": "detailed.pdf",
+    "pages": 2,
+    "amounts_verified": true,
+    "redaction_verified": false,
+    "overlapping_text_regions": 0
+  },
+  {
+    "file": "infographic.pdf",
+    "pages": 1,
+    "amounts_verified": true,
+    "redaction_verified": false,
+    "overlapping_text_regions": 0
+  },
+  {
+    "file": "redacted.pdf",
+    "pages": 2,
+    "amounts_verified": false,
+    "redaction_verified": true,
+    "overlapping_text_regions": 0
+  },
+  {
+    "file": "summary.pdf",
+    "pages": 1,
+    "amounts_verified": true,
+    "redaction_verified": false,
+    "overlapping_text_regions": 0
+  },
+  {
+    "file": "visual.pdf",
+    "pages": 4,
+    "amounts_verified": true,
+    "redaction_verified": false,
+    "overlapping_text_regions": 0
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "A01 initial recovery key remains until explicitly acknowledged",
+    "pass": true
+  },
+  {
+    "name": "A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection",
+    "pass": true
+  },
+  {
+    "name": "A03 password change and recovery rotation preserve data and rollback snapshots",
+    "pass": true
+  },
+  {
+    "name": "A04 recurring template opens a persistent prefilled debt form",
+    "pass": true
+  },
+  {
+    "name": "A05 adjustment, waiver, reversal, correction, void, archive and restore",
+    "pass": true
+  },
+  {
+    "name": "A06 password change keeps the newly issued recovery key visible",
+    "pass": true
+  },
+  {
+    "name": "A07 rapid alternating writes refresh both tabs",
+    "pass": true
+  },
+  {
+    "name": "A08 slow draft decryption preserves current typing and focus",
+    "pass": true
+  }
+]
