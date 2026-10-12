@@ -3,173 +3,173 @@
   "version": "3.1.0",
   "schemaVersion": 4,
   "buildDate": "2026-10-12",
-  "buildId": "20261012-stability-r7",
+  "buildId": "20261012-stability-r8",
   "entry": "index.html",
-  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261012-stability-r7",
-  "releasePath": "releases/20261012-stability-r7",
+  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261012-stability-r8",
+  "releasePath": "releases/20261012-stability-r8",
   "files": [
     {
       "name": "index.html",
       "bytes": 12620,
-      "sha256": "1a3aef13ce00a5520b003761ddf7bb88abbc42d47e0a7d635bacaf875a84f708"
+      "sha256": "7e00a7af802cf2ef876d22d1cb80d8422944873d474b8a292692ef0691f3e657"
     },
     {
       "name": "service-worker.js",
       "bytes": 2614,
-      "sha256": "b9bb19c73c5858d508a7166df75c7a0766e2f7162b87505b1cee277813ce5042"
+      "sha256": "0e71328f1ef0927255c1bddcf3568795ff9e394fd2582df5e81b11eb78897d87"
     },
     {
       "name": "version.json",
       "bytes": 653,
-      "sha256": "95918575841fe44939d3b64d5ec1384696614b7e4f0fb63859e88b97dd2c8b30"
+      "sha256": "37b7df9be52352cae974ae31419dec29b8f1c1b850f500fc55128bb7b1d2f8db"
     },
     {
-      "name": "releases/20261012-stability-r7/BIDI-LICENSE.txt",
+      "name": "releases/20261012-stability-r8/BIDI-LICENSE.txt",
       "bytes": 1071,
       "sha256": "49d4d143fed599deb502a0fe6e02f49832f87e9a3a4cd0502e469596d50faa6d"
     },
     {
-      "name": "releases/20261012-stability-r7/FONT-LICENSE.txt",
+      "name": "releases/20261012-stability-r8/FONT-LICENSE.txt",
       "bytes": 3859,
       "sha256": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9"
     },
     {
-      "name": "releases/20261012-stability-r7/app.3.1.0.js",
-      "bytes": 159408,
-      "sha256": "dba754c18fa08ae8cf6a00c0027e5498e8413604554b52964437ecb6d2734529"
+      "name": "releases/20261012-stability-r8/app.3.1.0.js",
+      "bytes": 161864,
+      "sha256": "e1f2a16d5bd710402b2a40cf51c55ea2618c2e4d5505c8f30258bda9e586b474"
     },
     {
-      "name": "releases/20261012-stability-r7/crypto.3.1.0.js",
+      "name": "releases/20261012-stability-r8/crypto.3.1.0.js",
       "bytes": 10634,
       "sha256": "81ac3a92ed44e64c87a2dbe6026c8b3b6fb1cf5fbbfb6fed2aa18c569a6040ba"
     },
     {
-      "name": "releases/20261012-stability-r7/financial-action-guard.3.1.1.js",
+      "name": "releases/20261012-stability-r8/financial-action-guard.3.1.1.js",
       "bytes": 3494,
       "sha256": "4c078dfcef91d531c7f016ae51affed72d006f421fd9d54d7ca3e59997c605f6"
     },
     {
-      "name": "releases/20261012-stability-r7/i18n.3.1.0.js",
+      "name": "releases/20261012-stability-r8/i18n.3.1.0.js",
       "bytes": 9963,
       "sha256": "9f15903aaae8d340cda567b937bed9c3e8563d30e932cc62f2b239c5cedca7cb"
     },
     {
-      "name": "releases/20261012-stability-r7/infographic-report-v1.3.1.1.js",
-      "bytes": 15086,
-      "sha256": "c7cb2a91067f6fc2507bab05bfddea5b56472339ed399d2281e93e1f8c8b3807"
+      "name": "releases/20261012-stability-r8/infographic-report-v1.3.1.1.js",
+      "bytes": 15342,
+      "sha256": "4094e22117cf91869be9eee4d6561f6ac3aeca9244e23b194cf9bc5832744d97"
     },
     {
-      "name": "releases/20261012-stability-r7/ledger-core.3.1.0.js",
-      "bytes": 25838,
-      "sha256": "945cc71ff359b76dc060ca596ae9d58bbd8dc3addbb90d7ec475f61262286630"
+      "name": "releases/20261012-stability-r8/ledger-core.3.1.0.js",
+      "bytes": 26459,
+      "sha256": "a4d186cb199712f3a560fca09c5db61c72b900f7aabfe2be74268c6d41c76a2e"
     },
     {
-      "name": "releases/20261012-stability-r7/migrations.3.1.0.js",
+      "name": "releases/20261012-stability-r8/migrations.3.1.0.js",
       "bytes": 5999,
       "sha256": "bb80f755c13391a0fba58b679c50a21b1aa0fd2d6a2fa32fc1c74c3741d8551e"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-arabic-forms.3.1.1.js",
+      "name": "releases/20261012-stability-r8/pdf-arabic-forms.3.1.1.js",
       "bytes": 2289,
       "sha256": "e710823dd37a62bd2875c2df1f4fb88a9095707f6b57b417ea976690ecb9bf7b"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-bidi.3.1.1.js",
+      "name": "releases/20261012-stability-r8/pdf-bidi.3.1.1.js",
       "bytes": 11975,
       "sha256": "4613e4f3ab710f76c5608bd8a93b502a121592e9d552beaa8d1b8367fbd20c4c"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-font-data.3.1.1.js",
+      "name": "releases/20261012-stability-r8/pdf-font-data.3.1.1.js",
       "bytes": 176953,
       "sha256": "5d184265d9cff05c5d4aeef9b575d648c92cf746106b2f373324ad8320230989"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/LICENSE",
+      "name": "releases/20261012-stability-r8/pdf-preview/LICENSE",
       "bytes": 10174,
       "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/cmaps-LICENSE",
+      "name": "releases/20261012-stability-r8/pdf-preview/cmaps-LICENSE",
       "bytes": 2080,
       "sha256": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/pdf.mjs",
+      "name": "releases/20261012-stability-r8/pdf-preview/pdf.mjs",
       "bytes": 658371,
       "sha256": "a209a2124baa35cbb9015b809926f1bcec9dd1c247296290e205dd9d76cb9128"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/pdf.worker.mjs",
+      "name": "releases/20261012-stability-r8/pdf-preview/pdf.worker.mjs",
       "bytes": 2209730,
       "sha256": "7c237f83fa56bce645d8af51d183c9c56ba7b2d2928ff42754dc7020bea36323"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/resources.js",
+      "name": "releases/20261012-stability-r8/pdf-preview/resources.js",
       "bytes": 2590932,
       "sha256": "1443a067948f169b547f6b27d16b30c7b1e36726ff8ff59b4d0c474da7ca5403"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/standard_fonts-LICENSE_FOXIT",
+      "name": "releases/20261012-stability-r8/pdf-preview/standard_fonts-LICENSE_FOXIT",
       "bytes": 1553,
       "sha256": "b578cdd2345840ada550bd12519533812320d5f1d21cf4c1c7e1b1b0a31c98b7"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-preview/standard_fonts-LICENSE_LIBERATION",
+      "name": "releases/20261012-stability-r8/pdf-preview/standard_fonts-LICENSE_LIBERATION",
       "bytes": 4414,
       "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-report-v2.3.1.1.js",
+      "name": "releases/20261012-stability-r8/pdf-report-v2.3.1.1.js",
       "bytes": 12043,
       "sha256": "f30d64b661d624bbe6947268eabb94265fa21c1d824e62b129136550b3d69bb2"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf-unicode.3.1.1.js",
+      "name": "releases/20261012-stability-r8/pdf-unicode.3.1.1.js",
       "bytes": 3732,
       "sha256": "62b6486ad7b2b15e81189b5da47d36020dbb2a49a55a655cfdd85ba3b381401f"
     },
     {
-      "name": "releases/20261012-stability-r7/pdf.3.1.0.js",
+      "name": "releases/20261012-stability-r8/pdf.3.1.0.js",
       "bytes": 4427,
       "sha256": "8255b3e2c083ded267d7f1af553e125a49dd0afd628509b3c4fad520a3b0131f"
     },
     {
-      "name": "releases/20261012-stability-r7/release.3.1.1.js",
+      "name": "releases/20261012-stability-r8/release.3.1.1.js",
       "bytes": 47,
-      "sha256": "1ade5ca1fb3e40e122b65289d60e103be31c3d6d84e8705ec2b1bd81e1688b73"
+      "sha256": "0fabc7018acaa23bfc5afe27a33e42bbae8201dd181e848842fe117d96f2c8e6"
     },
     {
-      "name": "releases/20261012-stability-r7/report-tools.3.1.1.js",
+      "name": "releases/20261012-stability-r8/report-tools.3.1.1.js",
       "bytes": 25658,
       "sha256": "172b55e76c2cd0fce77a845fc103c08e1bb5a0ddb9ac28aa8a0137d838fbe0e1"
     },
     {
-      "name": "releases/20261012-stability-r7/security-tools.3.1.1.js",
+      "name": "releases/20261012-stability-r8/security-tools.3.1.1.js",
       "bytes": 8320,
       "sha256": "819f45e2d9ccbfe114947e4eebd3a752faf68970175955dab96b72b561bfd1ae"
     },
     {
-      "name": "releases/20261012-stability-r7/storage.3.1.0.js",
+      "name": "releases/20261012-stability-r8/storage.3.1.0.js",
       "bytes": 13966,
       "sha256": "370aad8b469b39ec41f7dd49387b201396b72585db3694ca3c0d1281370de227"
     },
     {
-      "name": "releases/20261012-stability-r7/styles.3.1.0.css",
+      "name": "releases/20261012-stability-r8/styles.3.1.0.css",
       "bytes": 28671,
       "sha256": "90ea734ab22422529e077d613f05f28d3df285a299c5e6d83100a501a8b3e40a"
     },
     {
-      "name": "releases/20261012-stability-r7/ui-accessibility.3.1.1.js",
+      "name": "releases/20261012-stability-r8/ui-accessibility.3.1.1.js",
       "bytes": 2149,
       "sha256": "98f7c39484bf30a38bc35d336a327abd0a059117e060876619091b7f77e995fb"
     },
     {
-      "name": "releases/20261012-stability-r7/visual-report-v1.3.1.1.js",
+      "name": "releases/20261012-stability-r8/visual-report-v1.3.1.1.js",
       "bytes": 17799,
       "sha256": "104ce5f1d765d084ad809096c9b718d2884ca0851ba27dbbc3e24dc4ae041c8c"
     },
     {
-      "name": "releases/20261012-stability-r7/session.3.1.1.js",
+      "name": "releases/20261012-stability-r8/session.3.1.1.js",
       "bytes": 1250,
       "sha256": "316013730810d348a140bddcf60f468183e2e49e60c423e728d57f4210b3bcc4"
     }
