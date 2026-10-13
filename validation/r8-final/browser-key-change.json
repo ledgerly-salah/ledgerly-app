@@ -1,0 +1,10 @@
+[
+  {
+    "name": "A06 password change keeps the newly issued recovery key visible",
+    "pass": false,
+    "error": "AssertionError [ERR_ASSERTION]: New recovery key closed by delayed navigation\n\n0 !== 1\n\n    at file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/browser-final-acceptance.mjs:46:709\n    at async test (file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/browser-final-acceptance.mjs:13:340)\n    at async file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/browser-final-acceptance.mjs:46:2",
+    "modal": "",
+    "toasts": "Ledger protected\n\nYour master password is now required to open Ledgerly and to change protected financial records.\n\nDebt saved\n\nThe debt and its required evidence are stored together in the ledger.\n\nPassword changed\n\nData and local snapshots now use a new key. Save the new recovery key. Export a fresh backup.",
+    "errors": []
+  }
+]

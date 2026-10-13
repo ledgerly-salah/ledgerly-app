@@ -1,0 +1,1 @@
+PASS A06 password change keeps the newly issued recovery key visible

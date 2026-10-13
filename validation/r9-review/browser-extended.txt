@@ -1,0 +1,9 @@
+PASS A01 initial recovery key remains until explicitly acknowledged
+PASS A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection
+PASS A03 password change and recovery rotation preserve data and rollback snapshots
+PASS A04 recurring template opens a persistent prefilled debt form
+PASS A05 adjustment, waiver, reversal, correction, void, archive and restore
+PASS A06 password change keeps the newly issued recovery key visible
+A07 second save elapsed 104
+PASS A07 rapid alternating writes refresh both tabs
+PASS A08 slow draft decryption preserves current typing and focus

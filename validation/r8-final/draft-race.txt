@@ -1,0 +1,50 @@
+✖ A08 delayed draft restore cannot overwrite text already entered by the user (448.676957ms)
+✖ A08 delayed initial focus cannot interrupt typing in another field (440.104703ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6018.864625
+
+✖ failing tests:
+
+test at tests/final-acceptance.test.mjs:34:1
+✖ A08 delayed draft restore cannot overwrite text already entered by the user (448.676957ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  '10' !== '123'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/final-acceptance.test.mjs:35:471)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '10',
+    expected: '123',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/final-acceptance.test.mjs:37:1
+✖ A08 delayed initial focus cannot interrupt typing in another field (440.104703ms)
+  AssertionError [ERR_ASSERTION]: Values have same structure but are not reference-equal:
+  
+  HTMLInputElement {
+    Symbol(SameObject caches): [Object: null prototype] {
+      attributes: NamedNodeMap {}
+    }
+  }
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/final-acceptance.test.mjs:38:338)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: {},
+    expected: {},
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

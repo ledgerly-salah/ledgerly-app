@@ -1,0 +1,138 @@
+[
+  {
+    "name": "index.html",
+    "match": true
+  },
+  {
+    "name": "service-worker.js",
+    "match": true
+  },
+  {
+    "name": "version.json",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/BIDI-LICENSE.txt",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/FONT-LICENSE.txt",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/app.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/crypto.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/financial-action-guard.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/i18n.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/infographic-report-v1.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/ledger-core.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/migrations.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-arabic-forms.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-bidi.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-font-data.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/LICENSE",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/cmaps-LICENSE",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/pdf.mjs",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/pdf.worker.mjs",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/resources.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/standard_fonts-LICENSE_FOXIT",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-preview/standard_fonts-LICENSE_LIBERATION",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-report-v2.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf-unicode.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/pdf.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/release.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/report-tools.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/security-tools.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/storage.3.1.0.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/styles.3.1.0.css",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/ui-accessibility.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/visual-report-v1.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "releases/20261012-stability-r8/session.3.1.1.js",
+    "match": true
+  },
+  {
+    "name": "LEDGERLY_RELEASE.json",
+    "match": true
+  }
+]
