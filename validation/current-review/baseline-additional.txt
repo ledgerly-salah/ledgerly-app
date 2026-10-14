@@ -1,0 +1,105 @@
+✖ C02 Cancel never submits creditor details or a move form (119.643205ms)
+✖ C03 correction preserves a yearly payment plan frequency (31.260423ms)
+✖ C05 due-soon includes day 30 at local midnight in Riyadh (21.09046ms)
+✖ C06 calendar export preserves arbitrary creditor text without injecting calendar fields (19.645005ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 685.003839
+
+✖ failing tests:
+
+test at tests/current-situation.test.mjs:34:1
+✖ C02 Cancel never submits creditor details or a move form (119.643205ms)
+  AssertionError [ERR_ASSERTION]: openCreditorDetails('c')
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/current-situation.test.mjs:40:66)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/current-situation.test.mjs:43:1
+✖ C03 correction preserves a yearly payment plan frequency (31.260423ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'Weekly' !== 'Yearly'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/current-situation.test.mjs:45:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'Weekly',
+    expected: 'Yearly',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/current-situation.test.mjs:53:1
+✖ C05 due-soon includes day 30 at local midnight in Riyadh (21.09046ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/current-situation.test.mjs:56:183)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at node:internal/test_runner/test:1285:31
+      at node:internal/process/task_queues:151:7
+      at AsyncResource.runInAsyncScope (node:async_hooks:227:14)
+      at AsyncResource.runMicrotask (node:internal/process/task_queues:148:8) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/current-situation.test.mjs:59:1
+✖ C06 calendar export preserves arbitrary creditor text without injecting calendar fields (19.645005ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /DTSTAMP:\d{8}T\d{6}Z/. Input:
+  
+  'BEGIN:VCALENDAR\r\n' +
+    'VERSION:2.0\r\n' +
+    'PRODID:-//Ledgerly//Debt Due Dates//EN\r\n' +
+    'BEGIN:VEVENT\r\n' +
+    'UID:d@ledgerly.local\r\n' +
+    'DTSTART;VALUE=DATE:20261101\r\n' +
+    'SUMMARY:Ledgerly: عميل  طويل  \\ اختبار\n' +
+    'BEGIN:VEVENT\n' +
+    'أأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأ due\r\n' +
+    'DESCRIPTION:SAR 100.00 remaining\r\n' +
+    'END:VEVENT\r\n' +
+    'END:VCALENDAR'
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/current-situation.test.mjs:61:168)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Ledgerly//Debt Due Dates//EN\r\nBEGIN:VEVENT\r\nUID:d@ledgerly.local\r\nDTSTART;VALUE=DATE:20261101\r\nSUMMARY:Ledgerly: عميل  طويل  \\ اختبار\nBEGIN:VEVENT\nأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأأ due\r\nDESCRIPTION:SAR 100.00 remaining\r\nEND:VEVENT\r\nEND:VCALENDAR',
+    expected: /DTSTAMP:\d{8}T\d{6}Z/,
+    operator: 'match',
+    diff: 'simple'
+  }

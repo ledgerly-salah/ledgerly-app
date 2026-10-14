@@ -1,0 +1,27 @@
+[
+  {
+    "file": "infographic.pdf",
+    "pages": 1,
+    "content_verified": true
+  },
+  {
+    "file": "detailed.pdf",
+    "pages": 2,
+    "content_verified": true
+  },
+  {
+    "file": "redacted.pdf",
+    "pages": 2,
+    "content_verified": true
+  },
+  {
+    "file": "visual.pdf",
+    "pages": 4,
+    "content_verified": true
+  },
+  {
+    "file": "summary.pdf",
+    "pages": 1,
+    "content_verified": true
+  }
+]
