@@ -1,0 +1,102 @@
+✖ ZC01 notes-only payment correction preserves explicit allocation, method and evidence (191.388237ms)
+✖ ZC02 legacy migration never silently drops orphan debt or payment (0.792003ms)
+✔ ZC03 all allocation strategies and explicit debt choices conserve reductions (1.264515ms)
+✔ ZC04 historical monthly balances and plan estimates do not mutate ledger (1.153768ms)
+✔ ZC05 invalid structural and monetary inputs fail closed (1.02882ms)
+✔ ZC06 legacy detection, cleanup and authenticated migration (93.754697ms)
+✔ ZC07 metadata, draft deletion, snapshot pruning and storage fallbacks (5.325803ms)
+✔ ZC08 date boundaries and duplicate-window behavior (0.429226ms)
+✖ ZC09 invalid optional plan amount is rejected instead of silently removed (107.90963ms)
+1000-record validation and summaries milliseconds: 5
+✔ ZC10 financial payment correction still reallocates when amount changes (94.359648ms)
+✖ ZC11 migration rejects malformed creditor identities and nonpositive legacy amounts (0.596819ms)
+✔ ZC12 thousand-record ledger reconciles and formats within a bounded run (9.109042ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 8
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1020.171447
+
+✖ failing tests:
+
+test at tests/az-baseline-check.mjs:24:1
+✖ ZC01 notes-only payment correction preserves explicit allocation, method and evidence (191.388237ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      {
+        amountHalalas: 2500,
+  +     debtId: 'd1'
+  -     debtId: 'd2'
+      }
+    ]
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/az-baseline-check.mjs:26:262)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { debtId: 'd1', amountHalalas: 2500 } ],
+    expected: [ { debtId: 'd2', amountHalalas: 2500 } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests/az-baseline-check.mjs:28:1
+✖ ZC02 legacy migration never silently drops orphan debt or payment (0.792003ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/az-baseline-check.mjs:29:186)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /creditor|orphan|missing/i,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/az-baseline-check.mjs:57:1
+✖ ZC09 invalid optional plan amount is rejected instead of silently removed (107.90963ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + HTMLFormElement {}
+  - null
+  
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/az-baseline-check.mjs:58:385)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: HTMLFormElement {},
+    expected: null,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/az-baseline-check.mjs:63:1
+✖ ZC11 migration rejects malformed creditor identities and nonpositive legacy amounts (0.596819ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/az-baseline-check.mjs:64:175)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }

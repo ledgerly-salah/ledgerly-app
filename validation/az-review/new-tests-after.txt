@@ -1,0 +1,16 @@
+✔ ZC01 notes-only payment correction preserves explicit allocation, method and evidence (209.068155ms)
+✔ ZC02 legacy migration never silently drops orphan debt or payment (0.829613ms)
+✔ ZC03 all allocation strategies and explicit debt choices conserve reductions (6.954129ms)
+✔ ZC04 historical monthly balances and plan estimates do not mutate ledger (1.068475ms)
+✔ ZC05 invalid structural and monetary inputs fail closed (0.963967ms)
+✔ ZC06 legacy detection, cleanup and authenticated migration (96.397331ms)
+✔ ZC07 metadata, draft deletion, snapshot pruning and storage fallbacks (6.180219ms)
+✔ ZC08 date boundaries and duplicate-window behavior (0.491643ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 839.304748

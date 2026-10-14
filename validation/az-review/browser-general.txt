@@ -1,0 +1,51 @@
+DIAGNOSTICS Diagnostics
+
+Read-only health report. No financial amount is repaired automatically.
+
+×
+APP / SCHEMA
+3.1.0 / 4
+BUILD ID
+20261014-coverage-r11
+REVISION
+5
+FINANCIAL HEALTH
+✓ Reconciled
+AUDIT CHAIN
+✓ 4 verified · 0 legacy
+STORAGE
+5.88 MB / 2054 MB
+PERSISTENCE
+Best effort
+PENDING OPERATIONS
+0
+EVIDENCE INTEGRITY
+✓ Verified
+ORPHAN ATTACHMENTS
+0
+All financial records reconcile. Audit and evidence checks passed.
+Emergency backup
+Close
+BACKUP Backup test
+
+Checksum verified · 14 Oct 2026, 10:43
+
+×
+Backup ledger and referenced files opened successfully without touching current data. Attachment filenames and file metadata remain visible outside encryption.
+Creditors
+1
+Transactions
+2
+Remaining
+SAR 75.00
+Schema / app
+4 / 3.1.0
+Close
+PDF 269592
+PDF detailed 271656
+PDF redacted 271260
+PDF visual 280641
+PDF infographic 274019
+OFFLINE PASS
+TWO TAB PASS
+BROWSER PASS; 0 page errors

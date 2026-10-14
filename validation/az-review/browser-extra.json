@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Z01 rename, duplicate-name refusal, merge identity and evidence",
+    "pass": true
+  },
+  {
+    "name": "Z02 move a debt with evidence and preserve total and ID",
+    "pass": true
+  },
+  {
+    "name": "Z03 attachment download, remove and add preserve financial record",
+    "pass": true
+  },
+  {
+    "name": "Z04 read-only routes, historical totals, clipboard and redaction",
+    "pass": true
+  },
+  {
+    "name": "Z05 successful new ledger has recoverable snapshot and evidence",
+    "pass": true
+  },
+  {
+    "name": "Z06 wrong authorization cannot change transaction",
+    "pass": true
+  },
+  {
+    "name": "Z07 oversized and corrupt image attachments rejected without changes",
+    "pass": true
+  },
+  {
+    "name": "Z08 mobile navigation and all filter/sort choices",
+    "pass": true
+  },
+  {
+    "name": "Z09 notes-only correction preserves a specific debt allocation in browser",
+    "pass": true
+  },
+  {
+    "name": "Z10 invalid legacy data stays preserved and migration stops",
+    "pass": true
+  },
+  {
+    "name": "Z11 missing local database never silently creates replacement ledger",
+    "pass": true
+  },
+  {
+    "name": "Z12 report scopes, privacy variants, order and invalid range",
+    "pass": true
+  }
+]

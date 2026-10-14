@@ -1,0 +1,1 @@
+N01 ACCEPTANCE PASS: cancelled reset preserves both active and persistent ledger.

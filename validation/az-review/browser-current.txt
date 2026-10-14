@@ -1,0 +1,16 @@
+PASS A01 initial recovery key remains until explicitly acknowledged
+PASS A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection
+PASS A03 password change and recovery rotation preserve data and rollback snapshots
+PASS A04 recurring template opens a persistent prefilled debt form
+PASS A05 adjustment, waiver, reversal, correction, void, archive and restore
+PASS A06 password change keeps the newly issued recovery key visible
+A07 second save elapsed 65
+PASS A07 rapid alternating writes refresh both tabs
+PASS A08 slow draft decryption preserves current typing and focus
+PASS C01 decimal money input and correction retain exact value
+PASS C02 cancelled details keep the stored revision and contact unchanged
+PASS C03 yearly plan survives save and a later notes correction
+PASS C04 templates reject unsafe amounts and can advance a generated debt
+PASS C05 calendar and CSV actual downloads preserve dates, amounts and punctuation
+PASS C06 phone search, preferences, monthly close and empty screens
+PASS C07 small screen, keyboard containment, background lock and unlock

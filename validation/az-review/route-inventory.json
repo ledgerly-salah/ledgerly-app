@@ -1,0 +1,317 @@
+[
+  {
+    "action": "add-adjustment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "add-attachment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "add-debt-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "add-payment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "add-waiver",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "apply-merge-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "apply-restore",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "archive-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "archived-creditors",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "attachments",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "audit",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "backup-menu",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "change-password",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "clean-orphan-attachments",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "close-modal",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "confirm-async-no",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "confirm-async-yes",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "confirm-modal",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "copy-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "copy-recovery",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "creditor-details",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "creditor-menu",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "delete-attachment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "diagnostics",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "download-attachment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "edit-tx",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "emergency-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "enable-security",
+    "status": "legacy/not current UI",
+    "evidence": "Legacy optional-security dialog; mandatory setup now protects every active ledger. Mandatory setup tested, legacy dialog not reached in normal UI."
+  },
+  {
+    "action": "export-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "export-csv",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "export-ics",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "export-pdf-full",
+    "status": "legacy/not current UI",
+    "evidence": "Legacy report-menu route superseded by the capture-phase Report v2 center; five actual PDF kinds tested."
+  },
+  {
+    "action": "export-pdf-redacted",
+    "status": "legacy/not current UI",
+    "evidence": "Legacy PDF route superseded by Report v2; redacted PDF exported and inspected."
+  },
+  {
+    "action": "export-report-full",
+    "status": "legacy/not current UI",
+    "evidence": "Legacy HTML export not exposed by the current intercepted report center; source reviewed only."
+  },
+  {
+    "action": "export-report-redacted",
+    "status": "legacy/not current UI",
+    "evidence": "No current rendered button; legacy HTML helper, source reviewed only."
+  },
+  {
+    "action": "finish-onboarding",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "generate-template",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "glossary",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "lock-now",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "merge-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "merge-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "move-tx",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "new-empty-ledger",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "plan",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "preview-attachment",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "preview-page",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "print",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "rename-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "report-menu",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "restore-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "restore-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "restore-snapshot",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "reverse-tx",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "save-settings",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "snapshots",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "statement",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "statement-redact",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "templates",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "templates-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "test-backup",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "toggle-creditor",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "tx-more",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  },
+  {
+    "action": "void-tx",
+    "status": "browser exercised",
+    "evidence": "browser-*-actions.json and corresponding successful scenario assertions"
+  }
+]
