@@ -1,0 +1,7 @@
+PASS C01 decimal money input and correction retain exact value
+PASS C02 cancelled details keep the stored revision and contact unchanged
+PASS C03 yearly plan survives save and a later notes correction
+PASS C04 templates reject unsafe amounts and can advance a generated debt
+PASS C05 calendar and CSV actual downloads preserve dates, amounts and punctuation
+PASS C06 phone search, preferences, monthly close and empty screens
+PASS C07 small screen, keyboard containment, background lock and unlock

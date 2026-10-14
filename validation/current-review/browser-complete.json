@@ -1,0 +1,62 @@
+[
+  {
+    "name": "A01 initial recovery key remains until explicitly acknowledged",
+    "pass": true
+  },
+  {
+    "name": "A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection",
+    "pass": true
+  },
+  {
+    "name": "A03 password change and recovery rotation preserve data and rollback snapshots",
+    "pass": true
+  },
+  {
+    "name": "A04 recurring template opens a persistent prefilled debt form",
+    "pass": true
+  },
+  {
+    "name": "A05 adjustment, waiver, reversal, correction, void, archive and restore",
+    "pass": true
+  },
+  {
+    "name": "A06 password change keeps the newly issued recovery key visible",
+    "pass": true
+  },
+  {
+    "name": "A07 rapid alternating writes refresh both tabs",
+    "pass": true
+  },
+  {
+    "name": "A08 slow draft decryption preserves current typing and focus",
+    "pass": true
+  },
+  {
+    "name": "C01 decimal money input and correction retain exact value",
+    "pass": true
+  },
+  {
+    "name": "C02 cancelled details keep the stored revision and contact unchanged",
+    "pass": true
+  },
+  {
+    "name": "C03 yearly plan survives save and a later notes correction",
+    "pass": true
+  },
+  {
+    "name": "C04 templates reject unsafe amounts and can advance a generated debt",
+    "pass": true
+  },
+  {
+    "name": "C05 calendar and CSV actual downloads preserve dates, amounts and punctuation",
+    "pass": true
+  },
+  {
+    "name": "C06 phone search, preferences, monthly close and empty screens",
+    "pass": true
+  },
+  {
+    "name": "C07 small screen, keyboard containment, background lock and unlock",
+    "pass": true
+  }
+]

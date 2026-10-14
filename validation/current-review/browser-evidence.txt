@@ -1,0 +1,2 @@
+N03 ACCEPTANCE PASS: diagnostics warns about missing evidence; financial result remains separate.
+CONTROL report correctly blocks: Missing or mismatched attachment for transaction tx_mv7erwjg_2f7b29b24d62.
