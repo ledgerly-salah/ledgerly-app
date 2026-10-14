@@ -1,0 +1,149 @@
+✔ C01 every supported two-decimal amount round-trips without a changed halala (4.844291ms)
+✔ C02 Cancel never submits creditor details or a move form (243.83521ms)
+✔ C03 correction preserves a yearly payment plan frequency (77.689428ms)
+✔ C04 invalid templates cannot be persisted into a healthy ledger (1.558425ms)
+✔ C05 due-soon includes day 30 at local midnight in Riyadh (36.356019ms)
+✔ C06 calendar export preserves arbitrary creditor text without injecting calendar fields (42.110109ms)
+✔ C07 filters, search, sorting and settings persist without changing balances (254.008047ms)
+✔ C08 deterministic mixed ledgers agree with an independent integer oracle (194.087869ms)
+✔ C09 text fields render as text and never create active markup (74.39806ms)
+✔ C10 all ordinary cent values and Arabic input retain the exact integer amount (353.223146ms)
+✔ D01 password form rotates data key, evidence and snapshots; new recovery works; old backup remains readable (1202.864315ms)
+✔ D01 atomic rotation rejects revision/snapshot conflicts, cancellation and bad file without losing snapshots or drafts (9.427605ms)
+✔ D02 stale reload cannot repopulate locked state or overwrite a newer session (156.946774ms)
+✔ D03 pending attachment list stops quietly after lock without metadata or modal (45.481817ms)
+✔ D04 oldest overdue wins; paid debt excluded; today is upcoming (16.0897ms)
+✔ D05 legacy advances reconcile across dates and reversal; newly backdated allocation rejected (2.281148ms)
+✔ D06 reversed allocation still permits voiding debt (0.359413ms)
+✔ D07 success, pending and failed journal omit free text (5.44408ms)
+✔ D07 opening an existing v4 database scrubs historical journal without a schema downgrade barrier (1.725478ms)
+✔ D08 authenticated identity/metadata, format downgrade and content substitution reject (20.09888ms)
+✔ D08 real unlock migrates legacy evidence, preserves snapshot, creditor merge rebinds metadata (187.619617ms)
+✔ D09 missing, mismatched and still-referenced deletion reject atomically; valid unlink succeeds (31.825445ms)
+✔ D10 equivalent debt/payment/reversal IDs normalize; true financial conflict stays blocked (23.854767ms)
+✔ D11 real duplicate-transaction import adds evidence exactly once, rejects different content atomically (75.148599ms)
+✔ D12 lock at each async report stage prevents export and clears built output (45.482218ms)
+✔ D12 real reference writer rejects cancellation without incrementing revision (2.227337ms)
+✔ D05 report states advance credit, checks arithmetic and blocks false reconciliation (13.689122ms)
+✔ D11 evidence ID collision remaps deterministically and repeated import stays single (53.457082ms)
+✔ D05 historical category exposure stays equal to remaining when allocation targets a future debt (0.796985ms)
+✔ D08 attachment substitution is blocked at preview, not just during a later save (100.753703ms)
+✔ D01 lock while password is verified prevents key rotation and success UI (31.92813ms)
+✔ D09 locking an in-flight IndexedDB write aborts state and evidence together (3.178334ms)
+✔ D01 recovery rotation also changes data key atomically while preserving master password and snapshots (488.205896ms)
+✔ D08 rollback upgrades legacy evidence in the same atomic write and keeps balances (98.199491ms)
+✔ Report dialog cancellation aborts export at every asynchronous boundary (56.734901ms)
+✔ A01 onboarding never replaces an unacknowledged recovery key (244.13991ms)
+✔ A04 deferred programmatic back preserves a newer dialog; real back closes it (343.345199ms)
+✔ A06 password change does not navigate back before presenting the new recovery key (460.453974ms)
+✔ A07 all newer broadcast revisions are observed immediately after a local write (125.939335ms)
+✔ A08 delayed draft restore cannot overwrite text already entered by the user (149.328279ms)
+✔ A08 delayed initial focus cannot interrupt typing in another field (168.938976ms)
+✔ baseline balances are unchanged (18.987225ms)
+✔ Base64 roundtrip at advertised 10 MiB limit (1692.08976ms)
+✔ large encrypted ledger roundtrip (43.723139ms)
+✔ negative or excessive allocations cannot be saved (0.783944ms)
+✔ correction below allocated debt is rejected (0.255706ms)
+✔ decreases reconcile debt and category exposure (0.639997ms)
+✔ unallocated increases are explicit exposure and consumed by payments (0.341125ms)
+✔ 500 valid mixed ledgers keep categories equal to creditor balance (44.889382ms)
+✔ future schema and invalid dates rejected before normalization (1.112722ms)
+✔ duplicate, cross-creditor and circular reversals rejected (0.856495ms)
+✔ archiving a card does not remove outstanding liabilities (0.332242ms)
+✔ cash paid stays separate from waived (0.181835ms)
+✔ weekly and monthly plans produce different targets; paid debt ignored (0.66156ms)
+✔ settled debt does not determine next due date (7.989256ms)
+✔ CSV treats formula-like labels as text (0.724185ms)
+✔ legacy migration preserves named creditor, extra payments and numeric IDs (1.685107ms)
+✔ financial merge conflicts include adjustment direction (167.502619ms)
+✔ lock removes every sensitive overlay and title (54.281644ms)
+✔ all close paths settle duplicate confirmation (128.136881ms)
+✔ commit rejects conflicts so no caller enters success path (33.706198ms)
+✔ complete before/after correction is stored in audit (27.233234ms)
+✔ Arabic PDF text uses embedded Unicode glyphs, not question marks (8.630384ms)
+✔ invalid evidence reference rejected (0.23151ms)
+✔ snapshot preserves deleted evidence; state and attachments roll back atomically (10.977498ms)
+✔ failure in attachment mutation aborts the state write too (1.366555ms)
+✔ concurrent reference writes have unique revision lease (2.685079ms)
+✔ safe-mode restore reencrypts evidence and preserves the current security keys (39.20536ms)
+✔ release manifest hashes and relative module imports are complete (7.132121ms)
+✔ install waits for an explicit update and offline navigation uses one cached shell (1.128826ms)
+✔ core save paths cannot add debt or payment without password even without guard listeners (92.56485ms)
+✔ core authorization rejects wrong password and cancel preserves input and evidence nodes (64.373477ms)
+✔ core authorization checks every attempt and fails if locked during verification (40.14469ms)
+✔ image Preview displays inline without downloading and releases plaintext on close (51.01454ms)
+✔ locking while attachment decrypts prevents preview and download (52.110516ms)
+✔ PDF preview pages clamp at boundaries and render one bounded canvas (25.839633ms)
+ACCEPTANCE: 70 → 60 → 40; paid 30; waiver reversal → 60; payment reversal → 90; duplicate reversal rejected; merge preserves total and references.
+✔ autonomous acceptance: real form saves 100 debt, 30 payment, 10 decrease, 20 waiver, reversal and atomic creditor merge (71.566735ms)
+✔ R01 moving authenticated evidence preserves content and new identity (372.475958ms)
+✔ R02 locked tab opens current revision after another tab saves (213.775242ms)
+✔ R03 lock during new-ledger encryption preserves ledger and locked state (279.219178ms)
+✔ R04 earlier failed commit cannot remove a successful financial write (178.291307ms)
+✔ R05 plaintext backup finishing after lock cannot repopulate modal or context (144.919129ms)
+✔ R06 emergency backup exports a coherent current bundle (193.395973ms)
+✔ R07 dated automatic allocation selects eligible debt and preserves date guard (1.857187ms)
+✔ R08 as-of screen explains advance credit and respects amount privacy (67.384147ms)
+✔ Control: normal backup uses coherent current bundle despite stale in-memory record (104.122379ms)
+✔ R02 unlock reads rotated security without any prior reload and distinguishes concurrent revision changes (334.637058ms)
+✔ R03 new ledger succeeds atomically with restorable evidence; IDB cancellation retains ledger, draft and files (242.203246ms)
+✔ R01 payment move rebinds evidence and reallocates; tampered content is rejected atomically (245.994312ms)
+✔ R05 cancellation during checksum or evidence check leaves no modal or backup state (216.541449ms)
+✔ R07 real waiver save and correction retain eligible historical allocation (131.124923ms)
+✔ R04 delayed reload cannot replace newer committed state within same session (97.523289ms)
+✔ S01: stale debt preparation cannot save after lock and unlock (695.68814ms)
+✔ S02: cancelling password dialog prevents rotation (436.687235ms)
+✔ S03: cancelling duplicate warning restores the exact form and selected evidence (318.703844ms)
+✔ S04: monthly template clamps January 31 to February end (238.485141ms)
+✔ S05: archived name and balance respect full privacy (293.895836ms)
+✔ Control: debt preparation ending while still locked does not save (188.294607ms)
+✔ S06: report and diagnostics both reject missing hash and historical corruption (33.42274ms)
+✔ Control: report audit checker rejects altered current content when hash identity remains intact (25.833037ms)
+✔ Calendar anchors recover after short months and handle leap years (0.219472ms)
+✔ Cancellation also blocks attachment preparation without a lock (100.098887ms)
+✔ Cancellation of a move cannot commit into a replacement dialog (114.538563ms)
+✔ Audit verifies the archive and never skips corrupt entries behind legacy records (201.543709ms)
+✔ Payment preparation is cancelled by closing its form and reopening a new dialog (162.973113ms)
+✔ Cancelling inline authorization also cancels already-running evidence preparation (179.042527ms)
+✔ N01 acceptance: cancel new-empty-ledger authorization during encryption preserves ledger (577.818035ms)
+✔ N02 acceptance: delayed settings request cannot replace a newer debt form (185.885786ms)
+✔ N03 acceptance: diagnostics reports missing evidence separately from finance (124.968078ms)
+✔ N04 acceptance: audit details hide amounts and names in full privacy (341.432014ms)
+✔ N05 acceptance: restored specific-debt payment allocation retains specific debt (150.860685ms)
+✔ N06 acceptance: CSV distinguishes opposite-effect reversals (1.438274ms)
+✔ N07 acceptance: individually safe creditor totals are rejected before global precision loss (0.683544ms)
+✔ N08 acceptance: infographic shows true category count and groups remaining shares (2.01097ms)
+✔ N02 closing a pending read or requesting two windows out of order preserves latest intent (109.751301ms)
+✔ N03 diagnostics rejects authenticated evidence corruption without changing ledger (127.154562ms)
+✔ N05 draft for a different creditor restores its debt and unavailable debt requires explicit choice (141.050131ms)
+✔ N04 audit text respects both privacy levels and remains available in normal mode (118.121323ms)
+✔ N07 safe aggregate limit is accepted exactly and rejected above it even after reversal (0.766148ms)
+✔ N08 display categories conserve values for empty, five, six and twelve categories (1.493437ms)
+ℹ tests 120
+ℹ suites 0
+ℹ pass 120
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3846.26746
+ℹ start of coverage report
+ℹ ----------------------------------------------------------------------------------------------------------------------------------------
+ℹ file                        | line % | branch % | funcs % | uncovered lines
+ℹ ----------------------------------------------------------------------------------------------------------------------------------------
+ℹ releases                    |        |          |         | 
+ℹ  20261014-acceptance-r10    |        |          |         | 
+ℹ   crypto.3.1.0.js           |  96.15 |    88.52 |   93.33 | 11 102-105
+ℹ   ledger-core.3.1.0.js      |  95.85 |    79.69 |   91.35 | 59-60 125 205 216-222 294-295
+ℹ   migrations.3.1.0.js       |  67.12 |    40.00 |   54.55 | 10-11 46-53 58-60 63-73
+ℹ   pdf-arabic-forms.3.1.1.js | 100.00 |   100.00 |  100.00 | 
+ℹ   pdf-bidi.3.1.1.js         | 100.00 |    59.60 |   60.00 | 
+ℹ   pdf-font-data.3.1.1.js    | 100.00 |   100.00 |  100.00 | 
+ℹ   pdf-report-v2.3.1.1.js    |   8.33 |   100.00 |    0.00 | 6-35 37-57 59-67 69-81 83-91 93-119 121-145 147-162 164-176 178-198 201-203
+ℹ   pdf-unicode.3.1.1.js      |  69.57 |    77.42 |   75.00 | 17-23
+ℹ   session.3.1.1.js          | 100.00 |    95.65 |   88.89 | 
+ℹ   storage.3.1.0.js          |  93.65 |    85.37 |   71.93 | 40-41 84 112-113 117-119
+ℹ ----------------------------------------------------------------------------------------------------------------------------------------
+ℹ all files                   |  72.49 |    78.88 |   73.70 | 
+ℹ ----------------------------------------------------------------------------------------------------------------------------------------
+ℹ end of coverage report

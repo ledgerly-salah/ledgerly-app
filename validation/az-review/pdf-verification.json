@@ -1,0 +1,37 @@
+[
+  {
+    "file": "detailed.pdf",
+    "pages": 2,
+    "text_checked": true
+  },
+  {
+    "file": "infographic.pdf",
+    "pages": 1,
+    "text_checked": true
+  },
+  {
+    "file": "masked.pdf",
+    "pages": 1,
+    "text_checked": true
+  },
+  {
+    "file": "private.pdf",
+    "pages": 1,
+    "text_checked": true
+  },
+  {
+    "file": "redacted.pdf",
+    "pages": 2,
+    "text_checked": true
+  },
+  {
+    "file": "summary.pdf",
+    "pages": 1,
+    "text_checked": true
+  },
+  {
+    "file": "visual.pdf",
+    "pages": 4,
+    "text_checked": true
+  }
+]

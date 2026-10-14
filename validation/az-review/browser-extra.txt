@@ -1,0 +1,12 @@
+PASS Z01 rename, duplicate-name refusal, merge identity and evidence
+PASS Z02 move a debt with evidence and preserve total and ID
+PASS Z03 attachment download, remove and add preserve financial record
+PASS Z04 read-only routes, historical totals, clipboard and redaction
+PASS Z05 successful new ledger has recoverable snapshot and evidence
+PASS Z06 wrong authorization cannot change transaction
+PASS Z07 oversized and corrupt image attachments rejected without changes
+PASS Z08 mobile navigation and all filter/sort choices
+PASS Z09 notes-only correction preserves a specific debt allocation in browser
+PASS Z10 invalid legacy data stays preserved and migration stops
+PASS Z11 missing local database never silently creates replacement ledger
+PASS Z12 report scopes, privacy variants, order and invalid range

@@ -1,0 +1,24 @@
+{
+  "build": "20261014-coverage-r11",
+  "node_tests": 132,
+  "browser_suites": [
+    {
+      "suite": "browser-current.json",
+      "passed": 15
+    },
+    {
+      "suite": "browser-extra.json",
+      "passed": 12
+    },
+    {
+      "suite": "browser-edge.json",
+      "passed": 5
+    }
+  ],
+  "browser_scenarios": 32,
+  "static_action_handlers": 63,
+  "browser_exercised_handlers": 58,
+  "legacy_handlers": 5,
+  "manifest_files_verified": 33,
+  "scope": "Node 24 and headless Chromium; synthetic isolated ledgers; not a 100% correctness claim"
+}
