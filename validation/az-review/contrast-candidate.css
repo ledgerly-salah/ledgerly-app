@@ -1,0 +1,8 @@
+/* Review-only candidate; loaded by the test server, not deployed. */
+:root{--muted:#52665c;--ok:#0d6c51;--danger:#a9433d;--warn:#825616}
+body.dark{--ok:#74d8b9;--danger:#ef9188;--warn:#efbf72}
+body.dark .badge.ok{background:#163c31}
+body.dark .badge.warn{background:#45321b}
+body.dark .badge.bad{background:#442521}
+.local-pill{color:var(--ok)}
+body.dark .local-pill{background:#163c31}

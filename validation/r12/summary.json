@@ -1,0 +1,11 @@
+{
+  "build": "20261016-contrast-r12",
+  "node_passed": 132,
+  "node_failed": 0,
+  "accessibility_states": 32,
+  "accessibility_violations": 0,
+  "accessibility_incomplete_states": 30,
+  "upgrade": "r11 to r12 passed; encrypted balance preserved; open form blocks reload",
+  "manifest_files": 33,
+  "limits": "Representative automated accessibility scan, not all states or TalkBack. Phone evidence is for r11."
+}

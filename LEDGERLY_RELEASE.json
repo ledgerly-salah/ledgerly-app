@@ -2,174 +2,174 @@
   "product": "Ledgerly",
   "version": "3.1.0",
   "schemaVersion": 4,
-  "buildDate": "2026-10-14",
-  "buildId": "20261014-coverage-r11",
+  "buildDate": "2026-10-16",
+  "buildId": "20261016-contrast-r12",
   "entry": "index.html",
-  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261014-coverage-r11",
-  "releasePath": "releases/20261014-coverage-r11",
+  "serviceWorkerCache": "ledgerly-shell-3.1.0-20261016-contrast-r12",
+  "releasePath": "releases/20261016-contrast-r12",
   "files": [
     {
       "name": "index.html",
       "bytes": 12620,
-      "sha256": "dc29074196a1ed8654c55e05e60c7bc9a7a7f69cc058a3eae530386314df3d5c"
+      "sha256": "2e7d01f473e0a84ebe1a6a487ef6c55f8b245c99cfeabe3f74bde6f40e1cd4b9"
     },
     {
       "name": "service-worker.js",
       "bytes": 2614,
-      "sha256": "7ac20da2060728fcff03ecd8d16ab3c807b178e671ffcc39c4f5b66c5e1cc79f"
+      "sha256": "3c139de839849a994f7a519c0ece8b8bc5232ff769a586595acf3e1256ecd4a1"
     },
     {
       "name": "version.json",
       "bytes": 653,
-      "sha256": "3666242958daf3ef0c6d1c5df49f93ba8307be783748a8a1b9a6a6ad1c017c68"
+      "sha256": "1e8734e96b7fe1c8c83bf513d4cd5e9bc4b18ef69343425219aacee990936661"
     },
     {
-      "name": "releases/20261014-coverage-r11/BIDI-LICENSE.txt",
+      "name": "releases/20261016-contrast-r12/BIDI-LICENSE.txt",
       "bytes": 1071,
       "sha256": "49d4d143fed599deb502a0fe6e02f49832f87e9a3a4cd0502e469596d50faa6d"
     },
     {
-      "name": "releases/20261014-coverage-r11/FONT-LICENSE.txt",
+      "name": "releases/20261016-contrast-r12/FONT-LICENSE.txt",
       "bytes": 3859,
       "sha256": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9"
     },
     {
-      "name": "releases/20261014-coverage-r11/app.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/app.3.1.0.js",
       "bytes": 164134,
       "sha256": "9f5b79faea90a4579006601a800c9785cf9853605374741d642ac95bc1e61ba3"
     },
     {
-      "name": "releases/20261014-coverage-r11/crypto.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/crypto.3.1.0.js",
       "bytes": 10634,
       "sha256": "81ac3a92ed44e64c87a2dbe6026c8b3b6fb1cf5fbbfb6fed2aa18c569a6040ba"
     },
     {
-      "name": "releases/20261014-coverage-r11/financial-action-guard.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/financial-action-guard.3.1.1.js",
       "bytes": 3494,
       "sha256": "4c078dfcef91d531c7f016ae51affed72d006f421fd9d54d7ca3e59997c605f6"
     },
     {
-      "name": "releases/20261014-coverage-r11/i18n.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/i18n.3.1.0.js",
       "bytes": 9963,
       "sha256": "9f15903aaae8d340cda567b937bed9c3e8563d30e932cc62f2b239c5cedca7cb"
     },
     {
-      "name": "releases/20261014-coverage-r11/infographic-report-v1.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/infographic-report-v1.3.1.1.js",
       "bytes": 15325,
       "sha256": "9450cd8b08e7e7a57758d92018a56b05a2d06b2d471de62892258dbce0cc2b30"
     },
     {
-      "name": "releases/20261014-coverage-r11/ledger-core.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/ledger-core.3.1.0.js",
       "bytes": 27200,
       "sha256": "b54b349a25f45235c10c918810c7101a188c38016386db875dbff9cf8c3c7a05"
     },
     {
-      "name": "releases/20261014-coverage-r11/migrations.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/migrations.3.1.0.js",
       "bytes": 6582,
       "sha256": "38e582677158cb09eab76cf637244af792318d0fc1ed46df346b5f330e11debd"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-arabic-forms.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/pdf-arabic-forms.3.1.1.js",
       "bytes": 2289,
       "sha256": "e710823dd37a62bd2875c2df1f4fb88a9095707f6b57b417ea976690ecb9bf7b"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-bidi.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/pdf-bidi.3.1.1.js",
       "bytes": 11975,
       "sha256": "4613e4f3ab710f76c5608bd8a93b502a121592e9d552beaa8d1b8367fbd20c4c"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-font-data.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/pdf-font-data.3.1.1.js",
       "bytes": 176953,
       "sha256": "5d184265d9cff05c5d4aeef9b575d648c92cf746106b2f373324ad8320230989"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/LICENSE",
+      "name": "releases/20261016-contrast-r12/pdf-preview/LICENSE",
       "bytes": 10174,
       "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/cmaps-LICENSE",
+      "name": "releases/20261016-contrast-r12/pdf-preview/cmaps-LICENSE",
       "bytes": 2080,
       "sha256": "aa92ab5a472974865a96fd4a4e9c13bb41bf6fe1b309cb6b8da48bc9e19839a2"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/pdf.mjs",
+      "name": "releases/20261016-contrast-r12/pdf-preview/pdf.mjs",
       "bytes": 658371,
       "sha256": "a209a2124baa35cbb9015b809926f1bcec9dd1c247296290e205dd9d76cb9128"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/pdf.worker.mjs",
+      "name": "releases/20261016-contrast-r12/pdf-preview/pdf.worker.mjs",
       "bytes": 2209730,
       "sha256": "7c237f83fa56bce645d8af51d183c9c56ba7b2d2928ff42754dc7020bea36323"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/resources.js",
+      "name": "releases/20261016-contrast-r12/pdf-preview/resources.js",
       "bytes": 2590932,
       "sha256": "1443a067948f169b547f6b27d16b30c7b1e36726ff8ff59b4d0c474da7ca5403"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/standard_fonts-LICENSE_FOXIT",
+      "name": "releases/20261016-contrast-r12/pdf-preview/standard_fonts-LICENSE_FOXIT",
       "bytes": 1553,
       "sha256": "b578cdd2345840ada550bd12519533812320d5f1d21cf4c1c7e1b1b0a31c98b7"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-preview/standard_fonts-LICENSE_LIBERATION",
+      "name": "releases/20261016-contrast-r12/pdf-preview/standard_fonts-LICENSE_LIBERATION",
       "bytes": 4414,
       "sha256": "93fed46019c38bbe566b479d22148e2e8a1e85ada614accb0211c37b2c61c19b"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-report-v2.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/pdf-report-v2.3.1.1.js",
       "bytes": 12043,
       "sha256": "7bbac0e2a40f28791e7c81a7bc5be6d0b4cd144ece73dd406abd494d58c7816c"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf-unicode.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/pdf-unicode.3.1.1.js",
       "bytes": 3732,
       "sha256": "62b6486ad7b2b15e81189b5da47d36020dbb2a49a55a655cfdd85ba3b381401f"
     },
     {
-      "name": "releases/20261014-coverage-r11/pdf.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/pdf.3.1.0.js",
       "bytes": 4427,
       "sha256": "8255b3e2c083ded267d7f1af553e125a49dd0afd628509b3c4fad520a3b0131f"
     },
     {
-      "name": "releases/20261014-coverage-r11/release.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/release.3.1.1.js",
       "bytes": 47,
-      "sha256": "b09b28d01a414699fb4c6aa8e58814587690cf0640654a097c57ac494ad8722a"
+      "sha256": "a3468873eebc0fa1ca4b5db110a765f1529fcb9d7a8433b86dcb4c321c0b4ac5"
     },
     {
-      "name": "releases/20261014-coverage-r11/report-tools.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/report-tools.3.1.1.js",
       "bytes": 25658,
       "sha256": "172b55e76c2cd0fce77a845fc103c08e1bb5a0ddb9ac28aa8a0137d838fbe0e1"
     },
     {
-      "name": "releases/20261014-coverage-r11/security-tools.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/security-tools.3.1.1.js",
       "bytes": 8348,
       "sha256": "73f0a91c8f8f16fc2d88bf0d0acdfabd9d508dc4ada7368dac1b96990395271f"
     },
     {
-      "name": "releases/20261014-coverage-r11/storage.3.1.0.js",
+      "name": "releases/20261016-contrast-r12/storage.3.1.0.js",
       "bytes": 13966,
       "sha256": "370aad8b469b39ec41f7dd49387b201396b72585db3694ca3c0d1281370de227"
     },
     {
-      "name": "releases/20261014-coverage-r11/styles.3.1.0.css",
-      "bytes": 28671,
-      "sha256": "90ea734ab22422529e077d613f05f28d3df285a299c5e6d83100a501a8b3e40a"
+      "name": "releases/20261016-contrast-r12/styles.3.1.0.css",
+      "bytes": 29057,
+      "sha256": "65327167f93d0994aa5b8c59f9d51307264f6e9c9952b6be28988fe39e0271ce"
     },
     {
-      "name": "releases/20261014-coverage-r11/ui-accessibility.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/ui-accessibility.3.1.1.js",
       "bytes": 2149,
       "sha256": "98f7c39484bf30a38bc35d336a327abd0a059117e060876619091b7f77e995fb"
     },
     {
-      "name": "releases/20261014-coverage-r11/visual-report-v1.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/visual-report-v1.3.1.1.js",
       "bytes": 17782,
       "sha256": "4796bf1675c5ed174a557d599d7e3b553d6bb71b4cd63cad941a6f4e2ba377a3"
     },
     {
-      "name": "releases/20261014-coverage-r11/session.3.1.1.js",
+      "name": "releases/20261016-contrast-r12/session.3.1.1.js",
       "bytes": 1250,
       "sha256": "316013730810d348a140bddcf60f468183e2e49e60c423e728d57f4210b3bcc4"
     }

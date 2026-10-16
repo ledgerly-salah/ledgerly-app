@@ -1,0 +1,32 @@
+390 setup : no automatic violations
+390 null initial home : no automatic violations
+390 null initial debt : no automatic violations
+390 null initial payment : no automatic violations
+390 null initial creditor : no automatic violations
+390 null initial settings : no automatic violations
+390 null light home : no automatic violations
+390 null light debt : no automatic violations
+390 null light payment : no automatic violations
+390 null light creditor : no automatic violations
+390 null light settings : no automatic violations
+390 dark dark home : no automatic violations
+390 dark dark debt : no automatic violations
+390 dark dark payment : no automatic violations
+390 dark dark creditor : no automatic violations
+390 dark dark settings : no automatic violations
+1440 setup : no automatic violations
+1440 null initial home : no automatic violations
+1440 null initial debt : no automatic violations
+1440 null initial payment : no automatic violations
+1440 null initial creditor : no automatic violations
+1440 null initial settings : no automatic violations
+1440 null light home : no automatic violations
+1440 null light debt : no automatic violations
+1440 null light payment : no automatic violations
+1440 null light creditor : no automatic violations
+1440 null light settings : no automatic violations
+1440 dark dark home : no automatic violations
+1440 dark dark debt : no automatic violations
+1440 dark dark payment : no automatic violations
+1440 dark dark creditor : no automatic violations
+1440 dark dark settings : no automatic violations
