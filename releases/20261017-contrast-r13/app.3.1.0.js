@@ -114,7 +114,9 @@ function hideProtectionSetup(){$('setupScreen').hidden=true;}
 
 async function bootstrap(){
   $('versionLabel').textContent=`v${APP_VERSION} · ${BUILD_ID}`;$('footerVersion').textContent=`v${APP_VERSION}`;setupStaticEvents();setupServiceWorker();updateConnectivity();
-  const persist=await requestPersistentStorage();storageInfo=await storageEstimate();storageInfo.persisted=persist.persisted||storageInfo.persisted;backupMeta=(await getMeta('backup'))?.value||backupMeta;
+  // A browser permission prompt may remain unanswered; it must not block the UI.
+  const persistenceRequest=requestPersistentStorage();storageInfo=await storageEstimate();
+  void persistenceRequest.then(persist=>{storageInfo.persisted=persist.persisted||storageInfo.persisted;});backupMeta=(await getMeta('backup'))?.value||backupMeta;
   record=await getStateRecord();
   if(record){localStorage.setItem(INSTALL_MARKER,nowIso());
     security=record.security||null;

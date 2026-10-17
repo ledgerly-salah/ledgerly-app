@@ -23,7 +23,6 @@ jobs:
       - name: Test isolated synthetic ledger
         env:
           LEDGERLY_ENGINE: ${{ matrix.engine }}
-          LEDGERLY_CASE: ${{ matrix.engine == 'firefox' && 'A01' || '' }}
         run: node scripts/browser-r13-cross-engine.mjs
       - uses: actions/upload-artifact@v4
         if: always()

@@ -35,8 +35,8 @@
     },
     {
       "name": "releases/20261017-contrast-r13/app.3.1.0.js",
-      "bytes": 164134,
-      "sha256": "9f5b79faea90a4579006601a800c9785cf9853605374741d642ac95bc1e61ba3"
+      "bytes": 164266,
+      "sha256": "2ee20a73141071d004d5b5bee83de619b18ac0730a851b9f382b6ff80797e578"
     },
     {
       "name": "releases/20261017-contrast-r13/crypto.3.1.0.js",
