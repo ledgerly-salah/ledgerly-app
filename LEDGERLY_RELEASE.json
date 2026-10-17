@@ -35,8 +35,8 @@
     },
     {
       "name": "releases/20261017-contrast-r13/app.3.1.0.js",
-      "bytes": 164266,
-      "sha256": "2ee20a73141071d004d5b5bee83de619b18ac0730a851b9f382b6ff80797e578"
+      "bytes": 164362,
+      "sha256": "9963ae57b3c9f3d6e84249fa474375d67c27c7631ba77c29e03868053f0fcc2b"
     },
     {
       "name": "releases/20261017-contrast-r13/crypto.3.1.0.js",
@@ -155,8 +155,8 @@
     },
     {
       "name": "releases/20261017-contrast-r13/styles.3.1.0.css",
-      "bytes": 29171,
-      "sha256": "d81ff2af717830820a812cd16eebc61f5dfbfd4ac99ed7d10a239a064e50086e"
+      "bytes": 29296,
+      "sha256": "abfb052d1bb7e013ad1cfeea0cb2681a863039acfdabe0fdb30b0a4a9e565e70"
     },
     {
       "name": "releases/20261017-contrast-r13/ui-accessibility.3.1.1.js",

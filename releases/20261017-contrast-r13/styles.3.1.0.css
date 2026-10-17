@@ -86,3 +86,6 @@ body.dark .local-pill{background:#163c31}
 
 /* Improve small hero text contrast over the mobile gradient. */
 .hero-kicker,.hero-main>.eyebrow{color:#bfd0cb}
+
+/* Update notices occupy layout space instead of covering toolbar controls. */
+.update-banner{position:relative;inset:auto}

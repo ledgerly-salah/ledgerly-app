@@ -109,7 +109,7 @@ function armAutoLock(){clearTimeout(idleTimer);if(!record?.encrypted||!dek)retur
 function lockApp(){if(!record?.encrypted)return;sessionEpoch++;clearTimeout(draftTimer);clearTimeout(backgroundTimer);closeModal(false,true);window.dispatchEvent(new Event('ledgerly-locked'));document.querySelectorAll('input[type=password]').forEach(el=>el.value='');dek=null;state=null;ui.attachmentTarget=null;clearTimeout(idleTimer);document.title='Ledgerly · Locked';$('app').hidden=true;$('lockScreen').hidden=false;setTimeout(()=>$('unlockPassword')?.focus(),50);}
 
 function unlockUi(){clearTimeout(idleTimer);$('lockScreen').hidden=true;$('app').hidden=false;leaveSafeMode();armAutoLock();}
-function showProtectionSetup(){clearTimeout(idleTimer);$('app').hidden=true;$('lockScreen').hidden=true;$('safeScreen').hidden=true;$('setupScreen').hidden=false;setTimeout(()=>$('setupPassword')?.focus(),60);}
+function showProtectionSetup(){clearTimeout(idleTimer);$('app').hidden=true;$('lockScreen').hidden=true;$('safeScreen').hidden=true;$('setupScreen').hidden=false;setTimeout(()=>{if(!$('setupScreen').hidden&&!$('setupScreen').contains(document.activeElement))$('setupPassword')?.focus();},60);}
 function hideProtectionSetup(){$('setupScreen').hidden=true;}
 
 async function bootstrap(){
@@ -160,7 +160,7 @@ async function unlockCurrent(secret,{recovery=false}={}){
 function setupServiceWorker(){
   if(!('serviceWorker'in navigator))return;navigator.serviceWorker.register('./service-worker.js').then(reg=>{
     swRegistration=reg;if(reg.waiting&&navigator.serviceWorker.controller)$('updateBanner').hidden=false;
-    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)$('updateBanner').hidden=false;});});
+    reg.addEventListener('updatefound',()=>{const w=reg.installing;if(!w)return;w.addEventListener('statechange',()=>{if(w.state==='installed'&&reg.waiting&&navigator.serviceWorker.controller)$('updateBanner').hidden=false;});});
     const hadController=Boolean(navigator.serviceWorker.controller);navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadController)return;if(!$('modalBackdrop').hidden||document.querySelector('#ledgerlyReportOverlay,#ledgerlySecurityOverlay,#ledgerlyFinancialGuard')){$('updateBanner').hidden=false;return;}location.reload();});
   }).catch(console.warn);
 }
