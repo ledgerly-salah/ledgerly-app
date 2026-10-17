@@ -1,0 +1,54 @@
+{
+  "build": "20261016-contrast-r12",
+  "checks": [
+    "Manifest and Chromium installability checks passed",
+    "Browser process restart then offline load and unlock preserve SAR 100"
+  ],
+  "limits": "Fresh persistent desktop Chromium profile. Not Android installation or OS launcher verification.",
+  "manifest": {
+    "url": "http://127.0.0.1:8775/ledgerly-app/ledgerly-v2.webmanifest",
+    "errors": [],
+    "parsed": {
+      "id": "/ledgerly-app/",
+      "name": "Ledgerly · Private Debt Ledger",
+      "short_name": "Ledgerly",
+      "description": "Ledgerly — a password-protected, offline-first personal debt ledger with mandatory evidence and PDF reporting.",
+      "lang": "en",
+      "dir": "auto",
+      "start_url": "/ledgerly-app/",
+      "scope": "/ledgerly-app/",
+      "display": "standalone",
+      "orientation": "portrait-primary",
+      "background_color": "#f1f5f2",
+      "theme_color": "#0d2f28",
+      "categories": [
+        "finance",
+        "productivity"
+      ],
+      "icons": [
+        {
+          "src": "./branding/icon-navy-192.png",
+          "sizes": "192x192",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./branding/icon-navy-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "any"
+        },
+        {
+          "src": "./branding/icon-navy-maskable-512.png",
+          "sizes": "512x512",
+          "type": "image/png",
+          "purpose": "maskable"
+        }
+      ]
+    }
+  },
+  "installability": {
+    "installabilityErrors": []
+  },
+  "pass": true
+}

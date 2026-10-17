@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "name": "P02 encrypted thousand-record browser load, search, save and reopen",
+      "pass": true
+    }
+  ],
+  "metrics": {
+    "loadUnlockRenderMs": 1199,
+    "searchMs": 67,
+    "addDebtMs": 2410
+  },
+  "environment": "Headless Chromium server; not physical phone capacity",
+  "fixture": "1000 debts of SAR 1 across 20 creditors, no fixture attachments; then one UI debt with image"
+}
