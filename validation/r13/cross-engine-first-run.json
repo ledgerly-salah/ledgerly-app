@@ -1,0 +1,17 @@
+{
+  "head": "e43f1f5c99460019707d49c61cc31f20d3e2dab4",
+  "run": 38994183453,
+  "webkit": {
+    "version": "27.2",
+    "passed": 15,
+    "failed": 0,
+    "job": 117282925210
+  },
+  "firefox": {
+    "version": "157.0",
+    "passed": 0,
+    "failed": 15,
+    "job": 117282925269,
+    "pattern": "Setup password field never became visible; root cause under investigation"
+  }
+}
