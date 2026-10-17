@@ -1,0 +1,16 @@
+{
+  "pr": "https://github.com/ledgerly-salah/ledgerly-app/pull/10",
+  "draft": true,
+  "head": "237e04bfd2906cc162ceda50cf8ba90a098a552b",
+  "tree": "08fa7447b18cedb72769bce82555af4468babe97",
+  "base": "135ab4b57bc164d9b2dfff14c92be9237306c91c",
+  "remoteFilesMatched": 58,
+  "ciRun": 38994703205,
+  "ciStatus": "completed",
+  "merged": false,
+  "published": false,
+  "ciConclusion": "success",
+  "browserRun": 38994703212,
+  "firefoxPassed": 15,
+  "webkitPassed": 15
+}

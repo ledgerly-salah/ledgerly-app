@@ -1,0 +1,1 @@
+UPGRADE PASS: real service worker r12 -> r13; active form blocks update; encrypted synthetic balance preserved.

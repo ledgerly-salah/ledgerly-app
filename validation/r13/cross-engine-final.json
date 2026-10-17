@@ -1,0 +1,47 @@
+{
+  "head": "237e04bfd2906cc162ceda50cf8ba90a098a552b",
+  "nodeRun": 38994703205,
+  "browserRun": 38994703212,
+  "firefox": {
+    "id": 117284576468,
+    "lines": [
+      "2026-10-17T02:23:35.9602804Z ENGINE firefox 157.0",
+      "2026-10-17T02:23:39.0863002Z PASS A01 initial recovery key remains until explicitly acknowledged",
+      "2026-10-17T02:23:57.0815908Z PASS A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection",
+      "2026-10-17T02:24:03.6502462Z PASS A03 password change and recovery rotation preserve data and rollback snapshots",
+      "2026-10-17T02:24:10.8849449Z PASS A04 recurring template opens a persistent prefilled debt form",
+      "2026-10-17T02:24:19.3556041Z PASS A05 adjustment, waiver, reversal, correction, void, archive and restore",
+      "2026-10-17T02:24:22.7549345Z PASS A06 password change keeps the newly issued recovery key visible",
+      "2026-10-17T02:24:26.9950896Z PASS A07 rapid alternating writes refresh both tabs",
+      "2026-10-17T02:24:28.7854451Z PASS A08 slow draft decryption preserves current typing and focus",
+      "2026-10-17T02:24:31.6375079Z PASS C01 decimal money input and correction retain exact value",
+      "2026-10-17T02:24:35.0288169Z PASS C02 cancelled details keep the stored revision and contact unchanged",
+      "2026-10-17T02:24:39.4411068Z PASS C03 yearly plan survives save and a later notes correction",
+      "2026-10-17T02:24:51.5772528Z PASS C04 templates reject unsafe amounts and can advance a generated debt",
+      "2026-10-17T02:24:55.2786925Z PASS C05 calendar and CSV actual downloads preserve dates, amounts and punctuation",
+      "2026-10-17T02:25:02.8765874Z PASS C06 phone search, preferences, monthly close and empty screens",
+      "2026-10-17T02:25:26.5223116Z PASS C07 small screen, keyboard containment, background lock and unlock"
+    ]
+  },
+  "webkit": {
+    "id": 117284576368,
+    "lines": [
+      "2026-10-17T02:23:51.7310539Z ENGINE webkit 27.2",
+      "2026-10-17T02:23:56.8933664Z PASS A01 initial recovery key remains until explicitly acknowledged",
+      "2026-10-17T02:24:17.9376329Z PASS A02 restore, rollback, image evidence, merge idempotence and corrupted backup rejection",
+      "2026-10-17T02:24:25.4579463Z PASS A03 password change and recovery rotation preserve data and rollback snapshots",
+      "2026-10-17T02:24:32.7144696Z PASS A04 recurring template opens a persistent prefilled debt form",
+      "2026-10-17T02:24:44.0155459Z PASS A05 adjustment, waiver, reversal, correction, void, archive and restore",
+      "2026-10-17T02:24:47.8710933Z PASS A06 password change keeps the newly issued recovery key visible",
+      "2026-10-17T02:24:52.3960230Z PASS A07 rapid alternating writes refresh both tabs",
+      "2026-10-17T02:24:54.2888965Z PASS A08 slow draft decryption preserves current typing and focus",
+      "2026-10-17T02:24:57.6451610Z PASS C01 decimal money input and correction retain exact value",
+      "2026-10-17T02:25:01.3909904Z PASS C02 cancelled details keep the stored revision and contact unchanged",
+      "2026-10-17T02:25:05.8469234Z PASS C03 yearly plan survives save and a later notes correction",
+      "2026-10-17T02:25:18.0309824Z PASS C04 templates reject unsafe amounts and can advance a generated debt",
+      "2026-10-17T02:25:22.4929082Z PASS C05 calendar and CSV actual downloads preserve dates, amounts and punctuation",
+      "2026-10-17T02:25:30.9094610Z PASS C06 phone search, preferences, monthly close and empty screens",
+      "2026-10-17T02:25:54.4632033Z PASS C07 small screen, keyboard containment, background lock and unlock"
+    ]
+  }
+}
