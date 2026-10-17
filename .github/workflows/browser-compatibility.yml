@@ -1,0 +1,32 @@
+name: Browser compatibility
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm install --no-save --package-lock=false playwright@1.64.0
+      - run: npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Test isolated synthetic ledger
+        env:
+          LEDGERLY_ENGINE: ${{ matrix.engine }}
+        run: node scripts/browser-r13-cross-engine.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-${{ matrix.engine }}
+          path: validation/r13/${{ matrix.engine }}-*.json
+          if-no-files-found: warn
