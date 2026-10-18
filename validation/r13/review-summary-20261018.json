@@ -18,5 +18,8 @@
   "rasterObscuredLineCenters": 0,
   "manifestFilesVerified": 33,
   "production": "20261016-contrast-r12",
-  "published": false
+  "published": false,
+  "actualThemeAsserted": true,
+  "heroRasterSamples": 8,
+  "heroMinimumRatio": 5.364
 }

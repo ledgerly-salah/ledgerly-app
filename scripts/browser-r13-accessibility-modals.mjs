@@ -42,7 +42,8 @@ try{
  const context=await b.newContext({viewport:{width,height:900}});const p=await context.newPage();p.setDefaultTimeout(15000);await p.goto('http://127.0.0.1:8768/');try{await setup(p);}catch(e){console.log('SETUP FAILURE',width,await p.locator('body').innerText());throw e;}await addDebt(p);await p.waitForTimeout(4500);
  await p.locator('[data-action=toggle-creditor]').first().click();
  for(const theme of ['light','dark']){
- if(await p.locator('body').evaluate(e=>e.classList.contains('dark'))!==(theme==='dark'))await p.locator('#themeBtn').click();
+ for(let attempt=0;attempt<3 && (await p.locator('body').evaluate(e=>e.classList.contains('dark')))!==(theme==='dark');attempt++){await p.locator('#themeBtn').click();await p.waitForTimeout(500);}
+ assert.equal(await p.locator('body').evaluate(e=>e.classList.contains('dark')),theme==='dark','Actual theme must match scan label');
  for(const action of ['backup-menu','diagnostics']){await settings(p,action);await scan(p,width+' '+theme+' '+action);await close(p);}
  for(const action of ['creditor-menu','plan','edit-tx','attachments']){await p.locator(`[data-action=${action}]`).first().click();await scan(p,width+' '+theme+' '+action);await close(p);}
  await p.locator('[data-action=creditor-menu]').first().click();await p.locator('[data-action=creditor-details]').click();await scan(p,width+' '+theme+' creditor-details');await close(p);
