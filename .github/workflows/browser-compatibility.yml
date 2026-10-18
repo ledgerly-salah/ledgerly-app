@@ -27,6 +27,7 @@ jobs:
           node scripts/browser-r13-cross-engine.mjs
           node scripts/browser-r13-focus-banner.mjs
           node scripts/browser-r14-scroll.mjs
+          node scripts/browser-r15-home.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -34,4 +35,5 @@ jobs:
           path: |
             validation/r13/${{ matrix.engine }}-*.json
             validation/r14/${{ matrix.engine }}-scroll.json
+            validation/r15/${{ matrix.engine }}-home.json
           if-no-files-found: warn

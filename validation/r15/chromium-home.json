@@ -1,0 +1,32 @@
+[
+  {
+    "width": 390,
+    "name": "Ordinary scrolling preserves expanded details",
+    "pass": true
+  },
+  {
+    "width": 390,
+    "name": "Home closes all details and returns to overview without ledger changes",
+    "pass": true
+  },
+  {
+    "width": 390,
+    "name": "Creditor can be reopened after Home",
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "name": "Ordinary scrolling preserves expanded details",
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "name": "Home closes all details and returns to overview without ledger changes",
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "name": "Creditor can be reopened after Home",
+    "pass": true
+  }
+]
