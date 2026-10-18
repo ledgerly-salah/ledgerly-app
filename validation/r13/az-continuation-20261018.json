@@ -1,0 +1,18 @@
+{
+  "baseHead": "839b15860509466cee4ec31ecd7f2e2efe71386e",
+  "nodeRun": 39150218291,
+  "browserRun": 39150218274,
+  "basicAxeStates": 32,
+  "axeConfirmedViolations": 0,
+  "axeIncompleteStates": 30,
+  "formChecks": 112,
+  "formUnreachable": 0,
+  "fullRasterSamples": 126,
+  "fullRasterPass": 122,
+  "decorativeSeparators": 4,
+  "noticeRasterPass": 4,
+  "toastCases": 8,
+  "actualThemeAsserted": true,
+  "runtimeChangesThisContinuation": false,
+  "published": false
+}

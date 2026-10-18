@@ -1,0 +1,78 @@
+[
+  {
+    "width": 390,
+    "theme": "light",
+    "text": "No outstanding balanceThere is no creditor with a remaining balance to receive a payment.",
+    "geometry": [
+      {
+        "text": "No outstanding balance",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "There is no creditor with a remaining balance to receive a payment.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "text": "No outstanding balanceThere is no creditor with a remaining balance to receive a payment.",
+    "geometry": [
+      {
+        "text": "No outstanding balance",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "There is no creditor with a remaining balance to receive a payment.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "text": "No outstanding balanceThere is no creditor with a remaining balance to receive a payment.",
+    "geometry": [
+      {
+        "text": "No outstanding balance",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "There is no creditor with a remaining balance to receive a payment.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "text": "No outstanding balanceThere is no creditor with a remaining balance to receive a payment.",
+    "geometry": [
+      {
+        "text": "No outstanding balance",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "There is no creditor with a remaining balance to receive a payment.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  }
+]

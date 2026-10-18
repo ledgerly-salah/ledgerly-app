@@ -1,0 +1,1030 @@
+[
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "New creditor name",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Due date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Category",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Quality",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Verification source",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Verified on",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Priority",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Description",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Planned payment (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Frequency",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Target date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "debt",
+    "text": "An attachment is mandatory for every new debt. Financial dates are stored separately from the time the record was entered. Amounts are stored as integer halalas.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Pay to creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Remaining",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Method",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Reference",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Allocation",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": " Verified",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "type": "payment",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "New creditor name",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Due date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Category",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Quality",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Verification source",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Verified on",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Priority",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Description",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Planned payment (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Frequency",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Target date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "debt",
+    "text": "An attachment is mandatory for every new debt. Financial dates are stored separately from the time the record was entered. Amounts are stored as integer halalas.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Pay to creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Remaining",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Method",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Reference",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Allocation",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": " Verified",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "type": "payment",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "New creditor name",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Due date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Category",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Quality",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Verification source",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Verified on",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Priority",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Description",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Planned payment (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Frequency",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Target date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "debt",
+    "text": "An attachment is mandatory for every new debt. Financial dates are stored separately from the time the record was entered. Amounts are stored as integer halalas.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Pay to creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Remaining",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Method",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Reference",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Allocation",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": " Verified",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "type": "payment",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "html": "<div class=\"notice\">A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "New creditor name",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Due date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Category",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Quality",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Verification source",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Verified on",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Priority",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Description",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Planned payment (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Frequency",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Target date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "debt",
+    "text": "An attachment is mandatory for every new debt. Financial dates are stored separately from the time the record was entered. Amounts are stored as integer halalas.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Pay to creditor",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Remaining",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Amount (SAR)",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Effective date",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Method",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Reference",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Allocation",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Supporting attachment",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "Notes",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": " Verified",
+    "reachable": true,
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "type": "payment",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "reachable": true,
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          {
+            "html": "<div class=\"notice\">A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ]
+  }
+]

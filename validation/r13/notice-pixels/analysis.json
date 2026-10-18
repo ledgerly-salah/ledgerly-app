@@ -1,0 +1,120 @@
+[
+  {
+    "name": "390-light",
+    "width": 390,
+    "theme": "light",
+    "selector": "#paymentForm > .notice",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true,
+        "top": 745,
+        "bottom": 756
+      },
+      {
+        "unobscured": true,
+        "top": 760.5,
+        "bottom": 771.5
+      },
+      {
+        "unobscured": true,
+        "top": 776,
+        "bottom": 787
+      }
+    ],
+    "sampledPixels": 4038,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "390-dark",
+    "width": 390,
+    "theme": "dark",
+    "selector": "#paymentForm > .notice",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true,
+        "top": 745,
+        "bottom": 756
+      },
+      {
+        "unobscured": true,
+        "top": 760.5,
+        "bottom": 771.5
+      },
+      {
+        "unobscured": true,
+        "top": 776,
+        "bottom": 787
+      }
+    ],
+    "sampledPixels": 4038,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "1440-light",
+    "width": 1440,
+    "theme": "light",
+    "selector": "#paymentForm > .notice",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true,
+        "top": 757,
+        "bottom": 768
+      },
+      {
+        "unobscured": true,
+        "top": 772.5,
+        "bottom": 783.5
+      }
+    ],
+    "sampledPixels": 3050,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "1440-dark",
+    "width": 1440,
+    "theme": "dark",
+    "selector": "#paymentForm > .notice",
+    "text": "A supporting attachment is mandatory for every new payment. Select the creditor first, then Ledgerly will allocate the payment to that creditor's open debt records.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true,
+        "top": 757,
+        "bottom": 768
+      },
+      {
+        "unobscured": true,
+        "top": 772.5,
+        "bottom": 783.5
+      }
+    ],
+    "sampledPixels": 3050,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  }
+]
