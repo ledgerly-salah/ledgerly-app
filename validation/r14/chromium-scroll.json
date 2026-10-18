@@ -1,0 +1,134 @@
+[
+  {
+    "width": 390,
+    "index": 0,
+    "expanded": true,
+    "before": {
+      "top": 159.53125,
+      "y": 1267
+    },
+    "after": {
+      "top": 159.53125,
+      "y": 1267,
+      "expanded": "true",
+      "detailTop": 280.53125,
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 390,
+    "index": 0,
+    "expanded": false,
+    "before": {
+      "top": 159.53125,
+      "y": 1267
+    },
+    "after": {
+      "top": 159.53125,
+      "y": 1267,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 390,
+    "index": 3,
+    "expanded": true,
+    "before": {
+      "top": 159.53125,
+      "y": 1810
+    },
+    "after": {
+      "top": 159.53125,
+      "y": 1810,
+      "expanded": "true",
+      "detailTop": 280.53125,
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 390,
+    "index": 3,
+    "expanded": false,
+    "before": {
+      "top": 159.53125,
+      "y": 1810
+    },
+    "after": {
+      "top": 159.53125,
+      "y": 1810,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 0,
+    "expanded": true,
+    "before": {
+      "top": 160.28125,
+      "y": 831
+    },
+    "after": {
+      "top": 160.28125,
+      "y": 831,
+      "expanded": "true",
+      "detailTop": 239.28125,
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 0,
+    "expanded": false,
+    "before": {
+      "top": 160.28125,
+      "y": 831
+    },
+    "after": {
+      "top": 160.28125,
+      "y": 831,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 3,
+    "expanded": true,
+    "before": {
+      "top": 160.28125,
+      "y": 1104
+    },
+    "after": {
+      "top": 160.28125,
+      "y": 1104,
+      "expanded": "true",
+      "detailTop": 239.28125,
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 3,
+    "expanded": false,
+    "before": {
+      "top": 160.28125,
+      "y": 1104
+    },
+    "after": {
+      "top": 160.28125,
+      "y": 1104,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  }
+]

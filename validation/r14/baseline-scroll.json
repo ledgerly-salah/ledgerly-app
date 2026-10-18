@@ -1,0 +1,134 @@
+[
+  {
+    "width": 390,
+    "index": 0,
+    "expanded": true,
+    "before": {
+      "top": 159.53125,
+      "y": 1267
+    },
+    "after": {
+      "top": 1426.53125,
+      "y": 0,
+      "expanded": "true",
+      "detailTop": 1547.53125,
+      "focus": false
+    },
+    "pass": false
+  },
+  {
+    "width": 390,
+    "index": 0,
+    "expanded": false,
+    "before": {
+      "top": 1426.53125,
+      "y": 0
+    },
+    "after": {
+      "top": 1426.53125,
+      "y": 0,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 390,
+    "index": 3,
+    "expanded": true,
+    "before": {
+      "top": 159.53125,
+      "y": 1810
+    },
+    "after": {
+      "top": 1969.53125,
+      "y": 0,
+      "expanded": "true",
+      "detailTop": 2090.53125,
+      "focus": false
+    },
+    "pass": false
+  },
+  {
+    "width": 390,
+    "index": 3,
+    "expanded": false,
+    "before": {
+      "top": 1969.53125,
+      "y": 0
+    },
+    "after": {
+      "top": 1969.53125,
+      "y": 0,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 0,
+    "expanded": true,
+    "before": {
+      "top": 160.28125,
+      "y": 831
+    },
+    "after": {
+      "top": 991.28125,
+      "y": 0,
+      "expanded": "true",
+      "detailTop": 1070.28125,
+      "focus": false
+    },
+    "pass": false
+  },
+  {
+    "width": 1440,
+    "index": 0,
+    "expanded": false,
+    "before": {
+      "top": 991.28125,
+      "y": 0
+    },
+    "after": {
+      "top": 991.28125,
+      "y": 0,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  },
+  {
+    "width": 1440,
+    "index": 3,
+    "expanded": true,
+    "before": {
+      "top": 160.28125,
+      "y": 1104
+    },
+    "after": {
+      "top": 1264.28125,
+      "y": 0,
+      "expanded": "true",
+      "detailTop": 1343.28125,
+      "focus": false
+    },
+    "pass": false
+  },
+  {
+    "width": 1440,
+    "index": 3,
+    "expanded": false,
+    "before": {
+      "top": 1264.28125,
+      "y": 0
+    },
+    "after": {
+      "top": 1264.28125,
+      "y": 0,
+      "expanded": "false",
+      "focus": false
+    },
+    "pass": true
+  }
+]
