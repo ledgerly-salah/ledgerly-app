@@ -1,0 +1,268 @@
+[
+  {
+    "name": "0",
+    "state": "320 light backup-menu",
+    "selector": ".modal-head > div > p",
+    "text": "Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 3411,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "1",
+    "state": "320 light diagnostics",
+    "selector": ".modal-head > div > p",
+    "text": "Read-only health report. No financial amount is repaired automatically.",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 1924,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "2",
+    "state": "320 light plan",
+    "selector": ".modal-body > .notice",
+    "text": "Plans are forecasts only. They never reduce the actual balance until a real payment is recorded.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 2308,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "3",
+    "state": "320 light attachments",
+    "selector": ".modal-body > .notice",
+    "text": "Images are re-encoded before storage to strip common EXIF metadata such as GPS. Attachments are encrypted when ledger protection is enabled.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 2749,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "4",
+    "state": "320 light attachments",
+    "selector": ".modal-body > .ledger-list > .tx-row > .tx-top > div:nth-child(1) > .tx-meta",
+    "text": "image/jpeg \u00b7 1 KB \u00b7 18 Oct 2026, 20:30",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 693,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "5",
+    "state": "320 dark backup-menu",
+    "selector": ".modal-head > div > p",
+    "text": "Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 3411,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "6",
+    "state": "320 dark diagnostics",
+    "selector": ".modal-head > div > p",
+    "text": "Read-only health report. No financial amount is repaired automatically.",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 1924,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "7",
+    "state": "320 dark plan",
+    "selector": ".modal-body > .notice",
+    "text": "Plans are forecasts only. They never reduce the actual balance until a real payment is recorded.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 2308,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "8",
+    "state": "320 dark attachments",
+    "selector": ".modal-body > .notice",
+    "text": "Images are re-encoded before storage to strip common EXIF metadata such as GPS. Attachments are encrypted when ledger protection is enabled.",
+    "color": "rgb(116, 86, 34)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 2749,
+    "threshold": 4.5,
+    "minRatio": 6.093,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "9",
+    "state": "320 dark attachments",
+    "selector": ".modal-body > .ledger-list > .tx-row > .tx-top > div:nth-child(1) > .tx-meta",
+    "text": "image/jpeg \u00b7 1 KB \u00b7 18 Oct 2026, 20:30",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "10px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 693,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  },
+  {
+    "name": "10",
+    "state": "1440 light backup-menu",
+    "selector": ".modal-head > div > p",
+    "text": "Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.",
+    "color": "rgb(82, 102, 92)",
+    "fontSize": "11px",
+    "fontWeight": "400",
+    "opacity": 1,
+    "lines": [
+      {
+        "unobscured": true
+      },
+      {
+        "unobscured": true
+      }
+    ],
+    "sampledPixels": 3437,
+    "threshold": 4.5,
+    "minRatio": 6.151,
+    "status": "meets-sampled-threshold"
+  }
+]
