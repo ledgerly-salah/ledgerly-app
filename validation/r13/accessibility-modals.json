@@ -1,0 +1,450 @@
+[
+  {
+    "name": "320 light backup-menu",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-head > div > p"
+            ],
+            "html": "<p>Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.</p>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light diagnostics",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-head > div > p"
+            ],
+            "html": "<p>Read-only health report. No financial amount is repaired automatically.</p>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light creditor-menu",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light plan",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-body > .notice"
+            ],
+            "html": "<div class=\"notice\">Plans are forecasts only. They never reduce the actual balance until a real payment is recorded.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light edit-tx",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light attachments",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-body > .notice"
+            ],
+            "html": "<div class=\"notice\">Images are re-encoded before storage to strip common EXIF metadata such as GPS. Attachments are encrypted when ledger protection is enabled.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "target": [
+              ".modal-body > .ledger-list > .tx-row > .tx-top > div:nth-child(1) > .tx-meta"
+            ],
+            "html": "<div class=\"tx-meta\">image/jpeg · 1 KB · 18 Oct 2026, 20:33</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 light creditor-details",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark backup-menu",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-head > div > p"
+            ],
+            "html": "<p>Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.</p>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark diagnostics",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-head > div > p"
+            ],
+            "html": "<p>Read-only health report. No financial amount is repaired automatically.</p>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark creditor-menu",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark plan",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-body > .notice"
+            ],
+            "html": "<div class=\"notice\">Plans are forecasts only. They never reduce the actual balance until a real payment is recorded.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark edit-tx",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark attachments",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-body > .notice"
+            ],
+            "html": "<div class=\"notice\">Images are re-encoded before storage to strip common EXIF metadata such as GPS. Attachments are encrypted when ledger protection is enabled.</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          },
+          {
+            "target": [
+              ".modal-body > .ledger-list > .tx-row > .tx-top > div:nth-child(1) > .tx-meta"
+            ],
+            "html": "<div class=\"tx-meta\">image/jpeg · 1 KB · 18 Oct 2026, 20:33</div>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "320 dark creditor-details",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light backup-menu",
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          {
+            "target": [
+              ".modal-head > div > p"
+            ],
+            "html": "<p>Portable backups with ledger and evidence tests. Export requests a download; confirm the file in Downloads, then run Test backup.</p>",
+            "summary": "Fix any of the following:\n  Element's background color could not be determined because it partially overlaps other elements"
+          }
+        ]
+      }
+    ],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light diagnostics",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light creditor-menu",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light plan",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light edit-tx",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light attachments",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 light creditor-details",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark backup-menu",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark diagnostics",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark creditor-menu",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark plan",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark edit-tx",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark attachments",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  },
+  {
+    "name": "1440 dark creditor-details",
+    "violations": [],
+    "incomplete": [],
+    "keyboard": {
+      "tabPresses": 30,
+      "outside": 0,
+      "clipped": 0
+    },
+    "horizontalOverflow": false
+  }
+]

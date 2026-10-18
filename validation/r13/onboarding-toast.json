@@ -1,0 +1,78 @@
+[
+  {
+    "width": 390,
+    "theme": "light",
+    "text": "Ledger protectedYour master password is now required to open Ledgerly and to change protected financial records.",
+    "geometry": [
+      {
+        "text": "Ledger protected",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "Your master password is now required to open Ledgerly and to change protected financial records.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "text": "Ledger protectedYour master password is now required to open Ledgerly and to change protected financial records.",
+    "geometry": [
+      {
+        "text": "Ledger protected",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "Your master password is now required to open Ledgerly and to change protected financial records.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "light",
+    "text": "Ledger protectedYour master password is now required to open Ledgerly and to change protected financial records.",
+    "geometry": [
+      {
+        "text": "Ledger protected",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "Your master password is now required to open Ledgerly and to change protected financial records.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "text": "Ledger protectedYour master password is now required to open Ledgerly and to change protected financial records.",
+    "geometry": [
+      {
+        "text": "Ledger protected",
+        "inViewport": true,
+        "unobscured": true
+      },
+      {
+        "text": "Your master password is now required to open Ledgerly and to change protected financial records.",
+        "inViewport": true,
+        "unobscured": true
+      }
+    ],
+    "violations": [],
+    "incomplete": []
+  }
+]

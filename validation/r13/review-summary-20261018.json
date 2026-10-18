@@ -1,0 +1,25 @@
+{
+  "runtimeHead": "2d8a8a7440c622b7f3431a8ef46bfb15d6d86c7f",
+  "browserRun": 39033267605,
+  "nodeRun": 39033267596,
+  "acceptancePerEngine": 15,
+  "focusBannerPerEngine": 4,
+  "engines": [
+    "firefox",
+    "webkit"
+  ],
+  "modalStates": 28,
+  "confirmedAxeViolations": 0,
+  "tabPresses": 840,
+  "focusIssues": 0,
+  "horizontalOverflow": 0,
+  "rasterSamples": 11,
+  "rasterMinimumRatio": 6.093,
+  "rasterObscuredLineCenters": 0,
+  "manifestFilesVerified": 33,
+  "production": "20261016-contrast-r12",
+  "published": false,
+  "actualThemeAsserted": true,
+  "heroRasterSamples": 8,
+  "heroMinimumRatio": 5.364
+}

@@ -1,0 +1,90 @@
+[
+  {
+    "name": "390-light-0",
+    "width": 390,
+    "theme": "light",
+    "selector": "#versionLabel",
+    "text": "v3.1.0 · 20261017-contrast-r13",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "800",
+    "opacity": 1
+  },
+  {
+    "name": "390-light-1",
+    "width": 390,
+    "theme": "light",
+    "selector": ".hero-main > .eyebrow",
+    "text": "Private · local-first · reconciled",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "9px",
+    "fontWeight": "850",
+    "opacity": 1
+  },
+  {
+    "name": "390-dark-2",
+    "width": 390,
+    "theme": "dark",
+    "selector": "#versionLabel",
+    "text": "v3.1.0 · 20261017-contrast-r13",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "800",
+    "opacity": 1
+  },
+  {
+    "name": "390-dark-3",
+    "width": 390,
+    "theme": "dark",
+    "selector": ".hero-main > .eyebrow",
+    "text": "Private · local-first · reconciled",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "9px",
+    "fontWeight": "850",
+    "opacity": 1
+  },
+  {
+    "name": "1440-light-4",
+    "width": 1440,
+    "theme": "light",
+    "selector": "#versionLabel",
+    "text": "v3.1.0 · 20261017-contrast-r13",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "800",
+    "opacity": 1
+  },
+  {
+    "name": "1440-light-5",
+    "width": 1440,
+    "theme": "light",
+    "selector": ".hero-main > .eyebrow",
+    "text": "Private · local-first · reconciled",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "850",
+    "opacity": 1
+  },
+  {
+    "name": "1440-dark-6",
+    "width": 1440,
+    "theme": "dark",
+    "selector": "#versionLabel",
+    "text": "v3.1.0 · 20261017-contrast-r13",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "800",
+    "opacity": 1
+  },
+  {
+    "name": "1440-dark-7",
+    "width": 1440,
+    "theme": "dark",
+    "selector": ".hero-main > .eyebrow",
+    "text": "Private · local-first · reconciled",
+    "color": "rgb(191, 208, 203)",
+    "fontSize": "10px",
+    "fontWeight": "850",
+    "opacity": 1
+  }
+]
