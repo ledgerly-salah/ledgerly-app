@@ -15,3 +15,5 @@ for name in names:
  results.append(dict(suite=name,exit=code,seconds=round(time.time()-start,2)))
  print(results[-1],flush=True)
  Path('validation/r16/browser-runs.json').write_text(json.dumps(results,indent=2))
+
+raise SystemExit(1 if any(x["exit"] for x in results) else 0)

@@ -1,0 +1,13 @@
+{
+  "environment": "Headless Chromium server, not phone benchmark",
+  "writes": 200,
+  "records": 1000,
+  "remaining": 100000,
+  "attachmentBytes": 1048576,
+  "firstWriteMs": 47.899999999965075,
+  "lastWriteMs": 211.59999999997672,
+  "p95WriteMs": 348.6000000000349,
+  "readMs": 238.70000000001164,
+  "snapshots": 40,
+  "pending": 0
+}
