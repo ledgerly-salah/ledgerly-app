@@ -1,0 +1,26 @@
+[
+  {
+    "name": "ZE01 recovery copy, creditor shortcuts, duplicate yes and no, lock button",
+    "pass": true
+  },
+  {
+    "name": "ZE02 orphan cleanup and emergency backup preserve referenced evidence",
+    "pass": true
+  },
+  {
+    "name": "ZE03 successful plain legacy migration requires protection and preserves totals",
+    "pass": true
+  },
+  {
+    "name": "ZE04 real PDF preview pagination, print dispatch and audit menu",
+    "pass": true
+  },
+  {
+    "name": "ZE05 browser quota failure aborts save and keeps original ledger",
+    "pass": true
+  },
+  {
+    "name": "ZE06 failed snapshot read shows error, preserves ledger and permits retry",
+    "pass": true
+  }
+]

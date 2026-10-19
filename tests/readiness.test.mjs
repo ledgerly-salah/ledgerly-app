@@ -83,3 +83,17 @@ test('Restored data remains a success when optional installation marker is unava
  const form=t.ctx.document.getElementById('authorizeForm');form.elements.password.value='synthetic-password';t.ctx.form=form;t.ctx.localStorage={setItem(){throw new Error('Blocked localStorage')}};
  await t.run('submitAuthorization(form)');assert.equal((await store.getStateRecord()).revision,2);assert.equal(t.ctx.notices.at(-1)[0],'Restore complete');assert.ok(t.ctx.notices.some(x=>x[0]==='Storage notice'));
 });
+
+for(const [action,injection] of [
+ ['snapshots',"listSnapshots=async()=>{throw new Error('Injected read failure')}"],
+ ['diagnostics',"storageEstimate=async()=>({});pendingOperations=async()=>{throw new Error('Injected read failure')}"],
+ ['confirm-modal',"ui.modal={onConfirm:async()=>{throw new Error('Injected read failure')}}"],
+ ['copy-recovery',"Object.defineProperty(navigator,'clipboard',{value:{writeText:async()=>{throw new Error('Injected read failure')}}})"]
+])test('Async action failure is reported without escaping or changing ledger: '+action,async()=>{
+ const {t}=await encryptedFixture();const before=await store.getStateRecord();t.ctx.notices=[];t.ctx.console={...console,error(){}};
+ t.run("toast=(...args)=>notices.push(args);"+injection);
+ const button=t.ctx.document.createElement('button');button.dataset.action=action;t.ctx.event={target:button};
+ await assert.doesNotReject(()=>t.run('handleDelegatedClick(event)'));
+ assert.equal(t.ctx.notices.at(-1)?.[0],'Action failed');assert.equal(t.ctx.notices.at(-1)?.[1],'Injected read failure');
+ assert.deepEqual(await store.getStateRecord(),before);t.dom.window.close();
+});

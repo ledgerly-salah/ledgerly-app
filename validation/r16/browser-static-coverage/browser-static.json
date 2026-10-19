@@ -1,0 +1,14 @@
+[
+  {
+    "name": "ST01 all debt/payment shortcuts, balance shortcut and filters preserve the ledger when cancelled",
+    "pass": true
+  },
+  {
+    "name": "ST02 update control blocks reload with an open form and reloads safely after closing",
+    "pass": true
+  },
+  {
+    "name": "ST03 missing database safe controls report failure and reject malformed restore without replacement",
+    "pass": true
+  }
+]

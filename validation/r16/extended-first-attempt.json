@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Z01 rename, duplicate-name refusal, merge identity and evidence",
+    "pass": true
+  },
+  {
+    "name": "Z02 move a debt with evidence and preserve total and ID",
+    "pass": true
+  },
+  {
+    "name": "Z03 attachment download, remove and add preserve financial record",
+    "pass": true
+  },
+  {
+    "name": "Z04 read-only routes, historical totals, clipboard and redaction",
+    "pass": true
+  },
+  {
+    "name": "Z05 successful new ledger has recoverable snapshot and evidence",
+    "pass": true
+  },
+  {
+    "name": "Z06 wrong authorization cannot change transaction",
+    "pass": true
+  },
+  {
+    "name": "Z07 oversized and corrupt image attachments rejected without changes",
+    "pass": false,
+    "error": "locator.setInputFiles: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#attachmentFileInput')\u001b[22m\n\u001b[2m    - locator resolved to <input hidden=\"\" type=\"file\" id=\"attachmentFileInput\" accept=\"image/*,application/pdf\"/>\u001b[22m\n\n    at async file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-az-acceptance.mjs:60:232\n    at async test (/workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-az-acceptance.mjs:14:955)\n    at async file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-az-acceptance.mjs:58:2",
+    "modal": "Attachments\n\nAcceptance creditor · Debt\n\n×\nImages are re-encoded before storage to strip common EXIF metadata such as GPS. Attachments are encrypted when ledger protection is enabled.\n📎 proof.jpg\nimage/jpeg · 1 KB · 20 Oct 2026, 02:23\nPreview\nRemove\n+ Add attachment",
+    "toasts": [
+      "Ledger protectedYour master password is now required to open Ledgerly and to change protected financial records.",
+      "Debt savedThe debt and its required evidence are stored together in the ledger.",
+      "Attachment failedAttachment exceeds the 10 MB limit."
+    ],
+    "form": [],
+    "errors": []
+  },
+  {
+    "name": "Z08 mobile navigation and all filter/sort choices",
+    "pass": true
+  },
+  {
+    "name": "Z09 notes-only correction preserves a specific debt allocation in browser",
+    "pass": true
+  },
+  {
+    "name": "Z10 invalid legacy data stays preserved and migration stops",
+    "pass": true
+  },
+  {
+    "name": "Z11 missing local database never silently creates replacement ledger",
+    "pass": true
+  },
+  {
+    "name": "Z12 report scopes, privacy variants, order and invalid range",
+    "pass": true
+  }
+]

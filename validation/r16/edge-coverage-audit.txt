@@ -1,0 +1,6 @@
+PASS ZE01 recovery copy, creditor shortcuts, duplicate yes and no, lock button
+PASS ZE02 orphan cleanup and emergency backup preserve referenced evidence
+PASS ZE03 successful plain legacy migration requires protection and preserves totals
+PASS ZE04 real PDF preview pagination, print dispatch and audit menu
+PASS ZE05 browser quota failure aborts save and keeps original ledger
+PASS ZE06 failed snapshot read shows error, preserves ledger and permits retry

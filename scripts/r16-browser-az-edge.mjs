@@ -44,5 +44,12 @@ try{
  await test('ZE05 browser quota failure aborts save and keeps original ledger',async p=>{
   await setup(p);await addDebt(p);await p.evaluate(()=>{window.realPut=IDBObjectStore.prototype.put;IDBObjectStore.prototype.put=function(...args){if(this.name==='state')throw new DOMException('Synthetic full storage','QuotaExceededError');return window.realPut.apply(this,args);}});await p.locator('#heroAddPaymentBtn').click();await p.locator('#paymentForm [name=amount]').fill('25');await p.locator('#paymentForm [name=attachment]').setInputFiles(file);await p.locator('#paymentForm button[type=submit]').click();await p.waitForFunction(()=>!document.querySelector('#paymentForm')?.dataset.processing);await p.locator('#paymentForm input[type=password]').fill(password);await p.locator('#paymentForm button[type=submit]').click();await p.waitForFunction(()=>document.querySelector('#toastStack').innerText.includes('Synthetic full storage'));await p.evaluate(()=>IDBObjectStore.prototype.put=window.realPut);const s=await inspect(p);assert.equal(s.transactions.length,1);assert.equal(s.attachments.length,1);assert.equal(s.totals.remaining,10000);
  });
+ await test('ZE06 failed snapshot read shows error, preserves ledger and permits retry',async p=>{
+  await setup(p);await addDebt(p);const before=await inspect(p);
+  await p.evaluate(()=>{window.originalGetAll=IDBObjectStore.prototype.getAll;IDBObjectStore.prototype.getAll=function(...args){if(this.name==='snapshots')throw new DOMException('Synthetic snapshot read failure','UnknownError');return window.originalGetAll.apply(this,args);};});
+  await settings(p,'snapshots');await p.waitForFunction(()=>document.querySelector('#toastStack').innerText.includes('Synthetic snapshot read failure'));
+  await p.evaluate(()=>{IDBObjectStore.prototype.getAll=window.originalGetAll;});
+  assert.deepEqual(await inspect(p),before);await p.locator('[data-action=snapshots]').click();await p.locator('#modal').getByText('Rollback snapshots',{exact:true}).waitFor();await close(p);await balance(p,'100.00');
+ });
 }finally{fs.writeFileSync(path.join(root,'validation/r16/browser-az-edge/browser-edge-actions.json'),JSON.stringify([...new Set(observed)].sort(),null,2));fs.writeFileSync(path.join(root,'validation/r16/browser-az-edge/browser-edge.json'),JSON.stringify(results,null,2));await b.close();server.close();}
 if(results.some(x=>!x.pass))process.exitCode=1;

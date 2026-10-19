@@ -1,0 +1,121 @@
+✖ Async action failure is reported without escaping or changing ledger: snapshots (1007.579088ms)
+✖ Async action failure is reported without escaping or changing ledger: diagnostics (326.031479ms)
+✖ Async action failure is reported without escaping or changing ledger: confirm-modal (291.700822ms)
+✖ Async action failure is reported without escaping or changing ledger: copy-recovery (481.312502ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5586.728546
+
+✖ failing tests:
+
+test at tests/readiness.test.mjs:92:3
+✖ Async action failure is reported without escaping or changing ledger: snapshots (1007.579088ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Injected read failure"
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:502:9)
+      at async TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Injected read failure
+        at listSnapshots (evalmachine.<anonymous>:1:67)
+        at openSnapshotsModal (evalmachine.<anonymous>:619:92)
+        at handleDelegatedClick (evalmachine.<anonymous>:726:31)
+        at evalmachine.<anonymous>:1:1
+        at Script.runInContext (node:vm:149:12)
+        at Object.runInContext (node:vm:301:6)
+        at Object.run (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:14:1180)
+        at file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:35
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+test at tests/readiness.test.mjs:92:3
+✖ Async action failure is reported without escaping or changing ledger: diagnostics (326.031479ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Injected read failure"
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:502:9)
+      at async TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Injected read failure
+        at pendingOperations (evalmachine.<anonymous>:1:101)
+        at openDiagnosticsModal (evalmachine.<anonymous>:614:299)
+        at runNextTicks (node:internal/process/task_queues:65:5)
+        at process.processImmediate (node:internal/timers:502:9)
+        at async waitForActual (node:assert:646:5)
+        at async strict.doesNotReject (node:assert:789:33)
+        at async TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:2)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+test at tests/readiness.test.mjs:92:3
+✖ Async action failure is reported without escaping or changing ledger: confirm-modal (291.700822ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Injected read failure"
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:502:9)
+      at async TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Injected read failure
+        at onConfirm (evalmachine.<anonymous>:1:73)
+        at handleDelegatedClick (evalmachine.<anonymous>:681:69)
+        at evalmachine.<anonymous>:1:1
+        at Script.runInContext (node:vm:149:12)
+        at Object.runInContext (node:vm:301:6)
+        at Object.run (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:14:1180)
+        at file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:35
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39)
+        at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:15),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }
+
+test at tests/readiness.test.mjs:92:3
+✖ Async action failure is reported without escaping or changing ledger: copy-recovery (481.312502ms)
+  AssertionError [ERR_ASSERTION]: Got unwanted rejection.
+  Actual message: "Injected read failure"
+      at runNextTicks (node:internal/process/task_queues:65:5)
+      at process.processImmediate (node:internal/timers:502:9)
+      at async TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:2)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: Error: Injected read failure
+        at Object.writeText (evalmachine.<anonymous>:1:115)
+        at handleDelegatedClick (evalmachine.<anonymous>:740:57)
+        at evalmachine.<anonymous>:1:1
+        at Script.runInContext (node:vm:149:12)
+        at Object.runInContext (node:vm:301:6)
+        at Object.run (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:14:1180)
+        at file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:35
+        at waitForActual (node:assert:632:21)
+        at strict.doesNotReject (node:assert:789:39)
+        at TestContext.<anonymous> (file:///workspace/scratch/5294820a0401/ledgerly-app/tests/readiness.test.mjs:96:15),
+    expected: undefined,
+    operator: 'doesNotReject',
+    diff: 'simple'
+  }

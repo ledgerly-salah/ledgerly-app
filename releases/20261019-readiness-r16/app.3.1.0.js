@@ -696,69 +696,69 @@ async function handleDelegatedClick(e){
   const filter=e.target.closest('[data-filter]');if(filter){ui.filter=filter.dataset.filter;renderFilters();renderCreditors();return;}
   const b=e.target.closest('[data-action]');if(!b)return;const a=b.dataset.action,id=b.dataset.id;
   try{
-    if(a==='confirm-async-yes')return settleConfirmation(true);
-    if(a==='confirm-async-no')return settleConfirmation(false);
-    if(a==='close-modal'){if(ui.modal?.type==='confirmAsync')return settleConfirmation(false);const requestId=dialogRequestId;await clearCurrentDraft();if(requestId===dialogRequestId)closeModal();return;}
-    if(a==='confirm-modal'){const cb=ui.modal?.onConfirm;return cb?.();}
-    if(a==='toggle-creditor'){ui.expanded.has(id)?ui.expanded.delete(id):ui.expanded.add(id);return renderCreditors();}
-    if(a==='copy-creditor')return copyCreditorSummary(id);
-    if(a==='add-payment')return openPaymentModal(id);
-    if(a==='add-debt-creditor')return openAddDebtModal(id);
-    if(a==='add-adjustment')return openAdjustmentModal(id);
-    if(a==='add-waiver')return openWaiverModal(id);
-    if(a==='plan')return openPlanModal(id);
-    if(a==='creditor-menu')return openCreditorMenu(id);
-    if(a==='edit-tx')return openEditTx(id);
-    if(a==='tx-more')return openTxMenu(id);
-    if(a==='void-tx')return openVoidTx(id);
-    if(a==='reverse-tx')return openReverseTx(id);
-    if(a==='move-tx')return openMoveTx(id);
-    if(a==='attachments')return openAttachmentsModal(id);
-    if(a==='creditor-details')return openCreditorDetails(id);
-    if(a==='rename-creditor')return openRenameCreditor(id);
-    if(a==='statement')return openStatement(id);
-    if(a==='merge-creditor')return openMergeCreditor(id);
-    if(a==='templates-creditor')return openTemplatesModal(id);
-    if(a==='archive-creditor')return archiveCreditor(id);
-    if(a==='statement-redact')return openStatement(id,{redacted:!document.querySelector('.statement-total')?.textContent.includes('••••')});
-    if(a==='print'){if(ui.privacy!=='none')return toast('Print privacy','Privacy mode is active. Export a redacted report instead.');return window.print();}
-    if(a==='generate-template')return generateTemplate(id);
-    if(a==='add-attachment'){ui.attachmentTarget=id;return $('attachmentFileInput').click();}
-    if(a==='preview-attachment')return previewAttachment(id);
-    if(a==='preview-page')return renderAttachmentPage(Number(b.dataset.direction)||0);
-    if(a==='download-attachment')return downloadAttachment(id);
-    if(a==='delete-attachment')return removeAttachment(id);
-    if(a==='export-backup')return exportBackup();
-    if(a==='test-backup'){ui.fileMode='test';return $('restoreFileInput').click();}
-    if(a==='restore-backup'){ui.fileMode='restore';return $('restoreFileInput').click();}
-    if(a==='merge-backup'){ui.fileMode='merge';return $('restoreFileInput').click();}
-    if(a==='apply-restore')return applyRestore();
-    if(a==='apply-merge-backup')return applyMergeBackup();
-    if(a==='export-csv')return exportCsv();
-    if(a==='export-ics')return exportIcs();
-    if(a==='export-pdf-full')return exportPdfReport(false);
-    if(a==='export-pdf-redacted')return exportPdfReport(true);
-    if(a==='export-report-full')return exportReport(false);
-    if(a==='export-report-redacted')return exportReport(true);
-    if(a==='backup-menu')return openBackupModal();
-    if(a==='report-menu')return openReportMenu();
-    if(a==='templates')return openTemplatesModal();
-    if(a==='archived-creditors')return openArchivedCreditors();
-    if(a==='snapshots')return openSnapshotsModal();
-    if(a==='diagnostics')return openDiagnosticsModal();
-    if(a==='audit')return openAuditModal();
-    if(a==='glossary')return openGlossary();
-    if(a==='finish-onboarding')return finishOnboarding();
-    if(a==='enable-security')return openSecurityEnable();
-    if(a==='change-password')return openChangePassword();
-    if(a==='lock-now'){closeModal();return lockApp();}
-    if(a==='save-settings')return saveSettingsFromModal();
-    if(a==='clean-orphan-attachments')return cleanOrphanAttachments();
-    if(a==='emergency-backup')return emergencyBackup();
-    if(a==='restore-snapshot')return restoreSnapshot(id);
-    if(a==='restore-creditor')return restoreCreditor(id);
-    if(a==='new-empty-ledger')return newEmptyLedger();
-    if(a==='copy-recovery'){return navigator.clipboard?.writeText(b.dataset.key||'').then(()=>toast('Recovery key copied','Store it outside this device.'));}
+    if(a==='confirm-async-yes')return await settleConfirmation(true);
+    if(a==='confirm-async-no')return await settleConfirmation(false);
+    if(a==='close-modal'){if(ui.modal?.type==='confirmAsync')return await settleConfirmation(false);const requestId=dialogRequestId;await clearCurrentDraft();if(requestId===dialogRequestId)closeModal();return;}
+    if(a==='confirm-modal'){const cb=ui.modal?.onConfirm;return await cb?.();}
+    if(a==='toggle-creditor'){ui.expanded.has(id)?ui.expanded.delete(id):ui.expanded.add(id);return await renderCreditors();}
+    if(a==='copy-creditor')return await copyCreditorSummary(id);
+    if(a==='add-payment')return await openPaymentModal(id);
+    if(a==='add-debt-creditor')return await openAddDebtModal(id);
+    if(a==='add-adjustment')return await openAdjustmentModal(id);
+    if(a==='add-waiver')return await openWaiverModal(id);
+    if(a==='plan')return await openPlanModal(id);
+    if(a==='creditor-menu')return await openCreditorMenu(id);
+    if(a==='edit-tx')return await openEditTx(id);
+    if(a==='tx-more')return await openTxMenu(id);
+    if(a==='void-tx')return await openVoidTx(id);
+    if(a==='reverse-tx')return await openReverseTx(id);
+    if(a==='move-tx')return await openMoveTx(id);
+    if(a==='attachments')return await openAttachmentsModal(id);
+    if(a==='creditor-details')return await openCreditorDetails(id);
+    if(a==='rename-creditor')return await openRenameCreditor(id);
+    if(a==='statement')return await openStatement(id);
+    if(a==='merge-creditor')return await openMergeCreditor(id);
+    if(a==='templates-creditor')return await openTemplatesModal(id);
+    if(a==='archive-creditor')return await archiveCreditor(id);
+    if(a==='statement-redact')return await openStatement(id,{redacted:!document.querySelector('.statement-total')?.textContent.includes('••••')});
+    if(a==='print'){if(ui.privacy!=='none')return await toast('Print privacy','Privacy mode is active. Export a redacted report instead.');return await window.print();}
+    if(a==='generate-template')return await generateTemplate(id);
+    if(a==='add-attachment'){ui.attachmentTarget=id;return await $('attachmentFileInput').click();}
+    if(a==='preview-attachment')return await previewAttachment(id);
+    if(a==='preview-page')return await renderAttachmentPage(Number(b.dataset.direction)||0);
+    if(a==='download-attachment')return await downloadAttachment(id);
+    if(a==='delete-attachment')return await removeAttachment(id);
+    if(a==='export-backup')return await exportBackup();
+    if(a==='test-backup'){ui.fileMode='test';return await $('restoreFileInput').click();}
+    if(a==='restore-backup'){ui.fileMode='restore';return await $('restoreFileInput').click();}
+    if(a==='merge-backup'){ui.fileMode='merge';return await $('restoreFileInput').click();}
+    if(a==='apply-restore')return await applyRestore();
+    if(a==='apply-merge-backup')return await applyMergeBackup();
+    if(a==='export-csv')return await exportCsv();
+    if(a==='export-ics')return await exportIcs();
+    if(a==='export-pdf-full')return await exportPdfReport(false);
+    if(a==='export-pdf-redacted')return await exportPdfReport(true);
+    if(a==='export-report-full')return await exportReport(false);
+    if(a==='export-report-redacted')return await exportReport(true);
+    if(a==='backup-menu')return await openBackupModal();
+    if(a==='report-menu')return await openReportMenu();
+    if(a==='templates')return await openTemplatesModal();
+    if(a==='archived-creditors')return await openArchivedCreditors();
+    if(a==='snapshots')return await openSnapshotsModal();
+    if(a==='diagnostics')return await openDiagnosticsModal();
+    if(a==='audit')return await openAuditModal();
+    if(a==='glossary')return await openGlossary();
+    if(a==='finish-onboarding')return await finishOnboarding();
+    if(a==='enable-security')return await openSecurityEnable();
+    if(a==='change-password')return await openChangePassword();
+    if(a==='lock-now'){closeModal();return await lockApp();}
+    if(a==='save-settings')return await saveSettingsFromModal();
+    if(a==='clean-orphan-attachments')return await cleanOrphanAttachments();
+    if(a==='emergency-backup')return await emergencyBackup();
+    if(a==='restore-snapshot')return await restoreSnapshot(id);
+    if(a==='restore-creditor')return await restoreCreditor(id);
+    if(a==='new-empty-ledger')return await newEmptyLedger();
+    if(a==='copy-recovery'){return await navigator.clipboard?.writeText(b.dataset.key||'').then(()=>toast('Recovery key copied','Store it outside this device.'));}
   }catch(err){if(err.name==='AbortError')return;console.error(err);toast('Action failed',err.message||'Unexpected error.');}
 }
 

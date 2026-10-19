@@ -1,0 +1,18 @@
+[
+  {
+    "name": "ST01 all debt/payment shortcuts, balance shortcut and filters preserve the ledger when cancelled",
+    "pass": true
+  },
+  {
+    "name": "ST02 update control blocks reload with an open form and reloads safely after closing",
+    "pass": true
+  },
+  {
+    "name": "ST03 missing database safe controls report failure and reject malformed restore without replacement",
+    "pass": false,
+    "error": "page.waitForFunction: Timeout 10000ms exceeded.\n    at /workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-static-coverage.mjs:42:213\n    at async test (/workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-static-coverage.mjs:15:955)\n    at async file:///workspace/scratch/5294820a0401/ledgerly-app/scripts/r16-browser-static-coverage.mjs:39:2",
+    "modal": "",
+    "form": [],
+    "errors": []
+  }
+]

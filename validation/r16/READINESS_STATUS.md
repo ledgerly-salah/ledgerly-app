@@ -1,5 +1,7 @@
 # Ledgerly r16 — نتيجة الإصلاح والتحقق قبل النشر
 
+> سجل تاريخي؛ أحدث مطابقة تغطية وإصلاح لاحق في [COVERAGE_REVIEW.md](COVERAGE_REVIEW.md). استُثني TalkBack بطلب المستخدم لاحقًا، فلا يُعد بوابة قبول معلقة.
+
 19 أكتوبر 2026. المرشح: `20261019-readiness-r16`. الإنتاج لم يتغير: r15. طلب المراجعة: https://github.com/ledgerly-salah/ledgerly-app/pull/13 (Draft، لا دمج ولا نشر).
 
 ## الحكم
