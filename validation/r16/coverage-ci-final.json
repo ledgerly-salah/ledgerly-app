@@ -1,0 +1,27 @@
+{
+  "tested_commit": "d8fb30e95fac59b1b1a4a29dde2515390103fef8",
+  "node": {
+    "run": 39341579830,
+    "conclusion": "success"
+  },
+  "browsers": {
+    "run": 39341579824,
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 118364139897,
+        "engine": "webkit",
+        "conclusion": "success"
+      },
+      {
+        "id": 118364140265,
+        "engine": "firefox",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "pr": 13,
+  "draft": true,
+  "merged": false,
+  "production_base": "e232df0e56cf6296a1029f7074cf8d764413d99c"
+}
