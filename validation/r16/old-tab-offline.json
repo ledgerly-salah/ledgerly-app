@@ -1,0 +1,10 @@
+{
+  "oldTabRetained": true,
+  "oldPdfModuleAvailable": true,
+  "cleanup": {
+    "keys": [
+      "ledgerly-shell-3.1.0-20261019-readiness-r16"
+    ],
+    "currentPdf": true
+  }
+}

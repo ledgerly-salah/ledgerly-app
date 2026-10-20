@@ -1,0 +1,970 @@
+{
+  "build": "20261019-readiness-r16",
+  "app_sha256": "c1ecb9fd42f26be041c9bc818ce1de9f358b994fa76d08562991e6c002dfb62b",
+  "scope": "Chrome and existing shortcut on the user phone; isolated Chromium acceptance; TalkBack excluded by user.",
+  "routes": [
+    {
+      "kind": "action",
+      "id": "confirm-async-yes",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "confirm-async-no",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "close-modal",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json",
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "confirm-modal",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "toggle-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "copy-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "add-payment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "add-debt-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "add-adjustment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "add-waiver",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "plan",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "creditor-menu",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "edit-tx",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "tx-more",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "void-tx",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "reverse-tx",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "move-tx",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "attachments",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "creditor-details",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "rename-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "statement",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "merge-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "templates-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "archive-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "statement-redact",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "print",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "generate-template",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "add-attachment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "preview-attachment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "preview-page",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "download-attachment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "delete-attachment",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "export-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "test-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "restore-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "merge-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "apply-restore",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "apply-merge-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "export-csv",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "export-ics",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "export-pdf-full",
+      "status": "excluded",
+      "evidence": [],
+      "note": "Report v2 capture handler replaces the legacy menu."
+    },
+    {
+      "kind": "action",
+      "id": "export-pdf-redacted",
+      "status": "excluded",
+      "evidence": [],
+      "note": "Report v2 capture handler replaces the legacy menu."
+    },
+    {
+      "kind": "action",
+      "id": "export-report-full",
+      "status": "excluded",
+      "evidence": [],
+      "note": "Legacy HTML export is not exposed by current report center."
+    },
+    {
+      "kind": "action",
+      "id": "export-report-redacted",
+      "status": "excluded",
+      "evidence": [],
+      "note": "No current rendered control."
+    },
+    {
+      "kind": "action",
+      "id": "backup-menu",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "report-menu",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "templates",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "archived-creditors",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "snapshots",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "diagnostics",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "audit",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "glossary",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "finish-onboarding",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json",
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "enable-security",
+      "status": "excluded",
+      "evidence": [],
+      "note": "Mandatory security setup replaces optional setup."
+    },
+    {
+      "kind": "action",
+      "id": "change-password",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "lock-now",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "save-settings",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "clean-orphan-attachments",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "emergency-backup",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "restore-snapshot",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "restore-creditor",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "new-empty-ledger",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "action",
+      "id": "copy-recovery",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-edge/browser-edge-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "debtForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json",
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "paymentForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "adjustmentForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "waiverForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "authorizeForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "editTxForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "voidTxForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "reverseTxForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "creditorDetailsForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "renameCreditorForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "mergeCreditorForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "moveTxForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "templateForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "backupPasswordForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "asOfForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "enableSecurityForm",
+      "status": "excluded",
+      "evidence": [],
+      "note": "Legacy optional security form."
+    },
+    {
+      "kind": "form",
+      "id": "changePasswordForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "form",
+      "id": "paymentForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Execution evidence only; feature assertions are in COVERAGE_REVIEW.md."
+    },
+    {
+      "kind": "static-control",
+      "id": "asOfBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "attachmentFileInput",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "Z03/Z07/ZE04"
+    },
+    {
+      "kind": "static-control",
+      "id": "auditBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "balanceCard",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "closeMonthBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "explainTotalBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "filterBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "mandatorySecurityForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json",
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "modalBackdrop",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "final-acceptance A04; dialog-focus; C07"
+    },
+    {
+      "kind": "static-control",
+      "id": "privacyBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "reloadUpdateBtn",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "ST02"
+    },
+    {
+      "kind": "static-control",
+      "id": "restoreFileInput",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "A02/ST03"
+    },
+    {
+      "kind": "static-control",
+      "id": "safeBackupBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "safeDiagnosticsBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "safeRestoreBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "searchInput",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "C06"
+    },
+    {
+      "kind": "static-control",
+      "id": "settingsBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json",
+        "validation/r16/browser-az-edge/browser-edge-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json",
+        "validation/r16/browser-r11-offline-evidence/browser-offline-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "sortSelect",
+      "status": "mapped",
+      "evidence": [],
+      "note": "Mapped to explicit input/event scenario, not inferred from button-click logs.",
+      "scenario": "Z08"
+    },
+    {
+      "kind": "static-control",
+      "id": "themeBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "toggleInsightsBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-az-acceptance/browser-extra-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "unlockForm",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-static-coverage/browser-static-actions.json",
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    },
+    {
+      "kind": "static-control",
+      "id": "useRecoveryBtn",
+      "status": "observed",
+      "evidence": [
+        "validation/r16/browser-current-acceptance/browser-current-actions.json"
+      ],
+      "note": "Inputs, system events and hidden safe-mode controls require scenario/source mapping; click logs alone are insufficient."
+    }
+  ],
+  "warning": "This inventory is not statement/branch coverage and does not prove every possible combination."
+}

@@ -1,0 +1,18 @@
+[
+  "#addDebtBtn",
+  "#addPaymentBtn",
+  "#balanceCard",
+  "#emptyAddDebtBtn",
+  "#filterBtn",
+  "#heroAddDebtBtn",
+  "#mobileAddDebtBtn",
+  "#mobileAddPaymentBtn",
+  "#safeBackupBtn",
+  "#safeDiagnosticsBtn",
+  "#safeRestoreBtn",
+  "close-modal",
+  "finish-onboarding",
+  "submit:debtForm",
+  "submit:mandatorySecurityForm",
+  "submit:unlockForm"
+]

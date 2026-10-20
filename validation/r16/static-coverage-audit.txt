@@ -1,0 +1,3 @@
+PASS ST01 all debt/payment shortcuts, balance shortcut and filters preserve the ledger when cancelled
+PASS ST02 update control blocks reload with an open form and reloads safely after closing
+PASS ST03 missing database safe controls report failure and reject malformed restore without replacement

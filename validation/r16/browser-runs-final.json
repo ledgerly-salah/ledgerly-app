@@ -1,0 +1,44 @@
+[
+  {
+    "suite": "browser-current-acceptance",
+    "exit": 0,
+    "seconds": 101.58
+  },
+  {
+    "suite": "browser-az-acceptance",
+    "exit": 0,
+    "seconds": 53.41
+  },
+  {
+    "suite": "browser-az-edge",
+    "exit": 0,
+    "seconds": 28.83,
+    "retest": true,
+    "note": "Legacy fixture reset now waits for initial setup to finish; five cases passed on rerun. Prior failure retained in final-run-initial.json."
+  },
+  {
+    "suite": "browser-r13-accessibility",
+    "exit": 0,
+    "seconds": 35.06
+  },
+  {
+    "suite": "browser-r14-scroll",
+    "exit": 0,
+    "seconds": 22.95
+  },
+  {
+    "suite": "browser-r15-home",
+    "exit": 0,
+    "seconds": 16.88
+  },
+  {
+    "suite": "browser-r11-offline-evidence",
+    "exit": 0,
+    "seconds": 9.36
+  },
+  {
+    "suite": "browser-r12-scale",
+    "exit": 0,
+    "seconds": 5.2
+  }
+]

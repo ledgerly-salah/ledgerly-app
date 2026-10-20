@@ -1,0 +1,229 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> test
+> node --test tests/*.test.mjs
+
+✔ ZC01 notes-only payment correction preserves explicit allocation, method and evidence (354.861844ms)
+✔ ZC02 legacy migration never silently drops orphan debt or payment (1.317741ms)
+✔ ZC03 all allocation strategies and explicit debt choices conserve reductions (28.765901ms)
+✔ ZC04 historical monthly balances and plan estimates do not mutate ledger (1.810907ms)
+✔ ZC05 invalid structural and monetary inputs fail closed (1.347684ms)
+✔ ZC06 legacy detection, cleanup and authenticated migration (200.407773ms)
+✔ ZC07 metadata, draft deletion, snapshot pruning and storage fallbacks (15.288754ms)
+✔ ZC08 date boundaries and duplicate-window behavior (0.809563ms)
+✔ ZC09 invalid optional plan amount is rejected instead of silently removed (177.516894ms)
+1000-record validation and summaries milliseconds: 12
+✔ ZC10 financial payment correction still reallocates when amount changes (164.404584ms)
+✔ ZC11 migration rejects malformed creditor identities and nonpositive legacy amounts (0.86914ms)
+✔ ZC12 thousand-record ledger reconciles and formats within a bounded run (17.72341ms)
+✔ C01 every supported two-decimal amount round-trips without a changed halala (2.615922ms)
+✔ C02 Cancel never submits creditor details or a move form (223.683609ms)
+✔ C03 correction preserves a yearly payment plan frequency (62.086535ms)
+✔ C04 invalid templates cannot be persisted into a healthy ledger (1.354976ms)
+✔ C05 due-soon includes day 30 at local midnight in Riyadh (36.787754ms)
+✔ C06 calendar export preserves arbitrary creditor text without injecting calendar fields (36.771385ms)
+✔ C07 filters, search, sorting and settings persist without changing balances (360.747826ms)
+✔ C08 deterministic mixed ledgers agree with an independent integer oracle (244.098843ms)
+✔ C09 text fields render as text and never create active markup (82.698533ms)
+✔ C10 all ordinary cent values and Arabic input retain the exact integer amount (364.26468ms)
+✔ D01 password form rotates data key, evidence and snapshots; new recovery works; old backup remains readable (1308.502297ms)
+✔ D01 atomic rotation rejects revision/snapshot conflicts, cancellation and bad file without losing snapshots or drafts (17.882113ms)
+✔ D02 stale reload cannot repopulate locked state or overwrite a newer session (102.856207ms)
+✔ D03 pending attachment list stops quietly after lock without metadata or modal (40.038462ms)
+✔ D04 oldest overdue wins; paid debt excluded; today is upcoming (26.700219ms)
+✔ D05 legacy advances reconcile across dates and reversal; newly backdated allocation rejected (1.749347ms)
+✔ D06 reversed allocation still permits voiding debt (0.290768ms)
+✔ D07 success, pending and failed journal omit free text (22.296564ms)
+✔ D07 opening an existing v4 database scrubs historical journal without a schema downgrade barrier (3.853324ms)
+✔ D08 authenticated identity/metadata, format downgrade and content substitution reject (21.244735ms)
+✔ D08 real unlock migrates legacy evidence, preserves snapshot, creditor merge rebinds metadata (286.969105ms)
+✔ D09 missing, mismatched and still-referenced deletion reject atomically; valid unlink succeeds (41.923227ms)
+✔ D10 equivalent debt/payment/reversal IDs normalize; true financial conflict stays blocked (27.044466ms)
+✔ D11 real duplicate-transaction import adds evidence exactly once, rejects different content atomically (119.343457ms)
+✔ D12 lock at each async report stage prevents export and clears built output (72.71438ms)
+✔ D12 real reference writer rejects cancellation without incrementing revision (2.499891ms)
+✔ D05 report states advance credit, checks arithmetic and blocks false reconciliation (15.937619ms)
+✔ D11 evidence ID collision remaps deterministically and repeated import stays single (42.827879ms)
+✔ D05 historical category exposure stays equal to remaining when allocation targets a future debt (0.741111ms)
+✔ D08 attachment substitution is blocked at preview, not just during a later save (122.866625ms)
+✔ D01 lock while password is verified prevents key rotation and success UI (45.343563ms)
+✔ D09 locking an in-flight IndexedDB write aborts state and evidence together (3.964739ms)
+✔ D01 recovery rotation also changes data key atomically while preserving master password and snapshots (777.391356ms)
+✔ D08 rollback upgrades legacy evidence in the same atomic write and keeps balances (149.827529ms)
+✔ Report dialog cancellation aborts export at every asynchronous boundary (80.624037ms)
+✔ dialog close restores focus once; unrelated mutations do not steal it (288.998038ms)
+✔ A01 onboarding never replaces an unacknowledged recovery key (354.804971ms)
+✔ A04 deferred programmatic back preserves a newer dialog; real back closes it (465.384295ms)
+✔ A06 password change does not navigate back before presenting the new recovery key (631.426417ms)
+✔ A07 all newer broadcast revisions are observed immediately after a local write (184.33172ms)
+✔ A08 delayed draft restore cannot overwrite text already entered by the user (135.998934ms)
+✔ A08 delayed initial focus cannot interrupt typing in another field (162.782236ms)
+✔ baseline balances are unchanged (5.280586ms)
+✔ Base64 roundtrip at advertised 10 MiB limit (1756.505454ms)
+✔ large encrypted ledger roundtrip (108.64332ms)
+✔ negative or excessive allocations cannot be saved (1.139669ms)
+✔ correction below allocated debt is rejected (0.463002ms)
+✔ decreases reconcile debt and category exposure (0.872294ms)
+✔ unallocated increases are explicit exposure and consumed by payments (0.435591ms)
+✔ 500 valid mixed ledgers keep categories equal to creditor balance (33.414076ms)
+✔ future schema and invalid dates rejected before normalization (8.864905ms)
+✔ duplicate, cross-creditor and circular reversals rejected (3.995214ms)
+✔ archiving a card does not remove outstanding liabilities (0.384296ms)
+✔ cash paid stays separate from waived (0.264569ms)
+✔ weekly and monthly plans produce different targets; paid debt ignored (12.920847ms)
+✔ settled debt does not determine next due date (8.791326ms)
+✔ CSV treats formula-like labels as text (0.785988ms)
+✔ legacy migration preserves named creditor, extra payments and numeric IDs (2.110588ms)
+✔ financial merge conflicts include adjustment direction (201.752633ms)
+✔ lock removes every sensitive overlay and title (70.300676ms)
+✔ all close paths settle duplicate confirmation (202.649214ms)
+✔ commit rejects conflicts so no caller enters success path (52.934062ms)
+✔ complete before/after correction is stored in audit (25.140312ms)
+✔ Arabic PDF text uses embedded Unicode glyphs, not question marks (8.073499ms)
+✔ invalid evidence reference rejected (0.353341ms)
+✔ snapshot preserves deleted evidence; state and attachments roll back atomically (12.838537ms)
+✔ failure in attachment mutation aborts the state write too (1.904926ms)
+✔ concurrent reference writes have unique revision lease (3.265609ms)
+✔ safe-mode restore reencrypts evidence and preserves the current security keys (36.797698ms)
+✔ release manifest hashes and relative module imports are complete (8.341624ms)
+✔ install waits for an explicit update and offline navigation uses one cached shell (1.527489ms)
+✔ core save paths cannot add debt or payment without password even without guard listeners (117.094219ms)
+✔ core authorization rejects wrong password and cancel preserves input and evidence nodes (80.616107ms)
+✔ core authorization checks every attempt and fails if locked during verification (48.793939ms)
+✔ image Preview displays inline without downloading and releases plaintext on close (38.774169ms)
+✔ locking while attachment decrypts prevents preview and download (68.03591ms)
+✔ PDF preview pages clamp at boundaries and render one bounded canvas (44.470989ms)
+ACCEPTANCE: 70 → 60 → 40; paid 30; waiver reversal → 60; payment reversal → 90; duplicate reversal rejected; merge preserves total and references.
+✔ autonomous acceptance: real form saves 100 debt, 30 payment, 10 decrease, 20 waiver, reversal and atomic creditor merge (60.795378ms)
+✔ R01 moving authenticated evidence preserves content and new identity (368.085667ms)
+✔ R02 locked tab opens current revision after another tab saves (399.857165ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ R03 lock during new-ledger encryption preserves ledger and locked state (327.29911ms)
+✔ R04 earlier failed commit cannot remove a successful financial write (182.411746ms)
+✔ R05 plaintext backup finishing after lock cannot repopulate modal or context (145.311017ms)
+✔ R06 emergency backup exports a coherent current bundle (114.486203ms)
+✔ R07 dated automatic allocation selects eligible debt and preserves date guard (1.642359ms)
+✔ R08 as-of screen explains advance credit and respects amount privacy (39.873458ms)
+✔ Control: normal backup uses coherent current bundle despite stale in-memory record (145.044424ms)
+✔ R02 unlock reads rotated security without any prior reload and distinguishes concurrent revision changes (483.721395ms)
+✔ R03 new ledger succeeds atomically with restorable evidence; IDB cancellation retains ledger, draft and files (335.116066ms)
+✔ R01 payment move rebinds evidence and reallocates; tampered content is rejected atomically (281.85201ms)
+✔ R05 cancellation during checksum or evidence check leaves no modal or backup state (242.645262ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ R07 real waiver save and correction retain eligible historical allocation (162.26183ms)
+✔ R04 delayed reload cannot replace newer committed state within same session (114.991017ms)
+✔ S01: stale debt preparation cannot save after lock and unlock (686.63309ms)
+✔ S02: cancelling password dialog prevents rotation (527.482602ms)
+✔ S03: cancelling duplicate warning restores the exact form and selected evidence (387.985262ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ S04: monthly template clamps January 31 to February end (338.224443ms)
+✔ S05: archived name and balance respect full privacy (321.621184ms)
+✔ Control: debt preparation ending while still locked does not save (176.024386ms)
+✔ S06: report and diagnostics both reject missing hash and historical corruption (34.439916ms)
+✔ Control: report audit checker rejects altered current content when hash identity remains intact (24.675508ms)
+✔ Calendar anchors recover after short months and handle leap years (0.349145ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ Cancellation also blocks attachment preparation without a lock (130.160536ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ Cancellation of a move cannot commit into a replacement dialog (125.282974ms)
+✔ Audit verifies the archive and never skips corrupt entries behind legacy records (178.169044ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ Payment preparation is cancelled by closing its form and reopening a new dialog (157.159335ms)
+✔ Cancelling inline authorization also cancels already-running evidence preparation (174.693796ms)
+Snapshot retention could not finish InvalidStateError [DOMException]: An operation was called on an object on which it is not allowed or at a time when it is not allowed. Also occurs if a request is made on a source object that has been deleted or removed. Use TransactionInactiveError or ReadOnlyError when possible, as they are more specific variations of InvalidStateError.
+    at new DOMException (node:internal/per_context/domexception:76:18)
+    at new InvalidStateError (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/lib/errors.js:53:5)
+    at FDBDatabase.transaction (file:///workspace/scratch/5294820a0401/ledgerly-app/node_modules/fake-indexeddb/build/esm/FDBDatabase.js:136:13)
+    at pruneSnapshots (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:107:87)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 11
+}
+✔ N01 acceptance: cancel new-empty-ledger authorization during encryption preserves ledger (611.3826ms)
+✔ N02 acceptance: delayed settings request cannot replace a newer debt form (141.009843ms)
+✔ N03 acceptance: diagnostics reports missing evidence separately from finance (167.809168ms)
+✔ N04 acceptance: audit details hide amounts and names in full privacy (413.023473ms)
+✔ N05 acceptance: restored specific-debt payment allocation retains specific debt (163.278055ms)
+✔ N06 acceptance: CSV distinguishes opposite-effect reversals (2.146391ms)
+✔ N07 acceptance: individually safe creditor totals are rejected before global precision loss (1.272204ms)
+✔ N08 acceptance: infographic shows true category count and groups remaining shares (2.360056ms)
+✔ N02 closing a pending read or requesting two windows out of order preserves latest intent (94.34163ms)
+✔ N03 diagnostics rejects authenticated evidence corruption without changing ledger (116.869804ms)
+✔ N05 draft for a different creditor restores its debt and unavailable debt requires explicit choice (146.421521ms)
+✔ N04 audit text respects both privacy levels and remains available in normal mode (144.662391ms)
+✔ N07 safe aggregate limit is accepted exactly and rejected above it even after reversal (0.818716ms)
+✔ N08 display categories conserve values for empty, five, six and twelve categories (1.438068ms)
+✔ P01 restore atomically resets backup metadata and does not perform a post-commit metadata write (589.551777ms)
+✔ P01 metadata transaction failure rolls back ledger, attachments and snapshot (251.798212ms)
+RevisionConflictError: A newer ledger revision exists on this device.
+    at run (file:///workspace/scratch/5294820a0401/ledgerly-app/releases/20261019-readiness-r16/storage.3.1.0.js:65:93)
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:502:9) {
+  code: 'REVISION_CONFLICT'
+}
+✔ P02 delayed fresh initialization cannot replace another tab ledger (175.90458ms)
+✔ P02 delayed encrypted migration cannot replace another tab ledger (241.395662ms)
+✔ P02 expected revision zero allows only one initial writer (2.280177ms)
+✔ Storage telemetry cannot indefinitely block startup/settings: estimate (5.715837ms)
+✔ Storage telemetry cannot indefinitely block startup/settings: persisted (6.335329ms)
+✔ Blocked IndexedDB upgrade fails explicitly and a later attempt recovers (21.263042ms)
+✔ Open database connection releases itself for a later schema upgrade (1.828433ms)
+✔ Debt form delayed draft callback respects a field already focused (148.629063ms)
+✔ Restored data remains a success when optional installation marker is unavailable (178.578576ms)
+✔ all Node acceptance suites target the current release manifest (2.255912ms)
+ℹ tests 145
+ℹ suites 0
+ℹ pass 145
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5388.797671
